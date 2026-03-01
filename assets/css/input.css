@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+    --color-mainColor: #bebebf;
+    --color-fontColor: #556166;
+    --color-secFontColor: #211F1F;
+    --color-priceColor: #949292;
+    --color-btnColor: #ffe9e3;
+}
+
+@utility row {
+    @apply flex flex-row;
+}
+
+@utility col {
+    @apply flex flex-col;
+}
+
+@utility dummy-container {
+    @apply max-w-7xl mx-auto px-4
+}
+
+.poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
