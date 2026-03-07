@@ -17,24 +17,28 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Miniver&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!--Poppins Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+
     <!--output.css-->
     <link href="../css/output.css" rel="stylesheet">
+
 </head>
 
-<body>
+
+<body class="pt-20">
     <header>
-        <nav class="row justify-between items-center p-7 border-b border-[#f1f1f1]">
-            <div class="row justify-between items-center gap-20">
-                <div>
-                    <img src="../images/home-images/Ceramics01.png" alt="img">
-                </div>
-                <div class="row justify-between gap-15 items-center hidden lg:flex">
+        <nav
+            class=" fixed top-0 left-0 w-full bg-white  z-50 flex justify-between items-center p-5 border-b border-[#f1f1f1]">
+            <div class="flex justify-between items-center gap-8">
+                <img src="../images/home-images/Ceramics01.png" alt="img" class="w-20 sm:w-24">
+
+                <div class="hidden lg:flex gap-8  items-center ">
                     <a href="../../index.html" class="uppercase tracking-widest poppins-medium text-[11px]">Home</a>
                     <a href="./about.html" class="uppercase tracking-widest poppins-medium text-[11px]">About Us</a>
                     <a href="" class="uppercase tracking-widest poppins-medium text-[11px]">our stores</a>
@@ -42,13 +46,19 @@
                     <a href="" class="uppercase tracking-widest poppins-medium text-[11px]">blog</a>
                 </div>
             </div>
-            <div class="row justify-between gap-5 items-center">
-                <div class="hidden md:block">
+            <div class="flex gap-5 items-center">
+                <!-- Cart visible on md+ -->
+                <div class="hidden md:flex items-center gap-2">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>0</span>
                 </div>
+                <!-- Download icon only on lg+ -->
                 <img src="../images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
-                <i class="fa-solid fa-bars"></i>
+
+                <button class="lg:hidden text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
             </div>
         </nav>
         <!--Hero Section-->
@@ -56,7 +66,8 @@
             <div class="grid grid-cols-1 min-[1030px]:grid-cols-2 gap-7">
                 <div class="col gap-7 min-[1030px]:ms-50 max-w-md max-[1030px]:ms-10">
                     <h1 class="uppercase poppins-medium text-[50px] text-sm/11">ABOUT OUR CREATIVE HOUSE</h1>
-                    <p class="text-fontColor text-[16px]">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+                    <p class="text-fontColor text-[16px]">Proin gravida nibh vel velit auctor aliquet. Aenean
+                        sollicitudin,
                         lorem quis bibendum auctor, nisi elit consequat ipsum, nec
                         sagittis sem nibh id elit.
                         Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
@@ -78,15 +89,257 @@
             <div>
                 <p class="w-10 h-[0.1px] bg-black"></p>
             </div>
-            <div class="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 justify-items-center">
-                <img src="../images/about-images/awards/client-img-1.png" alt="">
-                <img src="../images/about-images/awards/client-img-2.png" alt="">
-                <img src="../images/about-images/awards/client-img-3.png" alt="">
-                <img src="../images/about-images/awards/client-img-4.png" alt="">
-                <img src="../images/about-images/awards/client-img-5.png" alt="">
-                <img src="../images/about-images/awards/client-img-6.png" alt="">
+            <div
+                class="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 justify-items-center">
+                <img src="../images/about-images/awards/client-img-1.png" alt=""
+                    class="mx-auto opacity-60 hover:opacity-100 transition duration-300">
+                <img src="../images/about-images/awards/client-img-2.png" alt=""
+                    class="mx-auto opacity-60 hover:opacity-100 transition duration-300">
+                <img src="../images/about-images/awards/client-img-3.png" alt=""
+                    class="mx-auto opacity-60 hover:opacity-100 transition duration-300">
+                <img src="../images/about-images/awards/client-img-4.png" alt=""
+                    class="mx-auto opacity-60 hover:opacity-100 transition duration-300">
+                <img src="../images/about-images/awards/client-img-5.png" alt=""
+                    class="mx-auto opacity-60 hover:opacity-100 transition duration-300">
+                <img src="../images/about-images/awards/client-img-6.png" alt=""
+                    class="mx-auto opacity-60 hover:opacity-100 transition duration-300">
             </div>
         </section>
+
+        <!-- Video Section -->
+        <!-- Video Section -->
+        <section id="video-section"
+            class="relative h-64 sm:h-80 lg:h-[600px] flex items-center justify-center text-white cursor-pointer my-16 mx-4 sm:mx-12 lg:mx-24">
+
+            <!-- Background Image -->
+            <img src="../images/about-images/video-button-img1.jpg" class="absolute inset-0 w-full h-full object-cover">
+
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black/10"></div>
+
+            <!-- Play Button -->
+            <button
+                class="relative bg-white text-black w-16 h-16 sm:w-20 sm:h-20 rounded-full font-semibold shadow-lg flex items-center justify-center text-xl sm:text-2xl hover:bg-black hover:text-white hover:scale-110 transition duration-300 ease-in-out">
+                ▷
+            </button>
+
+        </section>
+
+        <!--team members -->
+
+        <section class="py-20 lg:py-24 text-center lg:-my-10">
+
+            <div class="max-w-[900px] lg:max-w-[1100px] mx-auto px-6">
+
+                <div id="testimonial-carousel" class="relative">
+
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial">
+
+                        <img src="../images/about-images/testimonials-img-1.png"
+                            class="mx-auto w-20 h-20 lg:w-24 lg:h-24 rounded-full shadow">
+
+                        <p
+                            class="text-[15px] lg:text-[16px] mt-6 text-gray-400 leading-relaxed max-w-[650px] mx-auto font-opensans">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit leo, eget eui dolor.
+                            In ut ullamcorper leo, eget euismod orci. Cum sociis natoquem ipsum dolor sit amet
+                        </p>
+
+                        <h3 class="mt-6 font-poppins text-[11px] tracking-[2px] font-medium uppercase">
+                            Milla Grant
+                        </h3>
+
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial hidden">
+
+                        <img src="../images/about-images/testimonials-img-2.png"
+                            class="mx-auto w-20 h-20 lg:w-24 lg:h-24 rounded-full shadow">
+
+                        <p
+                            class="text-[15px] lg:text-[16px] mt-6 text-gray-400 leading-relaxed max-w-[650px] mx-auto font-opensans">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit leo, eget eui dolor.
+                            In ut ullamcorper leo, eget euismod orci. Cum sociis natoquem ipsum dolor sit amet
+                        </p>
+
+                        <h3 class="mt-6 font-poppins text-[11px] tracking-[2px] font-medium uppercase">
+                            Vera Briggs
+                        </h3>
+
+                    </div>
+
+                    <!-- Arrows -->
+                    <div
+                        class="hidden lg:block absolute -left-52 top-1/2 -translate-y-1/2 text-6xl text-gray-900 select-none font-light">
+                        ‹
+                    </div>
+
+                    <div
+                        class="hidden lg:block absolute -right-52 top-1/2 -translate-y-1/2 text-6xl text-gray-900 select-none font-light">
+                        ›
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--Custom services-->
+        <section class="py-24 bg-white mt-20">
+
+            <!-- Title -->
+            <div>
+                <h2
+                    class="uppercase poppins-medium text-[28px] lg:text-[35px] font-medium mb-8 lg:ml-16 relative lg:top-20 text-center lg:text-left">
+                    Custom services
+                </h2>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+                <!-- Accordion -->
+                <div class="space-y-8 lg:-ml-20 lg:pt-20">
+
+                    <details class="group border-t border-b border-gray-200 pb-4 transition">
+
+                        <summary
+                            class="text-[#303030] mt-6 font-poppins text-[13px] leading-4 flex justify-between cursor-pointer uppercase font-semibold tracking-wide">
+                            What we do
+                            <span class="group-open:rotate-45 transition">+</span>
+                        </summary>
+
+                        <p class="mt-4 text-[#959494] font-opensans text-[14px] font-normal">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec vero pietas adversus deos nec
+                            quanta iis gratia debeatur sine explicatione naturae intellegi potest vixtis.
+                        </p>
+
+                    </details>
+
+                    <details class="group border-b border-gray-200 pb-4 transition">
+
+                        <summary
+                            class="text-[#303030] mt-6 font-poppins text-[13px] leading-4 flex justify-between cursor-pointer uppercase font-semibold tracking-wide">
+                            We’re already there
+                            <span class="group-open:rotate-45 transition">+</span>
+                        </summary>
+
+                        <p class="mt-4 text-[#959494] font-opensans text-[14px] font-normal">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+
+                    </details>
+
+                    <details class="group border-b border-gray-200 pb-4 transition">
+
+                        <summary
+                            class="text-[#303030] mt-6 font-poppins text-[13px] leading-4 flex justify-between cursor-pointer uppercase font-semibold tracking-wide">
+                            The company you keep
+                            <span class="group-open:rotate-45 transition">+</span>
+                        </summary>
+
+                        <p class="mt-4 text-[#959494] font-opensans text-[14px] font-normal">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+
+                    </details>
+
+                    <details class="group border-b border-gray-200 pb-4 transition">
+
+                        <summary
+                            class="text-[#303030] mt-6 font-poppins text-[13px] leading-4 flex justify-between cursor-pointer uppercase font-semibold tracking-wide">
+                            Your financial bridge
+                            <span class="group-open:rotate-45 transition">+</span>
+                        </summary>
+
+                        <p class="mt-4 text-[#959494] font-opensans text-[14px] font-normal">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+
+                    </details>
+
+                </div>
+
+                <!-- Image -->
+                <div class="w-full lg:-my-40">
+                    <img src="../images/about-images/about-us-img-3.jpg"
+                        class="w-full lg:w-[120%] max-w-none shadow-lg">
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="mt-24 lg:mt-36 text-left lg:ml-20 px-6 lg:px-0">
+
+            <h2 class="font-poppins font-medium uppercase mb-10 text-[26px] md:text-[30px] lg:text-[35px] leading-snug">
+
+                We are available. Interested in <br class="hidden lg:block">
+                collaboration?
+
+                <a
+                    class="underline text-[#f7dad0] py-4 uppercase tracking-wide hover:text-black transition hover:underline decoration-[#f7dad0] hover:opacity-35">
+                    Get in touch.
+                </a>
+
+            </h2>
+
+        </section>
+
+        <!-- footer -->
+
+        <footer class="bg-[#211f1f] py-16 px-12 font-poppins font-normal text-[15px] uppercase text-[#bfbfbf] mt-32 ">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-md font-bold mb-4 text-white">Contact</h3>
+                    <p class="mb-2">+1 123 456 789</p>
+                    <p>1316 Abbot Kinney Blvd.<br />Copenhagen CA 90291</p>
+                </div>
+
+                <!-- Help -->
+                <div>
+                    <h3 class="text-md font-bold mb-4 text-white">Help</h3>
+                    <ul class="space-y-2 text-[14px]">
+                        <li><a href="#" class="hover:underline decoration-gray-400">FAQ’s</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Pricing Plans</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Track Your Order</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Returns</a></li>
+                    </ul>
+                </div>
+
+                <!-- About Us -->
+                <div>
+                    <h3 class="text-md font-bold mb-4 text-white">About Us</h3>
+                    <ul class="space-y-2 text-[14px]">
+                        <li><a href="#" class="hover:underline decoration-gray-400">Our Story</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Job Opportunities</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Store Locator</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Services -->
+                <div>
+                    <h3 class=" text-white text-md font-bold mb-4">Customer Services</h3>
+                    <ul class="space-y-2 text-[14px]">
+                        <li><a href="#" class="hover:underline decoration-gray-400">My Account</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Terms of Use</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Deliveries & Returns</a></li>
+                        <li><a href="#" class="hover:underline decoration-gray-400">Gift Card</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+                © 2024 QODE INTERACTIVE, ALL RIGHTS RESERVED
+            </div>
+        </footer>
+
     </main>
 </body>
 
