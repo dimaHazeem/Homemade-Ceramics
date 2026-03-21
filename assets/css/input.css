@@ -4,6 +4,7 @@
     --color-mainColor: #bebebf;
     --color-fontColor: #556166;
     --color-secFontColor: #211F1F;
+    --color-lightFontColor : #959494;
     --color-priceColor: #949292;
     --color-btnColor: #ffe9e3;
 }
@@ -22,6 +23,4 @@
 
 .poppins-medium {
     font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
 }
