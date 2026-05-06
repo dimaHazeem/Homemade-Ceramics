@@ -57,14 +57,19 @@
             </div>
 
             <div class="row justify-between gap-5 items-center">
-                <div class="hidden md:block">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="cart-count">0</span>
+                <!-- Wishlist icon -->
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
+
+                    <div id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
+                        opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
                 </div>
-                <div class="hidden md:block">
-                    <i class="fa-regular fa-heart"></i>
-                    <span class="wishlist-count">0</span>
-                </div>
+
                 <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
                     data-drawer-placement="right" aria-controls="mobile-menu-drawer"
                     class="lg:hidden text-black text-[22px]">
