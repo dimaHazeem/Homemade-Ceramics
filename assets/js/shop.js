@@ -15,6 +15,7 @@ const priceTrack = document.querySelector("#priceTrack");
 const priceText = document.querySelector("#priceText");
 const applyFiltersBtn = document.querySelector("#applyFiltersBtn");
 const resetFiltersBtn = document.querySelector("#resetFiltersBtn");
+const clearFiltersBtn = document.querySelector("#clearFiltersBtn");
 
 const productsPerPage = 12;
 
@@ -401,6 +402,39 @@ if (resetMaterialBtn) {
     selectedMaterial = "all";
     currentPage = 1;
     updateShop();
+  });
+}
+
+if (clearFiltersBtn) {
+  clearFiltersBtn.addEventListener("click", function () {
+    selectedColor = "all";
+    selectedMaterial = "all";
+
+    minPrice = 60;
+    maxPrice = 460;
+
+    if (minPriceRange) {
+      minPriceRange.value = 60;
+    }
+
+    if (maxPriceRange) {
+      maxPriceRange.value = 460;
+    }
+
+    if (searchInput) {
+      searchInput.value = "";
+    }
+
+    if (sortSelect) {
+      sortSelect.value = "default";
+    }
+
+    currentPage = 1;
+
+    updateShop();
+    updatePriceUI();
+
+    showFilterToast("Filters cleared");
   });
 }
 

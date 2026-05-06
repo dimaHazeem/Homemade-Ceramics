@@ -90,7 +90,27 @@
                     </div>
                 </div>
 
-                <img src="../images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
+                <div class="relative group">
+                    <button type="button" id="openSearchBtn"
+                        class="text-black text-[22px] hover:text-[#e2b7a8] transition">
+                        <img src="../images/home-images/download.svg" alt="search..." class="w-5">
+                    </button>
+
+                    <div id="searchDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-7 z-50 hidden">
+
+                        <div class="relative">
+                            <input id="globalSearchInput" type="text" placeholder="Search products..."
+                                class="w-full border-b border-black/20 bg-transparent outline-none py-3 pr-8 text-[14px] tracking-normal placeholder:text-[#8a8a8a] normal-case">
+
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute right-0 top-1/2 -translate-y-1/2 text-[15px] text-black"></i>
+                        </div>
+
+                        <div id="globalSearchResults" class="mt-6 max-h-[360px] overflow-y-auto space-y-5">
+                        </div>
+                    </div>
+                </div>
                 <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
                     data-drawer-placement="right" aria-controls="mobile-menu-drawer"
                     class="lg:hidden text-black text-[22px]">
@@ -323,6 +343,7 @@
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
     <script src="../js/shop.js"></script>
+    <script src="../js/search.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>    
 </body>
 
