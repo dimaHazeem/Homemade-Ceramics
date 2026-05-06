@@ -114,7 +114,7 @@
     <section class="bg-[#ffffff] py-[80px] md:py-[100px]">
         <div class="max-w-[1400px] mx-auto px-8">
 
-            <div class="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
 
                 <!-- SIDEBAR -->
                 <aside class="space-y-12 text-[12px] uppercase tracking-[0.14em]">
@@ -213,23 +213,37 @@
 
                     <!-- PRICE -->
                     <div>
-                        <h4 class="mb-5">Filter by price</h4>
+                        <h4 class="mb-7 text-[16px] uppercase tracking-[0.18em] text-black">
+                            Filter by price
+                        </h4>
 
-                        <div class="relative h-[2px] bg-black/20">
-                            <div class="absolute left-[20%] right-[20%] h-[2px] bg-black"></div>
+                        <div class="price-slider relative h-[20px] mb-6">
+                            <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-black/20"></div>
 
-                            <div
-                                class="absolute left-[20%] top-1/2 -translate-y-1/2 w-3 h-3 border border-black bg-white rounded-full">
-                            </div>
+                            <div id="priceTrack" class="absolute top-1/2 -translate-y-1/2 h-[2px] bg-black"></div>
 
-                            <div
-                                class="absolute right-[20%] top-1/2 -translate-y-1/2 w-3 h-3 border border-black bg-white rounded-full">
-                            </div>
+                            <input id="minPriceRange" type="range" min="60" max="460" value="60">
+
+                            <input id="maxPriceRange" type="range" min="60" max="460" value="460">
                         </div>
 
-                        <div class="flex justify-between text-[11px] tracking-normal text-[#6f6f6f] mt-3">
-                            <span>$0</span>
-                            <span>$50</span>
+                        <div class="flex items-center justify-between gap-3 w-full">
+                            <span id="priceText"
+                                class="text-[15px] tracking-normal text-[#8a8a8a] normal-case whitespace-nowrap">
+                                $60 — $460
+                            </span>
+
+                            <div class="flex items-center gap-3 shrink-0">
+                                <button id="resetFiltersBtn"
+                                    class="hidden bg-[#ffe9e2] px-4 py-3 text-[10px] uppercase tracking-[0.25em] text-black hover:bg-black hover:text-white transition">
+                                    Reset
+                                </button>
+
+                                <button id="applyFiltersBtn"
+                                    class="bg-[#ffe9e2] px-4 py-3 text-[10px] uppercase tracking-[0.25em] text-black hover:bg-black hover:text-white transition">
+                                    Apply
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -250,7 +264,7 @@
                 </aside>
 
                 <!-- PRODUCTS AREA -->
-                <div>
+                <div class="lg:col-span-3">
 
                     <!-- TOP BAR -->
                     <div

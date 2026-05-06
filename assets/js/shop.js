@@ -3,18 +3,32 @@ const searchInput = document.querySelector("#searchInput");
 const sortSelect = document.querySelector("#sortSelect");
 const resultsText = document.querySelector("#resultsText");
 const paginationContainer = document.querySelector("#paginationContainer");
-const clearFiltersBtn = document.querySelector("#clearFiltersBtn");
+
+const colorFilters = document.querySelector("#colorFilters");
+const materialFilters = document.querySelector("#materialFilters");
+
+const minPriceRange = document.querySelector("#minPriceRange");
+const maxPriceRange = document.querySelector("#maxPriceRange");
+const priceTrack = document.querySelector("#priceTrack");
+const priceText = document.querySelector("#priceText");
+const applyFiltersBtn = document.querySelector("#applyFiltersBtn");
+const resetFiltersBtn = document.querySelector("#resetFiltersBtn");
 
 const productsPerPage = 12;
+
 let currentPage = 1;
 let selectedColor = "all";
 let selectedMaterial = "all";
+
+let minPrice = 60;
+let maxPrice = 460;
+
 let currentProducts = [...products];
 
 function getFilteredProducts() {
   let filtered = [...products];
 
-  const searchValue = searchInput ? searchInput.value.toLowerCase() : "";
+  const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
   if (searchValue !== "") {
     filtered = filtered.filter(product => {
@@ -34,6 +48,10 @@ function getFilteredProducts() {
   if (selectedMaterial !== "all") {
     filtered = filtered.filter(product => product.material === selectedMaterial);
   }
+
+  filtered = filtered.filter(product => {
+    return product.price >= minPrice && product.price <= maxPrice;
+  });
 
   if (sortSelect) {
     const sortValue = sortSelect.value;
@@ -70,6 +88,14 @@ function renderProducts(productsList) {
   }
 
   productsContainer.innerHTML = paginatedProducts.map(product => {
+    const oldPriceHTML = product.oldPrice
+      ? `<span class="line-through text-[#8a8a8a] mr-2">$${product.oldPrice}.00</span>`
+      : "";
+
+    const saleHTML = product.sale
+      ? `<span class="absolute top-3 right-3 text-[10px] uppercase tracking-[0.2em] text-[#b35b4b] bg-white px-3 py-1 z-20">Sale</span>`
+      : "";
+
     return `
       <div class="group text-center max-w-[300px] mx-auto">
 
@@ -83,11 +109,13 @@ function renderProducts(productsList) {
             />
           </a>
 
+          ${saleHTML}
+
           <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
           <button
             onclick="toggleWishlist(${product.id})"
-            class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-black hover:text-white"
+            class="absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-black hover:text-white z-10"
             title="Add to wishlist"
           >
             <i class="fa-regular fa-heart"></i>
@@ -96,7 +124,7 @@ function renderProducts(productsList) {
           <div class="absolute inset-0 flex items-center justify-center 
             opacity-0 translate-y-4 
             group-hover:opacity-100 group-hover:translate-y-0 
-            transition duration-500 ease-out">
+            transition duration-500 ease-out z-10">
 
             <button 
               onclick="addToCart(${product.id})"
@@ -115,7 +143,7 @@ function renderProducts(productsList) {
           </a>
 
           <p class="text-[13px] text-[#6f6f6f]">
-            $${product.price}
+            ${oldPriceHTML}$${product.price}.00
           </p>
         </div>
 
@@ -194,6 +222,111 @@ function goToPage(pageNumber) {
   });
 }
 
+function getCounts(key) {
+  const counts = {};
+
+  products.forEach(product => {
+    const value = product[key];
+
+    if (!value) return;
+
+    if (!counts[value]) {
+      counts[value] = 1;
+    } else {
+      counts[value]++;
+    }
+  });
+
+  return counts;
+}
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function renderSidebarFilters() {
+  if (!colorFilters || !materialFilters) return;
+
+  const colorCounts = getCounts("color");
+  const materialCounts = getCounts("material");
+
+  colorFilters.innerHTML = Object.keys(colorCounts).map(color => {
+    return `
+      <li 
+        class="cursor-pointer hover:text-black transition ${selectedColor === color ? 'text-black' : ''}"
+        onclick="selectColor('${color}')">
+        ${capitalize(color)} (${colorCounts[color]})
+      </li>
+    `;
+  }).join("");
+
+  materialFilters.innerHTML = Object.keys(materialCounts).map(material => {
+    return `
+      <li 
+        class="cursor-pointer hover:text-black transition ${selectedMaterial === material ? 'text-black' : ''}"
+        onclick="selectMaterial('${material}')">
+        ${capitalize(material)} (${materialCounts[material]})
+      </li>
+    `;
+  }).join("");
+}
+
+function selectColor(color) {
+  selectedColor = color;
+  currentPage = 1;
+  updateShop();
+}
+
+function selectMaterial(material) {
+  selectedMaterial = material;
+  currentPage = 1;
+  updateShop();
+}
+
+function updatePriceUI(activeInput = null) {
+  if (!minPriceRange || !maxPriceRange || !priceText || !priceTrack) return;
+
+  let minValue = Number(minPriceRange.value);
+  let maxValue = Number(maxPriceRange.value);
+
+  if (minValue >= maxValue) {
+    if (activeInput === minPriceRange) {
+      minValue = maxValue - 1;
+      minPriceRange.value = minValue;
+    } else {
+      maxValue = minValue + 1;
+      maxPriceRange.value = maxValue;
+    }
+  }
+
+  priceText.textContent = `$${minValue} — $${maxValue}`;
+
+  const minLimit = Number(minPriceRange.min);
+  const maxLimit = Number(maxPriceRange.max);
+
+  const leftPercent = ((minValue - minLimit) / (maxLimit - minLimit)) * 100;
+  const rightPercent = ((maxValue - minLimit) / (maxLimit - minLimit)) * 100;
+
+  priceTrack.style.left = `${leftPercent}%`;
+  priceTrack.style.right = `${100 - rightPercent}%`;
+
+  const searchHasValue = searchInput && searchInput.value.trim() !== "";
+  const priceIsDefault = minValue === 60 && maxValue === 460;
+
+  if (resetFiltersBtn) {
+    if (
+      !priceIsDefault ||
+      selectedColor !== "all" ||
+      selectedMaterial !== "all" ||
+      searchHasValue
+    ) {
+      resetFiltersBtn.classList.remove("hidden");
+    } else {
+      resetFiltersBtn.classList.add("hidden");
+    }
+  }
+}
+
 function updateShop() {
   currentProducts = getFilteredProducts();
 
@@ -206,6 +339,8 @@ function updateShop() {
   renderProducts(currentProducts);
   renderResultsText(currentProducts);
   renderPagination(currentProducts);
+  renderSidebarFilters();
+  updatePriceUI();
 }
 
 if (searchInput) {
@@ -222,26 +357,33 @@ if (sortSelect) {
   });
 }
 
-document.querySelectorAll(".filter-color").forEach(item => {
-  item.addEventListener("click", function () {
-    selectedColor = this.dataset.color;
+if (minPriceRange && maxPriceRange) {
+  minPriceRange.addEventListener("input", function () {
+    updatePriceUI(minPriceRange);
+  });
+
+  maxPriceRange.addEventListener("input", function () {
+    updatePriceUI(maxPriceRange);
+  });
+}
+
+if (applyFiltersBtn) {
+  applyFiltersBtn.addEventListener("click", function () {
+    minPrice = Number(minPriceRange.value);
+    maxPrice = Number(maxPriceRange.value);
+
     currentPage = 1;
     updateShop();
   });
-});
+}
 
-document.querySelectorAll(".filter-material").forEach(item => {
-  item.addEventListener("click", function () {
-    selectedMaterial = this.dataset.material;
-    currentPage = 1;
-    updateShop();
-  });
-});
-
-if (clearFiltersBtn) {
-  clearFiltersBtn.addEventListener("click", function () {
+if (resetFiltersBtn) {
+  resetFiltersBtn.addEventListener("click", function () {
     selectedColor = "all";
     selectedMaterial = "all";
+
+    minPrice = 60;
+    maxPrice = 460;
 
     if (searchInput) {
       searchInput.value = "";
@@ -249,6 +391,14 @@ if (clearFiltersBtn) {
 
     if (sortSelect) {
       sortSelect.value = "default";
+    }
+
+    if (minPriceRange) {
+      minPriceRange.value = 60;
+    }
+
+    if (maxPriceRange) {
+      maxPriceRange.value = 460;
     }
 
     currentPage = 1;
