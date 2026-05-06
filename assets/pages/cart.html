@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Output -->
+    <link href="../css/output.css" rel="stylesheet">
+</head>
+
+<body class="m-0 font-[Poppins] text-[#211f1f]">
+
+    <!-- HEADER -->
+    <header>
+        <nav class="row justify-between items-center p-7">
+            <div class="row justify-between items-center gap-20">
+                <div>
+                    <img src="../images/home-images/Ceramics01.png" alt="logo">
+                </div>
+
+                <div class="row justify-between gap-15 items-center hidden lg:flex">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest text-[11px] hover:text-gray-500 transition">Home</a>
+                    <a href="./about.html"
+                        class="uppercase tracking-widest text-[11px] hover:text-gray-500 transition">About Us</a>
+                    <a href="./ourStores.html"
+                        class="uppercase tracking-widest text-[11px] hover:text-gray-500 transition">Our Stores</a>
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest text-[11px] hover:text-gray-500 transition">Shop</a>
+                    <a href="./blog.html"
+                        class="uppercase tracking-widest text-[11px] hover:text-gray-500 transition">Blog</a>
+                </div>
+            </div>
+
+            <div class="row justify-between gap-5 items-center">
+                <div class="hidden md:block">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <div class="hidden md:block">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </div>
+
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- PAGE TITLE -->
+    <section class="bg-[#f6f6f6] py-12">
+        <div class="max-w-[1400px] mx-auto px-8">
+            <h1 class="text-[18px] uppercase tracking-[0.18em]">Cart</h1>
+        </div>
+    </section>
+
+    <!-- CART CONTENT -->
+    <main class="max-w-[1400px] mx-auto px-8 py-24">
+
+        <!-- Empty Cart -->
+        <section id="emptyCartSection"
+            class="hidden min-h-[420px] flex flex-col justify-center items-center text-center">
+            <h2 class="text-[32px] font-normal mb-10">
+                Your cart is currently empty.
+            </h2>
+
+            <a href="./shop.html"
+                class="bg-[#ffe9e2] px-16 py-5 text-[12px] uppercase tracking-[0.35em] hover:bg-black hover:text-white transition">
+                Return to shop
+            </a>
+        </section>
+
+        <!-- Cart Filled -->
+        <section id="cartContentSection" class="hidden">
+
+            <!-- Desktop / Tablet Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px] border-collapse">
+                    <thead>
+                        <tr class="border-b border-[#e5e5e5]">
+                            <th class="py-6 text-left text-[16px] font-semibold"></th>
+                            <th class="py-6 text-left text-[16px] font-semibold">Product</th>
+                            <th class="py-6 text-left text-[16px] font-semibold">Price</th>
+                            <th class="py-6 text-left text-[16px] font-semibold">Quantity</th>
+                            <th class="py-6 text-left text-[16px] font-semibold">Subtotal</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cartItemsContainer"></tbody>
+                </table>
+            </div>
+
+            <!-- Coupon + Actions -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-12 items-start">
+
+                <!-- Coupon Box -->
+                <div class="bg-[#fafafa] border border-[#ededed] p-8">
+                    <h3 class="text-[16px] uppercase tracking-[0.18em] mb-6">
+                        Have a coupon?
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4">
+                        <input id="couponInput" type="text" placeholder="Coupon Code"
+                            class="border border-[#e5e5e5] bg-white px-6 py-4 text-[12px] uppercase tracking-[0.25em] outline-none focus:border-black transition">
+
+                        <button id="applyCouponBtn"
+                            class="bg-[#ffe9e2] px-8 py-4 text-[12px] uppercase tracking-[0.28em] hover:bg-black hover:text-white transition">
+                            Apply
+                        </button>
+                    </div>
+
+                    <p id="couponMessage" class="mt-4 text-[14px] normal-case tracking-normal text-[#8a8a8a]"></p>
+                </div>
+
+                <!-- Cart Actions -->
+                <div class="flex flex-col md:flex-row lg:justify-end gap-5">
+                    <button id="updateCartBtn"
+                        class="bg-[#ffe9e2] px-10 py-5 text-[12px] uppercase tracking-[0.28em] hover:bg-black hover:text-white transition">
+                        Update Cart
+                    </button>
+
+                    <a href="./checkout.html"
+                        class="bg-[#ffe9e2] px-10 py-5 text-center text-[12px] uppercase tracking-[0.28em] hover:bg-black hover:text-white transition">
+                        Proceed to Checkout
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Cart Totals -->
+            <div class="mt-24">
+                <h2 class="text-[42px] uppercase tracking-[0.12em] mb-12">
+                    Cart Totals
+                </h2>
+
+                <div class="max-w-[420px] space-y-6 text-[18px] text-[#8a8a8a]">
+                    <div class="flex justify-between border-b border-[#ededed] pb-4">
+                        <span class="font-semibold">Subtotal</span>
+                        <span id="cartSubtotal">$0.00</span>
+                    </div>
+
+                    <div id="discountRow" class="hidden flex justify-between border-b border-[#ededed] pb-4">
+                        <span class="font-semibold">Discount</span>
+                        <span id="cartDiscount">-$0.00</span>
+                    </div>
+
+                    <div class="flex justify-between pt-2">
+                        <span class="font-semibold text-black">Total</span>
+                        <span id="cartTotal" class="font-semibold text-black">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/cart-page.js"></script>
+</body>
+
+</html>

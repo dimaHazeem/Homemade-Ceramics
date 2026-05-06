@@ -60,20 +60,36 @@
 
             <!-- RIGHT -->
             <div class="row justify-between gap-5 items-center">
+               <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+                        <span class="cart-count">0</span>
+                    </div>
 
-                <!-- CART -->
-                <div class="hidden md:block">
-                    <i class="fa-solid fa-cart-shopping "></i>
-                    <span>0</span>
+                    <!-- CART DROPDOWN -->
+                    <div
+                        id="cartDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
                 </div>
 
-                <!-- SEARCH -->
-                <img src="../images/home-images/download.svg" alt="search"
-                    class="w-5 hidden lg:block  hover:opacity-100 transition">
+               <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
 
-                <!-- MENU -->
-                <i class="fa-solid fa-bars "></i>
+                    <!-- WISHLIST DROPDOWN -->
+                    <div
+                        id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
 
+                <img src="../images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
+                <i class="fa-solid fa-bars"></i>
             </div>
 
         </nav>
@@ -245,6 +261,10 @@
         </div>
     </footer>
 
+    <script src="../js/data.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/shop.js"></script>
 </body>
 
 </html>

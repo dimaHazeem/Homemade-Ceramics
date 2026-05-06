@@ -1,3 +1,14 @@
+function getProductImageSrc(imageName) {
+  const fileName = imageName.split("/").pop();
+
+  const isInsidePagesFolder = window.location.pathname.includes("/assets/pages/");
+
+  if (isInsidePagesFolder) {
+    return `../images/shop-img/${fileName}`;
+  }
+
+  return `./assets/images/shop-img/${fileName}`;
+}
 const products = [
   {
     id: 1,

@@ -61,15 +61,34 @@
                 </div>
             </div>
             <div class="row justify-between gap-5 items-center">
-                <div class="hidden md:block">
-                    <i class="fa-regular fa-heart"></i>
-                    <span class="wishlist-count">0</span>
+               <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+
+                    <!-- CART DROPDOWN -->
+                    <div
+                        id="cartDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
                 </div>
 
-                <div class="hidden md:block">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="cart-count">0</span>
+               <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
+
+                    <!-- WISHLIST DROPDOWN -->
+                    <div
+                        id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
                 </div>
+
                 <img src="./assets/images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -131,9 +150,9 @@
                     <span class="text-priceColor">$300.00</span>
                 </div>
             </div>
-            <button
+            <a href="./assets/pages/shop.html"
                 class="py-2 px-8 tracking-widest poppins-medium uppercase md:translate-y-28 bg-btnColor cursor-pointer">View
-                all</button>
+                all</a>
         </section>
 
         <section class="my-52">
@@ -147,8 +166,8 @@
                         MEET DESIGNERS EVA & NINA</h1>
                     <p class="text-[#aba9a9] max-w-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
                         neque illo libero modi esse ipsa, consequatur amet soluta qui recusandae.</p>
-                    <button class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">read
-                        more</button>
+                    <a href="./assets/pages/shop.html" class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">read
+                        more</a>
                 </div>
             </div>
         </section>
@@ -219,8 +238,8 @@
                         WORKSHOP IN OUR CERAMIC STUDIO</h1>
                     <p class="text-[#aba9a9] max-w-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
                         neque illo libero modi esse ipsa, consequatur amet soluta qui recusandae.</p>
-                    <button class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">Apply
-                        Now</button>
+                    <a href="./assets/pages/about.html" class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">Apply
+                        Now</a>
                 </div>
             </div>
         </section>
@@ -234,11 +253,62 @@
             </div>
         </section>
     </main>
+        <footer class="bg-[#211f1f] py-16 px-12 font-[poppins] font-normal text-[15px] uppercase text-[#bfbfbf] mt-32 ">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <!-- Contact -->
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Contact</h3>
+                <p class="mb-2">+1 123 456 789</p>
+                <p>1316 Abbot Kinney Blvd.<br />Copenhagen CA 90291</p>
+            </div>
+
+            <!-- Help -->
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Help</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="#" class="hover:underline decoration-gray-400">FAQ’s</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Pricing Plans</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Track Your Order</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Returns</a></li>
+                </ul>
+            </div>
+
+            <!-- About Us -->
+            <div>
+                <h3 class="text-md font-[poppins] font-bold mb-4 text-white">About Us</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="#" class="hover:underline decoration-gray-400">Our Story</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Job Opportunities</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Store Locator</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Services -->
+            <div>
+                <h3 class=" text-white font-[poppins] text-md font-bold mb-4">Customer Services</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="#" class="hover:underline decoration-gray-400">My Account</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Terms of Use</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Deliveries & Returns</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Gift Card</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+            © 2024 QODE INTERACTIVE, ALL RIGHTS RESERVED
+        </div>
+    </footer>
 
 
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/cart.js"></script>
-    <script src="./assets/js/wishlist.js"></script>a
+    <script src="./assets/js/wishlist.js"></script>
+    <script src="./assets/js/shop.js"></script>
 </body>
 
 </html>

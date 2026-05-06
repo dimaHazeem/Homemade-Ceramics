@@ -107,7 +107,7 @@ if (paginatedProducts.length === 0) {
 
           <a href="./product-details.html?id=${product.id}">
             <img 
-              src="${product.image}"
+              src="${getProductImageSrc(product.image)}"
               alt="${product.name}"
               class="w-full aspect-square object-cover transition duration-700 ease-out group-hover:scale-[1.06]"
             />
