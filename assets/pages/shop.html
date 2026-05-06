@@ -110,7 +110,11 @@
                 </div>
 
                 <img src="../images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
-                <i class="fa-solid fa-bars"></i>
+                <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
+                    data-drawer-placement="right" aria-controls="mobile-menu-drawer"
+                    class="lg:hidden text-black text-[22px]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </nav>
 
@@ -309,10 +313,88 @@
         </div>
     </footer>
 
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobile-menu-drawer"
+        class="fixed top-0 right-0 z-50 h-screen w-[320px] max-w-[85%] translate-x-full bg-white p-8 overflow-y-auto transition-transform border-l border-[#ededed] lg:hidden"
+        tabindex="-1" aria-labelledby="mobile-menu-drawer-label">
+
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between border-b border-[#ededed] pb-6">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="Bridge Logo" class="w-[130px]">
+            </a>
+
+            <button type="button" data-drawer-hide="mobile-menu-drawer" aria-controls="mobile-menu-drawer"
+                class="text-black text-[24px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-xmark"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+
+        <!-- Drawer Links -->
+        <nav class="mt-10">
+            <ul class="space-y-7">
+                <li>
+                    <a href="../../index.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/about.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        About Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/ourStores.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Our Stores
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/shop.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Shop
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/blog.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/cart.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./wishlist.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-regular fa-heart"></i>
+                        Wishlist
+                        <span class="wishlist-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
     <script src="../js/data.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
     <script src="../js/shop.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
 </body>
 
 </html>

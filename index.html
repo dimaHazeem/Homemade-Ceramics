@@ -61,36 +61,38 @@
                 </div>
             </div>
             <div class="row justify-between gap-5 items-center">
-               <div class="relative group hidden md:block">
+                <div class="relative group hidden md:block">
                     <div class="cursor-pointer flex items-center gap-1">
                         <i class="fa-solid fa-cart-shopping text-[20px]"></i>
                         <span class="cart-count">0</span>
                     </div>
 
                     <!-- CART DROPDOWN -->
-                    <div
-                        id="cartDropdown"
+                    <div id="cartDropdown"
                         class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
                             opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                     </div>
                 </div>
 
-               <div class="relative group hidden md:block">
+                <div class="relative group hidden md:block">
                     <div class="cursor-pointer flex items-center gap-1">
                         <i class="fa-regular fa-heart text-[20px]"></i>
                         <span class="wishlist-count">0</span>
                     </div>
 
                     <!-- WISHLIST DROPDOWN -->
-                    <div
-                        id="wishlistDropdown"
+                    <div id="wishlistDropdown"
                         class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50
                             opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                     </div>
                 </div>
 
                 <img src="./assets/images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
-                <i class="fa-solid fa-bars"></i>
+                <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
+                    data-drawer-placement="right" aria-controls="mobile-menu-drawer"
+                    class="lg:hidden text-black text-[22px]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </nav>
         <div class="h-screen row">
@@ -166,7 +168,8 @@
                         MEET DESIGNERS EVA & NINA</h1>
                     <p class="text-[#aba9a9] max-w-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
                         neque illo libero modi esse ipsa, consequatur amet soluta qui recusandae.</p>
-                    <a href="./assets/pages/shop.html" class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">read
+                    <a href="./assets/pages/shop.html"
+                        class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">read
                         more</a>
                 </div>
             </div>
@@ -238,7 +241,8 @@
                         WORKSHOP IN OUR CERAMIC STUDIO</h1>
                     <p class="text-[#aba9a9] max-w-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
                         neque illo libero modi esse ipsa, consequatur amet soluta qui recusandae.</p>
-                    <a href="./assets/pages/about.html" class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">Apply
+                    <a href="./assets/pages/about.html"
+                        class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">Apply
                         Now</a>
                 </div>
             </div>
@@ -253,7 +257,7 @@
             </div>
         </section>
     </main>
-        <footer class="bg-[#211f1f] py-16 px-12 font-[poppins] font-normal text-[15px] uppercase text-[#bfbfbf] mt-32 ">
+    <footer class="bg-[#211f1f] py-16 px-12 font-[poppins] font-normal text-[15px] uppercase text-[#bfbfbf] mt-32 ">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
 
             <!-- Contact -->
@@ -305,10 +309,90 @@
     </footer>
 
 
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobile-menu-drawer"
+        class="fixed top-0 right-0 z-50 h-screen w-[320px] max-w-[85%] translate-x-full bg-white p-8 overflow-y-auto transition-transform border-l border-[#ededed] lg:hidden"
+        tabindex="-1" aria-labelledby="mobile-menu-drawer-label">
+
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between border-b border-[#ededed] pb-6">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="Bridge Logo" class="w-[130px]">
+            </a>
+
+            <button type="button" data-drawer-hide="mobile-menu-drawer" aria-controls="mobile-menu-drawer"
+                class="text-black text-[24px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-xmark"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+
+        <!-- Drawer Links -->
+        <nav class="mt-10">
+            <ul class="space-y-7">
+                <li>
+                    <a href="./index.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./assets/pages/about.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        About Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./assets/pages/ourStores.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Our Stores
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./assets/pages/shop.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Shop
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./assets/pages/blog.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./assets/pages/cart.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./wishlist.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-regular fa-heart"></i>
+                        Wishlist
+                        <span class="wishlist-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/cart.js"></script>
     <script src="./assets/js/wishlist.js"></script>
     <script src="./assets/js/shop.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
+
 </body>
 
 </html>
