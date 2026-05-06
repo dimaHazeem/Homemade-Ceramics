@@ -56,6 +56,22 @@ function findProductById(productId) {
   return products.find(product => product.id === productId);
 }
 
+async function fetchProductFromDatabase(productId) {
+  try {
+    const response = await fetch(`../../backend/api/product-details.php?id=${productId}`);
+    const data = await response.json();
+
+    if (!data.success) {
+      return null;
+    }
+
+    return data.product;
+  } catch (error) {
+    console.error("Error fetching product from database:", error);
+    return null;
+  }
+}
+
 /* -----------------------------
    Page State
 ----------------------------- */
@@ -365,14 +381,17 @@ function addSelectedProductToCart() {
    Init
 ----------------------------- */
 
-function initProductDetailsPage() {
+async function initProductDetailsPage() {
   const productId = getProductIdFromUrl();
-  selectedProduct = findProductById(productId);
+
+  selectedProduct = await fetchProductFromDatabase(productId);
 
   if (!selectedProduct) {
     showProductNotFound();
     return;
   }
+
+  quantity = 1;
 
   showProductContent();
   renderProductDetails(selectedProduct);

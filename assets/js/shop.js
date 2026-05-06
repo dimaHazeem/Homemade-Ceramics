@@ -26,10 +26,43 @@ let selectedMaterial = "all";
 let minPrice = 60;
 let maxPrice = 460;
 
-let currentProducts = [...products];
+let dbProducts = [];
+let currentProducts = [];
+
+async function fetchProductsFromDatabase() {
+  try {
+    const response = await fetch("../../backend/api/products.php");
+    const data = await response.json();
+
+    if (!data.success) {
+      productsContainer.innerHTML = `
+        <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
+          <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
+            Failed to load products.
+          </p>
+        </div>
+      `;
+      return [];
+    }
+
+    return data.products;
+  } catch (error) {
+    console.error("Error loading products:", error);
+
+    productsContainer.innerHTML = `
+      <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
+        <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
+          Could not connect to products API.
+        </p>
+      </div>
+    `;
+
+    return [];
+  }
+}
 
 function getFilteredProducts() {
-  let filtered = [...products];
+  let filtered = [...dbProducts];
 
   const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
@@ -246,7 +279,7 @@ function goToPage(pageNumber) {
 function getCounts(key) {
   const counts = {};
 
-  products.forEach(product => {
+  dbProducts.forEach(product => {
     const value = product[key];
 
     if (!value) return;
@@ -517,4 +550,10 @@ if (resetFiltersBtn) {
   });
 }
 
-updateShop();
+async function initShopPage() {
+  dbProducts = await fetchProductsFromDatabase();
+  currentProducts = [...dbProducts];
+  updateShop();
+}
+
+initShopPage();
