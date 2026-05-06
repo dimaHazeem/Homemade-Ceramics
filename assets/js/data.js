@@ -9,6 +9,7 @@ function getProductImageSrc(imageName) {
 
   return `./assets/images/shop-img/${fileName}`;
 }
+
 const products = [
   {
     id: 1,
@@ -17,7 +18,7 @@ const products = [
     category: "Bowls",
     color: "brown",
     material: "wood",
-    image: "../images/shop-img/product-16-550x550.jpg",
+    image: "product-16-550x550.jpg",
     description: "A warm bowl designed for simple lunch serving and natural table styling."
   },
   {
@@ -28,7 +29,7 @@ const products = [
     category: "Jars",
     color: "beige",
     material: "ceramic",
-    image: "../images/shop-img/product-14-1-550x550 (1).jpg",
+    image: "product-14-1-550x550.jpg",
     description: "A minimal brown jar with a clean handmade finish.",
     sale: true
   },
@@ -39,7 +40,7 @@ const products = [
     category: "Plates",
     color: "white",
     material: "ceramic",
-    image: "../images/shop-img/product-10-550x550.jpg",
+    image: "product-10-550x550.jpg",
     description: "A simple ceramic plate with a soft elegant shape for everyday use."
   },
   {
@@ -49,7 +50,7 @@ const products = [
     category: "Mugs",
     color: "pink",
     material: "ceramic",
-    image: "../images/shop-img/product-9-550x550.jpg",
+    image: "product-9-550x550.jpg",
     description: "A handmade clay mug with a soft tone and a comfortable handle."
   },
   {
@@ -59,7 +60,7 @@ const products = [
     category: "Plates",
     color: "pink",
     material: "ceramic",
-    image: "../images/shop-img/product-3-550x550.jpg",
+    image: "product-3-550x550.jpg",
     description: "A delicate clay plate with a pale accent and smooth ceramic surface."
   },
   {
@@ -69,7 +70,7 @@ const products = [
     category: "Boards",
     color: "brown",
     material: "wood",
-    image: "../images/shop-img/product-8-550x550.jpg",
+    image: "product-8-550x550.jpg",
     description: "A wooden cutting board with a practical handle and natural finish."
   },
   {
@@ -79,7 +80,7 @@ const products = [
     category: "Plates",
     color: "beige",
     material: "ceramic",
-    image: "../images/shop-img/product-7-550x550.jpg",
+    image: "product-7-550x550.jpg",
     description: "A designed ceramic plate with a soft organic shape and artistic look."
   },
   {
@@ -89,7 +90,7 @@ const products = [
     category: "Furniture",
     color: "brown",
     material: "wood",
-    image: "../images/shop-img/product-6-550x550.jpg",
+    image: "product-6-550x550.jpg",
     description: "A wooden desk chair with a natural handmade style."
   },
   {
@@ -99,7 +100,7 @@ const products = [
     category: "Plates",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-5-550x550.jpg",
+    image: "product-5-550x550.jpg",
     description: "A blue dessert plate with a calm modern finish."
   },
   {
@@ -109,7 +110,7 @@ const products = [
     category: "Plates",
     color: "beige",
     material: "ceramic",
-    image: "../images/shop-img/product-14-1-550x550.jpg",
+    image: "product-14-1-550x550.jpg",
     description: "A simple dessert plate suitable for sweets, snacks, and small servings."
   },
   {
@@ -119,7 +120,7 @@ const products = [
     category: "Decor",
     color: "gold",
     material: "metal",
-    image: "../images/shop-img/product-25-new-300x300.jpg",
+    image: "product-25-new-300x300.jpg",
     description: "A golden decorative piece that adds elegance to interior spaces."
   },
   {
@@ -129,10 +130,9 @@ const products = [
     category: "Plates",
     color: "gold",
     material: "ceramic",
-    image: "../images/shop-img/product-57-550x550.jpg",
+    image: "product-57-550x550.jpg",
     description: "A ceramic plate with golden edges and a refined handmade finish."
   },
-
   {
     id: 13,
     name: "Marine Plate",
@@ -140,7 +140,7 @@ const products = [
     category: "Plates",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-16-550x550.jpg",
+    image: "product-16-550x550.jpg",
     description: "A marine-inspired plate with a bold ceramic texture."
   },
   {
@@ -150,7 +150,7 @@ const products = [
     category: "Jugs",
     color: "pink",
     material: "ceramic",
-    image: "../images/shop-img/product-14-1-550x550 (1).jpg",
+    image: "product-14-1-550x550.jpg",
     description: "A soft ceramic milk jug designed for elegant table serving."
   },
   {
@@ -160,7 +160,7 @@ const products = [
     category: "Vases",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-10-550x550.jpg",
+    image: "product-10-550x550.jpg",
     description: "A Nordic-style vase with a calm tone and smooth finish."
   },
   {
@@ -170,7 +170,7 @@ const products = [
     category: "Plates",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-9-550x550.jpg",
+    image: "product-9-550x550.jpg",
     description: "An ocean-inspired ceramic plate with soft aqua tones."
   },
   {
@@ -180,7 +180,7 @@ const products = [
     category: "Vases",
     color: "brown",
     material: "wood",
-    image: "../images/shop-img/product-3-550x550.jpg",
+    image: "product-3-550x550.jpg",
     description: "A pastel-inspired vase with a warm handmade design."
   },
   {
@@ -190,7 +190,7 @@ const products = [
     category: "Mugs",
     color: "pink",
     material: "ceramic",
-    image: "../images/shop-img/product-8-550x550.jpg",
+    image: "product-8-550x550.jpg",
     description: "A pink ceramic mug with a soft modern shape."
   },
   {
@@ -200,7 +200,7 @@ const products = [
     category: "Plates",
     color: "pink",
     material: "ceramic",
-    image: "../images/shop-img/product-7-550x550.jpg",
+    image: "product-7-550x550.jpg",
     description: "A pink oval ceramic plate with golden edging and a delicate finish."
   },
   {
@@ -210,7 +210,7 @@ const products = [
     category: "Jars",
     color: "pink",
     material: "porcelain",
-    image: "../images/shop-img/product-6-550x550.jpg",
+    image: "product-6-550x550.jpg",
     description: "A porcelain jar with a soft surface and elegant handmade details."
   },
   {
@@ -220,7 +220,7 @@ const products = [
     category: "Furniture",
     color: "gold",
     material: "metal",
-    image: "../images/shop-img/product-5-550x550.jpg",
+    image: "product-5-550x550.jpg",
     description: "A retro decorative table piece with a golden artistic structure."
   },
   {
@@ -230,7 +230,7 @@ const products = [
     category: "Cutlery",
     color: "gold",
     material: "metal",
-    image: "../images/shop-img/product-14-1-550x550.jpg",
+    image: "product-14-1-550x550.jpg",
     description: "A rose-inspired golden cutlery set for elegant table styling."
   },
   {
@@ -240,7 +240,7 @@ const products = [
     category: "Dinnerware",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-25-new-300x300.jpg",
+    image: "product-25-new-300x300.jpg",
     description: "A rose dinnerware piece with soft ceramic tones."
   },
   {
@@ -250,10 +250,9 @@ const products = [
     category: "Jugs",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-57-550x550.jpg",
+    image: "product-57-550x550.jpg",
     description: "A soft ceramic jug designed for modern serving."
   },
-
   {
     id: 25,
     name: "Rose Oval Plate",
@@ -261,7 +260,7 @@ const products = [
     category: "Plates",
     color: "pink",
     material: "ceramic",
-    image: "../images/shop-img/product-16-550x550.jpg",
+    image: "product-16-550x550.jpg",
     description: "A rose oval plate with a delicate pink tone and gold edge."
   },
   {
@@ -271,7 +270,7 @@ const products = [
     category: "Plates",
     color: "gold",
     material: "ceramic",
-    image: "../images/shop-img/product-14-1-550x550 (1).jpg",
+    image: "product-14-1-550x550.jpg",
     description: "A sand-inspired ceramic plate with subtle golden details."
   },
   {
@@ -281,7 +280,7 @@ const products = [
     category: "Plates",
     color: "blue",
     material: "ceramic",
-    image: "../images/shop-img/product-10-550x550.jpg",
+    image: "product-10-550x550.jpg",
     description: "A sky-blue ceramic plate with a smooth modern finish."
   },
   {
@@ -291,7 +290,7 @@ const products = [
     category: "Sets",
     color: "gold",
     material: "metal",
-    image: "../images/shop-img/product-9-550x550.jpg",
+    image: "product-9-550x550.jpg",
     description: "A golden soup set designed for elegant serving moments."
   },
   {
@@ -301,7 +300,7 @@ const products = [
     category: "Furniture",
     color: "brown",
     material: "wood",
-    image: "../images/shop-img/product-3-550x550.jpg",
+    image: "product-3-550x550.jpg",
     description: "A wooden stylo table with a simple handmade furniture style."
   },
   {
@@ -311,7 +310,7 @@ const products = [
     category: "Sets",
     color: "beige",
     material: "ceramic",
-    image: "../images/shop-img/product-8-550x550.jpg",
+    image: "product-8-550x550.jpg",
     description: "A soft ceramic tea set with an organic handmade shape."
   },
   {
@@ -321,7 +320,147 @@ const products = [
     category: "Bowls",
     color: "black",
     material: "wood",
-    image: "../images/shop-img/product-7-550x550.jpg",
+    image: "product-7-550x550.jpg",
     description: "A wooden bowl set with a dark elegant finish."
   }
 ];
+
+const productGalleries = {
+  1: [
+    "secImage2.jpg",
+    "secImage3.jpg",
+    "secImage4.jpg",
+    "secImage5.jpg",
+    "secImage1.jpg"
+  ],
+
+  Jars: [
+    "secImage2 (1).jpg",
+    "secImage3 (1).jpg",
+    "secImage4 (1).jpg",
+    "secImage5 (1).jpg",
+    "secImage1 (9).jpg",
+  ],
+
+  11: [
+    "secImage2 (2).jpg",
+    "secImage3 (2).jpg",
+    "secImage4 (2).jpg",
+    "secImage5 (2).jpg",
+    "product-25-new-300x300.jpg"
+  ],
+
+  9: [
+    "secImage2 (3).jpg",
+    "secImage3 (3).jpg",
+    "secImage4 (3).jpg",
+    "secImage5 (3).jpg",
+    "product-5-550x550.jpg"
+  ],
+
+  5: [
+    "secImage2 (11).jpg",
+    "secImage3 (11).jpg",
+    "secImage4 (11).jpg",
+    "secImage1 (10).jpg",
+    "product-3-550x550.jpg"
+  ],
+
+  2: [
+    "secImage2 (4).jpg",
+    "secImage3 (4).jpg",
+    "secImage4 (4).jpg",
+    "secImage4 (4).jpg",
+    "product-14-1-550x550.jpg"
+  ],
+
+  8: [
+    "secImage2 (5).jpg",
+    "secImage3 (5).jpg",
+    "secImage4 (5).jpg",
+    "secImage5 (4).jpg",
+    "product-6-550x550.jpg"
+  ],
+
+  4: [
+    "secImage2 (6).jpg",
+    "secImage3 (6).jpg",
+    "secImage4 (6).jpg",
+    "secImage5 (5).jpg",
+    "product-9-550x550.jpg"
+  ],
+
+  12: [
+    "secImage2 (7).jpg",
+    "secImage3 (7).jpg",
+    "secImage4 (7).jpg",
+    "product-57-550x550.jpg",
+    "product-57-550x550.jpg"
+  ],
+
+  7: [
+    "secImage2 (8).jpg",
+    "secImage3 (8).jpg",
+    "secImage4 (8).jpg",
+    "secImage5 (7).jpg",
+    "product-7-550x550jpg"
+  ],
+
+  3: [
+    "secImage2 (9).jpg",
+    "secImage3 (9).jpg",
+    "secImage4 (9).jpg",
+    "secImage5 (8).jpg",
+    "product-10-550x550.jpg"
+  ],
+
+  6: [
+    "secImage2 (10).jpg",
+    "secImage3 (10).jpg",
+    "secImage4 (10).jpg",
+    "secImage5 (9).jpg",
+    "product-8-550x550.jpg"
+  ],
+
+  3: [
+    "secImage2 (9).jpg",
+    "secImage3 (9).jpg",
+    "secImage4 (9).jpg",
+    "secImage5 (8).jpg",
+    "product-10-550x550.jpg"
+  ]
+};
+
+const fallbackGallery = [
+  "product-16-550x550.jpg",
+  "product-14-1-550x550.jpg",
+  "product-10-550x550.jpg",
+  "product-9-550x550.jpg",
+  "product-7-550x550.jpg"
+];
+
+function buildProductGallery(product) {
+  const gallerySource =
+    productGalleries[product.id] ||
+    productGalleries[product.category] ||
+    fallbackGallery;
+
+  // last image in the gallery is the main image
+  const lastImage = gallerySource[gallerySource.length - 1];
+
+  // put last image first, then the rest
+  const gallery = [
+    lastImage,
+    ...gallerySource.slice(0, gallerySource.length - 1)
+  ];
+
+  const uniqueGallery = gallery.filter((image, index) => {
+    return image && gallery.indexOf(image) === index;
+  });
+
+  return uniqueGallery.slice(0, 5);
+}
+
+products.forEach(product => {
+  product.images = buildProductGallery(product);
+});

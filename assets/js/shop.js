@@ -81,16 +81,16 @@ function renderProducts(productsList) {
 
   const paginatedProducts = productsList.slice(start, end);
 
-if (paginatedProducts.length === 0) {
-  productsContainer.innerHTML = `
+  if (paginatedProducts.length === 0) {
+    productsContainer.innerHTML = `
     <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
       <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
         No products were found matching your selection.
       </p>
     </div>
   `;
-  return;
-}
+    return;
+  }
 
   productsContainer.innerHTML = paginatedProducts.map(product => {
     const oldPriceHTML = product.oldPrice
@@ -106,7 +106,7 @@ if (paginatedProducts.length === 0) {
 
         <div class="relative overflow-hidden">
 
-          <a href="./product-details.html?id=${product.id}">
+          <a href="./product-details.html?id=${product.id}" class="block relative z-0">
             <img 
               src="${getProductImageSrc(product.image)}"
               alt="${product.name}"
@@ -116,7 +116,7 @@ if (paginatedProducts.length === 0) {
 
           ${saleHTML}
 
-          <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+          <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
 
           <button
               type="button"
@@ -130,11 +130,11 @@ if (paginatedProducts.length === 0) {
           <div class="absolute inset-0 flex items-center justify-center 
             opacity-0 translate-y-4 
             group-hover:opacity-100 group-hover:translate-y-0 
-            transition duration-500 ease-out z-10">
+            transition duration-500 ease-out z-10 pointer-events-none">
 
             <button 
               onclick="addToCart(${product.id})"
-              class="bg-[#ffe9e2] h-[54px] border border-transparent text-[11px] uppercase tracking-[0.18em] px-12 py-2 hover:bg-black hover:text-white transition duration-300">
+              class="pointer-events-auto bg-[#ffe9e2] h-[54px] border border-transparent text-[11px] uppercase tracking-[0.18em] px-12 py-2 hover:bg-black hover:text-white transition duration-300">
               Add to cart
             </button>
 
