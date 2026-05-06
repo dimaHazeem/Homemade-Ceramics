@@ -38,19 +38,23 @@
                     <a href="./index.html" class="uppercase tracking-widest poppins-medium text-[11px] relative z-10
                                after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] 
                                after:w-[100%] after:bg-[#e2b7a8] after:-translate-y-1/2 after:z-0">Home</a>
-                    <a href="./assets/pages/about.html" class="uppercase tracking-widest poppins-medium text-[11px] relative 
+                    <a href="./assets/pages/about.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative 
                               after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] 
                             after:bg-[#e2b7a8] after:-translate-y-1/2 
                              after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">About Us</a>
-                    <a href="./assets/pages/ourStores.html" class="uppercase tracking-widest poppins-medium text-[11px] relative 
+                    <a href="./assets/pages/ourStores.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative 
                               after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] 
                             after:bg-[#e2b7a8] after:-translate-y-1/2 
                              after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">our stores</a>
-                    <a href="./assets/pages/shop.html" class="uppercase tracking-widest poppins-medium text-[11px] relative 
+                    <a href="./assets/pages/shop.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative 
                               after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] 
                             after:bg-[#e2b7a8] after:-translate-y-1/2 
                              after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">shop</a>
-                    <a href="./assets/pages/blog.html" class="uppercase tracking-widest poppins-medium text-[11px] relative 
+                    <a href="./assets/pages/blog.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative 
                               after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] 
                             after:bg-[#e2b7a8] after:-translate-y-1/2 
                              after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">blog</a>
@@ -58,8 +62,13 @@
             </div>
             <div class="row justify-between gap-5 items-center">
                 <div class="hidden md:block">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </div>
+
+                <div class="hidden md:block">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span>0</span>
+                    <span class="cart-count">0</span>
                 </div>
                 <img src="./assets/images/home-images/download.svg" alt="img" class="w-5 hidden lg:block">
                 <i class="fa-solid fa-bars"></i>
@@ -75,9 +84,9 @@
                         <p class="max-w-md text-center text-white">Lorem ipsum dolor sit amet consectetur, adipisicing
                             elit. Eum tempora possimus, placeat soluta facilis illo?</p>
                     </div>
-                    <button
+                    <a href="./assets/pages/shop.html"
                         class="text-white uppercase tracking-widest bg-black poppins-medium text-[11px] px-10 py-4 cursor-pointer">learn
-                        more</button>
+                        more</a>
                 </div>
             </div>
             <div class="hidden lg:flex col gap-15 p-5 justify-center items-center h-[81%]">
@@ -170,10 +179,10 @@
                         <div class="col gap-3 bg-white py-0.5 px-2 md:py-1 md:px-3 min-[1024px]:py-3 min-[1024px]:px-5 absolute
                         bottom-4 left-4 right-4 md:bottom-6 md:left-8 md:right-8 lg:bottom-8 lg:left-12 lg:right-12">
                             <p class="poppins-meduim text-[15px]">Japan Design 2023: Handmade Ceramic Ideas</p>
-                            <div class="bg-[#959494] w-10 h-px"></div>
+                            <div class="bg-lightFontColor w-10 h-px"></div>
                             <div class="row gap-2 flex-wrap">
-                                <h3 class="text-[#959494] text-[14px]">Nina Marling</h3>
-                                <h3 class="text-[#959494] text-[14px]">- 14 December, 2023</h3>
+                                <h3 class="text-lightFontColor text-[14px]">Nina Marling</h3>
+                                <h3 class="text-lightFontColor text-[14px]">- 14 December, 2023</h3>
                             </div>
                         </div>
                     </div>
@@ -210,7 +219,8 @@
                         WORKSHOP IN OUR CERAMIC STUDIO</h1>
                     <p class="text-[#aba9a9] max-w-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
                         neque illo libero modi esse ipsa, consequatur amet soluta qui recusandae.</p>
-                    <button class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">Apply Now</button>
+                    <button class="py-2 px-8 cursor-pointer poppins-meduim tracking-widest uppercase bg-btnColor">Apply
+                        Now</button>
                 </div>
             </div>
         </section>
@@ -224,6 +234,11 @@
             </div>
         </section>
     </main>
+
+
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/wishlist.js"></script>a
 </body>
 
 </html>
