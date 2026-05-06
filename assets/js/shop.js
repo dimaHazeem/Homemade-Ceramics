@@ -6,6 +6,8 @@ const paginationContainer = document.querySelector("#paginationContainer");
 
 const colorFilters = document.querySelector("#colorFilters");
 const materialFilters = document.querySelector("#materialFilters");
+const resetColorBtn = document.querySelector("#resetColorBtn");
+const resetMaterialBtn = document.querySelector("#resetMaterialBtn");
 
 const minPriceRange = document.querySelector("#minPriceRange");
 const maxPriceRange = document.querySelector("#maxPriceRange");
@@ -78,14 +80,16 @@ function renderProducts(productsList) {
 
   const paginatedProducts = productsList.slice(start, end);
 
-  if (paginatedProducts.length === 0) {
-    productsContainer.innerHTML = `
-      <p class="col-span-full text-center text-[#6f6f6f] uppercase tracking-[0.15em]">
-        No products found
+if (paginatedProducts.length === 0) {
+  productsContainer.innerHTML = `
+    <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
+      <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
+        No products were found matching your selection.
       </p>
-    `;
-    return;
-  }
+    </div>
+  `;
+  return;
+}
 
   productsContainer.innerHTML = paginatedProducts.map(product => {
     const oldPriceHTML = product.oldPrice
@@ -247,8 +251,27 @@ function getCounts(key) {
     if (!value) return;
 
     if (!counts[value]) {
-      counts[value] = 1;
-    } else {
+      counts[value] = 0;
+    }
+
+    const matchesSearch =
+      !searchInput ||
+      searchInput.value.trim() === "" ||
+      product.name.toLowerCase().includes(searchInput.value.toLowerCase().trim()) ||
+      product.category.toLowerCase().includes(searchInput.value.toLowerCase().trim()) ||
+      product.color.toLowerCase().includes(searchInput.value.toLowerCase().trim()) ||
+      product.material.toLowerCase().includes(searchInput.value.toLowerCase().trim());
+
+    const matchesPrice =
+      product.price >= minPrice && product.price <= maxPrice;
+
+    const matchesOtherColor =
+      key === "color" || selectedColor === "all" || product.color === selectedColor;
+
+    const matchesOtherMaterial =
+      key === "material" || selectedMaterial === "all" || product.material === selectedMaterial;
+
+    if (matchesSearch && matchesPrice && matchesOtherColor && matchesOtherMaterial) {
       counts[value]++;
     }
   });
@@ -266,25 +289,47 @@ function renderSidebarFilters() {
   const colorCounts = getCounts("color");
   const materialCounts = getCounts("material");
 
-  colorFilters.innerHTML = Object.keys(colorCounts).map(color => {
+  const colorOrder = ["beige", "black", "blue", "brown", "gold", "green", "purple", "red", "white", "pink"];
+  const materialOrder = ["ceramic", "chrome", "metal", "steel", "wood", "glass", "porcelain"];
+
+  const colorsToShow = colorOrder.filter(color => colorCounts[color] !== undefined);
+  const materialsToShow = materialOrder.filter(material => materialCounts[material] !== undefined);
+
+  colorFilters.innerHTML = colorsToShow.map(color => {
     return `
       <li 
-        class="cursor-pointer hover:text-black transition ${selectedColor === color ? 'text-black' : ''}"
+        class="cursor-pointer transition ${selectedColor === color ? 'text-black' : 'text-[#8a8a8a] hover:text-black'}"
         onclick="selectColor('${color}')">
         ${capitalize(color)} (${colorCounts[color]})
       </li>
     `;
   }).join("");
 
-  materialFilters.innerHTML = Object.keys(materialCounts).map(material => {
+  materialFilters.innerHTML = materialsToShow.map(material => {
     return `
       <li 
-        class="cursor-pointer hover:text-black transition ${selectedMaterial === material ? 'text-black' : ''}"
+        class="cursor-pointer transition ${selectedMaterial === material ? 'text-black' : 'text-[#8a8a8a] hover:text-black'}"
         onclick="selectMaterial('${material}')">
         ${capitalize(material)} (${materialCounts[material]})
       </li>
     `;
   }).join("");
+
+  if (resetColorBtn) {
+    if (selectedColor !== "all") {
+      resetColorBtn.classList.remove("hidden");
+    } else {
+      resetColorBtn.classList.add("hidden");
+    }
+  }
+
+  if (resetMaterialBtn) {
+    if (selectedMaterial !== "all") {
+      resetMaterialBtn.classList.remove("hidden");
+    } else {
+      resetMaterialBtn.classList.add("hidden");
+    }
+  }
 }
 
 function selectColor(color) {
@@ -341,6 +386,22 @@ function updatePriceUI(activeInput = null) {
       resetFiltersBtn.classList.add("hidden");
     }
   }
+}
+
+if (resetColorBtn) {
+  resetColorBtn.addEventListener("click", function () {
+    selectedColor = "all";
+    currentPage = 1;
+    updateShop();
+  });
+}
+
+if (resetMaterialBtn) {
+  resetMaterialBtn.addEventListener("click", function () {
+    selectedMaterial = "all";
+    currentPage = 1;
+    updateShop();
+  });
 }
 
 function updateShop() {

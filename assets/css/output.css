@@ -3181,10 +3181,6 @@
     --tw-tracking: 0.25em;
     letter-spacing: 0.25em;
   }
-  .tracking-\[0\.35em\] {
-    --tw-tracking: 0.35em;
-    letter-spacing: 0.35em;
-  }
   .tracking-\[0\.75px\] {
     --tw-tracking: 0.75px;
     letter-spacing: 0.75px;
@@ -4179,12 +4175,6 @@
       margin-top: calc(var(--spacing) * 36);
     }
   }
-  .lg\:col {
-    @media (width >= 64rem) {
-      display: flex;
-      flex-direction: column;
-    }
-  }
   .lg\:block {
     @media (width >= 64rem) {
       display: block;
@@ -4249,11 +4239,6 @@
   .lg\:grid-cols-6 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-  }
-  .lg\:grid-cols-\[260px_1fr\] {
-    @media (width >= 64rem) {
-      grid-template-columns: 260px 1fr;
     }
   }
   .lg\:gap-20 {
