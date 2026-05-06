@@ -29,7 +29,7 @@ function addToCart(productId) {
   }
 
   saveCart(cart);
-  alert(`${product.name} added to cart`);
+  showToast(`${product.name} added to cart`);
 }
 
 function updateCartCount() {
@@ -41,6 +41,27 @@ function updateCartCount() {
   cartCountElements.forEach(element => {
     element.textContent = totalQuantity;
   });
+}
+
+function showToast(message) {
+  const oldToast = document.querySelector(".cart-toast");
+
+  if (oldToast) {
+    oldToast.remove();
+  }
+
+  const toast = document.createElement("div");
+
+  toast.className =
+    "cart-toast fixed top-8 left-1/2 -translate-x-1/2 bg-[#211f1f] text-white px-8 py-4 text-[12px] uppercase tracking-[0.18em] z-50 shadow-lg";
+
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
 }
 
 updateCartCount();

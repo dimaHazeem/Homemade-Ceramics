@@ -114,11 +114,12 @@ function renderProducts(productsList) {
           <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
           <button
-            onclick="toggleWishlist(${product.id})"
-            class="absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-black hover:text-white z-10"
-            title="Add to wishlist"
-          >
-            <i class="fa-regular fa-heart"></i>
+              type="button"
+              data-wishlist-id="${product.id}"
+              class="wishlist-btn absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-black hover:text-white z-20"
+              title="Add to wishlist"
+            >
+          <i class="fa-regular fa-heart"></i>
           </button>
 
           <div class="absolute inset-0 flex items-center justify-center 
@@ -150,6 +151,21 @@ function renderProducts(productsList) {
       </div>
     `;
   }).join("");
+  connectWishlistButtons();
+}
+
+function connectWishlistButtons() {
+  const wishlistButtons = document.querySelectorAll(".wishlist-btn");
+
+  wishlistButtons.forEach(button => {
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const productId = Number(this.dataset.wishlistId);
+      toggleWishlist(productId);
+    });
+  });
 }
 
 function renderResultsText(productsList) {
