@@ -26,43 +26,41 @@ let selectedMaterial = "all";
 let minPrice = 60;
 let maxPrice = 460;
 
-let dbProducts = [];
 let currentProducts = [];
 
-async function fetchProductsFromDatabase() {
-  try {
-    const response = await fetch("../../backend/api/products.php");
-    const data = await response.json();
+/* -----------------------------
+   Helpers
+----------------------------- */
 
-    if (!data.success) {
-      productsContainer.innerHTML = `
-        <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
-          <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
-            Failed to load products.
-          </p>
-        </div>
-      `;
-      return [];
-    }
-
-    return data.products;
-  } catch (error) {
-    console.error("Error loading products:", error);
-
-    productsContainer.innerHTML = `
-      <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
-        <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
-          Could not connect to products API.
-        </p>
-      </div>
-    `;
-
-    return [];
-  }
+function formatPrice(price) {
+  return `$${Number(price).toFixed(2)}`;
 }
 
+function capitalize(word) {
+  if (!word) return "";
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function getProductImageSrc(imageName) {
+  if (!imageName) return "";
+
+  const fileName = String(imageName).split("/").pop();
+
+  const isInsidePagesFolder = window.location.pathname.includes("/assets/pages/");
+
+  if (isInsidePagesFolder) {
+    return `../images/shop-img/${fileName}`;
+  }
+
+  return `./assets/images/shop-img/${fileName}`;
+}
+
+/* -----------------------------
+   Filtering / Sorting
+----------------------------- */
+
 function getFilteredProducts() {
-  let filtered = [...dbProducts];
+  let filtered = [...products];
 
   const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
@@ -86,27 +84,31 @@ function getFilteredProducts() {
   }
 
   filtered = filtered.filter(product => {
-    return product.price >= minPrice && product.price <= maxPrice;
+    return Number(product.price) >= minPrice && Number(product.price) <= maxPrice;
   });
 
   if (sortSelect) {
     const sortValue = sortSelect.value;
 
     if (sortValue === "price-low") {
-      filtered.sort((a, b) => a.price - b.price);
+      filtered.sort((a, b) => Number(a.price) - Number(b.price));
     }
 
     if (sortValue === "price-high") {
-      filtered.sort((a, b) => b.price - a.price);
+      filtered.sort((a, b) => Number(b.price) - Number(a.price));
     }
 
     if (sortValue === "latest") {
-      filtered.sort((a, b) => b.id - a.id);
+      filtered.sort((a, b) => Number(b.id) - Number(a.id));
     }
   }
 
   return filtered;
 }
+
+/* -----------------------------
+   Render Products
+----------------------------- */
 
 function renderProducts(productsList) {
   const start = (currentPage - 1) * productsPerPage;
@@ -116,18 +118,18 @@ function renderProducts(productsList) {
 
   if (paginatedProducts.length === 0) {
     productsContainer.innerHTML = `
-    <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
-      <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
-        No products were found matching your selection.
-      </p>
-    </div>
-  `;
+      <div class="col-span-full border border-[#ededed] px-8 py-8 text-right">
+        <p class="text-[18px] text-[#8a8a8a] normal-case tracking-normal">
+          No products were found matching your selection.
+        </p>
+      </div>
+    `;
     return;
   }
 
   productsContainer.innerHTML = paginatedProducts.map(product => {
     const oldPriceHTML = product.oldPrice
-      ? `<span class="line-through text-[#8a8a8a] mr-2">$${product.oldPrice}.00</span>`
+      ? `<span class="line-through text-[#8a8a8a] mr-2">${formatPrice(product.oldPrice)}</span>`
       : "";
 
     const saleHTML = product.sale
@@ -152,12 +154,11 @@ function renderProducts(productsList) {
           <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
 
           <button
-              type="button"
-              data-wishlist-id="${product.id}"
-              class="wishlist-btn absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-black hover:text-white z-20"
-              title="Add to wishlist"
-            >
-          <i class="fa-regular fa-heart"></i>
+            type="button"
+            data-wishlist-id="${product.id}"
+            class="wishlist-btn absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-black hover:text-white z-20"
+            title="Add to wishlist">
+            <i class="fa-regular fa-heart"></i>
           </button>
 
           <div class="absolute inset-0 flex items-center justify-center 
@@ -182,15 +183,20 @@ function renderProducts(productsList) {
           </a>
 
           <p class="text-[13px] text-[#6f6f6f]">
-            ${oldPriceHTML}$${product.price}.00
+            ${oldPriceHTML}${formatPrice(product.price)}
           </p>
         </div>
 
       </div>
     `;
   }).join("");
+
   connectWishlistButtons();
 }
+
+/* -----------------------------
+   Wishlist Buttons
+----------------------------- */
 
 function connectWishlistButtons() {
   const wishlistButtons = document.querySelectorAll(".wishlist-btn");
@@ -205,6 +211,10 @@ function connectWishlistButtons() {
     });
   });
 }
+
+/* -----------------------------
+   Results Text / Pagination
+----------------------------- */
 
 function renderResultsText(productsList) {
   if (!resultsText) return;
@@ -276,10 +286,14 @@ function goToPage(pageNumber) {
   });
 }
 
+/* -----------------------------
+   Sidebar Counts
+----------------------------- */
+
 function getCounts(key) {
   const counts = {};
 
-  dbProducts.forEach(product => {
+  products.forEach(product => {
     const value = product[key];
 
     if (!value) return;
@@ -288,16 +302,17 @@ function getCounts(key) {
       counts[value] = 0;
     }
 
+    const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
     const matchesSearch =
-      !searchInput ||
-      searchInput.value.trim() === "" ||
-      product.name.toLowerCase().includes(searchInput.value.toLowerCase().trim()) ||
-      product.category.toLowerCase().includes(searchInput.value.toLowerCase().trim()) ||
-      product.color.toLowerCase().includes(searchInput.value.toLowerCase().trim()) ||
-      product.material.toLowerCase().includes(searchInput.value.toLowerCase().trim());
+      searchValue === "" ||
+      product.name.toLowerCase().includes(searchValue) ||
+      product.category.toLowerCase().includes(searchValue) ||
+      product.color.toLowerCase().includes(searchValue) ||
+      product.material.toLowerCase().includes(searchValue);
 
     const matchesPrice =
-      product.price >= minPrice && product.price <= maxPrice;
+      Number(product.price) >= minPrice && Number(product.price) <= maxPrice;
 
     const matchesOtherColor =
       key === "color" || selectedColor === "all" || product.color === selectedColor;
@@ -311,10 +326,6 @@ function getCounts(key) {
   });
 
   return counts;
-}
-
-function capitalize(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 function renderSidebarFilters() {
@@ -332,7 +343,7 @@ function renderSidebarFilters() {
   colorFilters.innerHTML = colorsToShow.map(color => {
     return `
       <li 
-        class="cursor-pointer transition ${selectedColor === color ? 'text-black' : 'text-[#8a8a8a] hover:text-black'}"
+        class="cursor-pointer transition ${selectedColor === color ? "text-black" : "text-[#8a8a8a] hover:text-black"}"
         onclick="selectColor('${color}')">
         ${capitalize(color)} (${colorCounts[color]})
       </li>
@@ -342,7 +353,7 @@ function renderSidebarFilters() {
   materialFilters.innerHTML = materialsToShow.map(material => {
     return `
       <li 
-        class="cursor-pointer transition ${selectedMaterial === material ? 'text-black' : 'text-[#8a8a8a] hover:text-black'}"
+        class="cursor-pointer transition ${selectedMaterial === material ? "text-black" : "text-[#8a8a8a] hover:text-black"}"
         onclick="selectMaterial('${material}')">
         ${capitalize(material)} (${materialCounts[material]})
       </li>
@@ -377,6 +388,10 @@ function selectMaterial(material) {
   currentPage = 1;
   updateShop();
 }
+
+/* -----------------------------
+   Price UI
+----------------------------- */
 
 function updatePriceUI(activeInput = null) {
   if (!minPriceRange || !maxPriceRange || !priceText || !priceTrack) return;
@@ -422,6 +437,10 @@ function updatePriceUI(activeInput = null) {
   }
 }
 
+/* -----------------------------
+   Events
+----------------------------- */
+
 if (resetColorBtn) {
   resetColorBtn.addEventListener("click", function () {
     selectedColor = "all";
@@ -446,21 +465,10 @@ if (clearFiltersBtn) {
     minPrice = 60;
     maxPrice = 460;
 
-    if (minPriceRange) {
-      minPriceRange.value = 60;
-    }
-
-    if (maxPriceRange) {
-      maxPriceRange.value = 460;
-    }
-
-    if (searchInput) {
-      searchInput.value = "";
-    }
-
-    if (sortSelect) {
-      sortSelect.value = "default";
-    }
+    if (minPriceRange) minPriceRange.value = 60;
+    if (maxPriceRange) maxPriceRange.value = 460;
+    if (searchInput) searchInput.value = "";
+    if (sortSelect) sortSelect.value = "default";
 
     currentPage = 1;
 
@@ -469,22 +477,6 @@ if (clearFiltersBtn) {
 
     showFilterToast("Filters cleared");
   });
-}
-
-function updateShop() {
-  currentProducts = getFilteredProducts();
-
-  const totalPages = Math.ceil(currentProducts.length / productsPerPage);
-
-  if (currentPage > totalPages) {
-    currentPage = 1;
-  }
-
-  renderProducts(currentProducts);
-  renderResultsText(currentProducts);
-  renderPagination(currentProducts);
-  renderSidebarFilters();
-  updatePriceUI();
 }
 
 if (searchInput) {
@@ -529,30 +521,42 @@ if (resetFiltersBtn) {
     minPrice = 60;
     maxPrice = 460;
 
-    if (searchInput) {
-      searchInput.value = "";
-    }
-
-    if (sortSelect) {
-      sortSelect.value = "default";
-    }
-
-    if (minPriceRange) {
-      minPriceRange.value = 60;
-    }
-
-    if (maxPriceRange) {
-      maxPriceRange.value = 460;
-    }
+    if (searchInput) searchInput.value = "";
+    if (sortSelect) sortSelect.value = "default";
+    if (minPriceRange) minPriceRange.value = 60;
+    if (maxPriceRange) maxPriceRange.value = 460;
 
     currentPage = 1;
     updateShop();
   });
 }
 
-async function initShopPage() {
-  dbProducts = await fetchProductsFromDatabase();
-  currentProducts = [...dbProducts];
+/* -----------------------------
+   Main Update
+----------------------------- */
+
+function updateShop() {
+  currentProducts = getFilteredProducts();
+
+  const totalPages = Math.ceil(currentProducts.length / productsPerPage);
+
+  if (currentPage > totalPages) {
+    currentPage = 1;
+  }
+
+  renderProducts(currentProducts);
+  renderResultsText(currentProducts);
+  renderPagination(currentProducts);
+  renderSidebarFilters();
+  updatePriceUI();
+}
+
+/* -----------------------------
+   Init
+----------------------------- */
+
+function initShopPage() {
+  currentProducts = [...products];
   updateShop();
 }
 

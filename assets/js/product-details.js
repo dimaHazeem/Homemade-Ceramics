@@ -2,6 +2,7 @@ const productNotFound = document.querySelector("#productNotFound");
 const productDetailsContent = document.querySelector("#productDetailsContent");
 
 const productImage = document.querySelector("#productImage");
+const productThumbnails = document.querySelector("#productThumbnails");
 
 const productCategory = document.querySelector("#productCategory");
 const productName = document.querySelector("#productName");
@@ -19,7 +20,6 @@ const addDetailsToCartBtn = document.querySelector("#addDetailsToCartBtn");
 const addDetailsToWishlistBtn = document.querySelector("#addDetailsToWishlistBtn");
 
 const relatedProductsContainer = document.querySelector("#relatedProductsContainer");
-const productThumbnails = document.querySelector("#productThumbnails");
 
 const productLightbox = document.querySelector("#productLightbox");
 const lightboxImage = document.querySelector("#lightboxImage");
@@ -56,22 +56,6 @@ function findProductById(productId) {
   return products.find(product => product.id === productId);
 }
 
-async function fetchProductFromDatabase(productId) {
-  try {
-    const response = await fetch(`../../backend/api/product-details.php?id=${productId}`);
-    const data = await response.json();
-
-    if (!data.success) {
-      return null;
-    }
-
-    return data.product;
-  } catch (error) {
-    console.error("Error fetching product from database:", error);
-    return null;
-  }
-}
-
 /* -----------------------------
    Page State
 ----------------------------- */
@@ -91,24 +75,21 @@ function showProductContent() {
 ----------------------------- */
 
 function getProductGallery(product) {
-  if (Array.isArray(product.images) && product.images.length > 0) {
+  if (!product) return [];
+
+  if (product.images && Array.isArray(product.images) && product.images.length > 0) {
     return product.images;
   }
 
   return [product.image];
 }
 
-function updateMainImage(index) {
-  activeImageIndex = index;
-
-  const imageSrc = getProductImageSrc(productImages[activeImageIndex]);
-
-  productImage.src = imageSrc;
-  productImage.alt = selectedProduct.name;
-
+function updateActiveThumbnail() {
   const thumbButtons = document.querySelectorAll(".product-thumb-btn");
 
-  thumbButtons.forEach((button, buttonIndex) => {
+  thumbButtons.forEach(button => {
+    const buttonIndex = Number(button.dataset.index);
+
     if (buttonIndex === activeImageIndex) {
       button.classList.add("border-black");
       button.classList.remove("border-transparent");
@@ -119,22 +100,27 @@ function updateMainImage(index) {
   });
 }
 
+function updateMainImage(index) {
+  activeImageIndex = index;
+
+  if (!productImage || productImages.length === 0) return;
+
+  productImage.src = getProductImageSrc(productImages[activeImageIndex]);
+  productImage.alt = selectedProduct.name;
+
+  updateActiveThumbnail();
+}
+
 function setProductImages(product) {
   productImages = getProductGallery(product);
   activeImageIndex = 0;
 
-  updateMainImage(activeImageIndex);
+  if (!productImage || !productThumbnails) return;
 
-  if (!productThumbnails) return;
+  productImage.src = getProductImageSrc(productImages[0]);
+  productImage.alt = product.name;
 
-  const sideImages = productImages.slice(1, 5);
-
-  const thumbPositions = [
-    "object-right",
-    "object-center",
-    "object-center",
-    "object-left-bottom"
-  ];
+  const sideImages = productImages.slice(0, 4);
 
   productThumbnails.innerHTML = sideImages.map((image, index) => {
     return `
@@ -142,29 +128,27 @@ function setProductImages(product) {
         type="button"
         class="product-thumb-btn w-[180px] h-[145px] bg-white overflow-hidden border border-transparent hover:border-black transition flex items-center justify-center"
         data-index="${index}">
-
         <img
           src="${getProductImageSrc(image)}"
           alt="${product.name}"
-          class="w-full h-full object-cover ${thumbPositions[index] || "object-center"}"
+          class="w-full h-full object-cover object-center"
         >
       </button>
     `;
   }).join("");
 
-  const thumbButtons = document.querySelectorAll(".product-thumb-btn");
-
-  thumbButtons.forEach(button => {
-    button.addEventListener("click", function () {
-      const index = Number(this.dataset.index);
+  document.querySelectorAll(".product-thumb-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
       updateMainImage(index);
-      openLightbox(index);
     });
   });
 
-  productImage.addEventListener("click", function () {
+  productImage.addEventListener("click", () => {
     openLightbox(activeImageIndex);
   });
+
+  updateActiveThumbnail();
 }
 
 /* -----------------------------
@@ -193,12 +177,15 @@ function closeLightbox() {
 }
 
 function updateLightboxImage() {
-  const imageSrc = getProductImageSrc(productImages[activeImageIndex]);
+  if (!lightboxImage || productImages.length === 0) return;
 
-  lightboxImage.src = imageSrc;
-  lightboxImage.alt = selectedProduct.name;
+  lightboxImage.src = getProductImageSrc(productImages[activeImageIndex]);
 
-  lightboxCounter.textContent = `${activeImageIndex + 1}/${productImages.length}`;
+  if (lightboxCounter) {
+    lightboxCounter.textContent = `${activeImageIndex + 1}/${productImages.length}`;
+  }
+
+  updateActiveThumbnail();
 }
 
 function showNextImage() {
@@ -208,8 +195,8 @@ function showNextImage() {
     activeImageIndex = 0;
   }
 
-  updateLightboxImage();
   updateMainImage(activeImageIndex);
+  updateLightboxImage();
 }
 
 function showPrevImage() {
@@ -219,8 +206,8 @@ function showPrevImage() {
     activeImageIndex = productImages.length - 1;
   }
 
-  updateLightboxImage();
   updateMainImage(activeImageIndex);
+  updateLightboxImage();
 }
 
 /* -----------------------------
@@ -381,10 +368,10 @@ function addSelectedProductToCart() {
    Init
 ----------------------------- */
 
-async function initProductDetailsPage() {
+function initProductDetailsPage() {
   const productId = getProductIdFromUrl();
 
-  selectedProduct = await fetchProductFromDatabase(productId);
+  selectedProduct = findProductById(productId);
 
   if (!selectedProduct) {
     showProductNotFound();
