@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQS | Bridge</title>
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.35), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.10), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .page-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 76px;
+            line-height: 0.95;
+            font-weight: 500;
+        }
+
+        .faq-section {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 90px 24px 40px;
+        }
+
+        .faq-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.10);
+            overflow: hidden;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e5d8cc;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-btn {
+            width: 100%;
+            padding: 28px 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .faq-btn:hover {
+            background: rgba(244, 216, 204, 0.18);
+        }
+
+        .faq-question {
+            font-family: "Poppins", sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-weight: 600;
+            color: #17120f;
+        }
+
+        .faq-icon {
+            color: #a66c4f;
+            font-size: 20px;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 34px 30px;
+            color: #776d64;
+            font-size: 15px;
+            line-height: 1.9;
+            max-width: 820px;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .ceramic-shape {
+            border-radius: 48% 52% 44% 56% / 58% 44% 56% 42%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .shape-one {
+            width: 150px;
+            height: 150px;
+            top: -55px;
+            left: -50px;
+            background: rgba(244, 216, 204, 0.55);
+        }
+
+        .shape-two {
+            width: 190px;
+            height: 190px;
+            bottom: -70px;
+            right: -70px;
+            background: rgba(166, 108, 79, 0.13);
+        }
+
+        .help-box {
+            background: rgba(255, 253, 249, 0.9);
+            border: 1px solid #ddcfc2;
+            border-radius: 28px;
+            padding: 38px;
+            margin-top: 46px;
+        }
+
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 58px;
+            }
+
+            .faq-btn {
+                padding: 24px;
+            }
+
+            .faq-answer {
+                padding: 0 24px 26px;
+            }
+
+            .shape-one,
+            .shape-two {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- HEADER -->
+    <header class="">
+
+        <nav class="row justify-between items-center p-7">
+
+            <div class="row justify-between items-center gap-20">
+
+                <div>
+                    <img src="../images/home-images/Ceramics01.png" alt="logo" class="">
+                </div>
+
+                <div class="row justify-between gap-15 items-center hidden lg:flex">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Home</a>
+
+                    <a href="./about.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">About
+                        Us</a>
+
+                    <a href="./ourStores.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">our
+                        stores</a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">shop</a>
+
+                    <a href="./blog.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">blog</a>
+                </div>
+            </div>
+
+            <div class="row justify-between gap-5 items-center">
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+
+                    <div id="cartDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
+
+                    <div id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button type="button" id="openSearchBtn"
+                        class="text-black text-[22px] hover:text-[#e2b7a8] transition">
+                        <img src="../images/home-images/download.svg" alt="search..." class="w-5">
+                    </button>
+
+                    <div id="searchDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-7 z-50 hidden">
+
+                        <div class="relative">
+                            <input id="globalSearchInput" type="text" placeholder="Search products..."
+                                class="w-full border-b border-black/20 bg-transparent outline-none py-3 pr-8 text-[14px] tracking-normal placeholder:text-[#8a8a8a] normal-case">
+
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute right-0 top-1/2 -translate-y-1/2 text-[15px] text-black"></i>
+                        </div>
+
+                        <div id="globalSearchResults" class="mt-6 max-h-[360px] overflow-y-auto space-y-5">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
+                    data-drawer-placement="right" aria-controls="mobile-menu-drawer"
+                    class="lg:hidden text-black text-[22px]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- FAQS MAIN -->
+    <main class="faq-section">
+
+        <section class="text-center mb-14">
+            <p class="font-[Poppins] text-[11px] uppercase tracking-[0.36em] font-bold text-[#a66c4f] mb-4">
+                Customer Care
+            </p>
+
+            <h1 class="page-title">
+                FAQS
+            </h1>
+
+            <p class="mt-6 text-[15px] leading-[1.9] text-[#776d64] max-w-[620px] mx-auto">
+                Find helpful answers about our handmade ceramics, delivery, returns,
+                care instructions, and your Bridge account.
+            </p>
+        </section>
+
+        <section class="relative">
+
+            <div class="ceramic-shape shape-one"></div>
+            <div class="ceramic-shape shape-two"></div>
+
+            <div class="faq-card relative z-10">
+
+                <div class="faq-item active">
+                    <button class="faq-btn" type="button">
+                        <span class="faq-question">Are all ceramic pieces handmade?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+
+                    <div class="faq-answer show">
+                        Yes. Each piece is made with a handmade process, so small differences in shape,
+                        glaze, color, and texture are natural. These details are part of the charm and uniqueness
+                        of handmade ceramics.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" type="button">
+                        <span class="faq-question">Are the products dishwasher safe?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+
+                    <div class="faq-answer">
+                        Most pieces are safe for everyday use, but we recommend gentle hand washing to protect
+                        the glaze and keep your ceramics beautiful for longer.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" type="button">
+                        <span class="faq-question">How long does delivery take?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+
+                    <div class="faq-answer">
+                        Orders are usually processed within 1–3 business days. Delivery time depends on your
+                        location and selected shipping method.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" type="button">
+                        <span class="faq-question">Can I return or exchange an item?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+
+                    <div class="faq-answer">
+                        Returns are accepted for unused items in their original condition. If your item arrives
+                        damaged, please contact us with clear photos so we can help you quickly.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" type="button">
+                        <span class="faq-question">Do you offer gift cards?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+
+                    <div class="faq-answer">
+                        Yes. Gift cards are available and make a thoughtful present for ceramic lovers,
+                        housewarmings, birthdays, and special occasions.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" type="button">
+                        <span class="faq-question">How can I track my order?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+
+                    <div class="faq-answer">
+                        After your order is processed, you can track it through your account page or through the
+                        shipping details sent to your email.
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="help-box text-center">
+            <p class="font-[Poppins] text-[10px] uppercase tracking-[0.32em] text-[#a66c4f] font-bold mb-4">
+                Still Need Help?
+            </p>
+
+            <h2 class="font-['Cormorant_Garamond'] text-[46px] leading-none mb-5">
+                We are happy to help.
+            </h2>
+
+            <p class="text-[15px] leading-[1.9] text-[#776d64] max-w-[620px] mx-auto mb-8">
+                If you have another question about your order, handmade care, delivery,
+                or returns, reach out to our customer care team.
+            </p>
+
+            <a href="delivery-returns.html"
+                class="inline-flex items-center justify-center h-[54px] px-10 rounded-[16px] bg-[#a66c4f] text-white uppercase tracking-[0.28em] text-[11px] font-bold hover:bg-[#8b573d] transition">
+                Delivery & Returns
+            </a>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#211f1f] py-16 px-12 font-[poppins] font-normal text-[15px] uppercase text-[#bfbfbf] mt-32 ">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Contact</h3>
+                <p class="mb-2">+1 123 456 789</p>
+                <p>1316 Abbot Kinney Blvd.<br />Copenhagen CA 90291</p>
+            </div>
+
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Help</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="faqs.html" class="hover:underline decoration-gray-400">FAQ’s</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Pricing Plans</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Track Your Order</a></li>
+                    <li><a href="delivery-returns.html" class="hover:underline decoration-gray-400">Returns</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-md font-[poppins] font-bold mb-4 text-white">About Us</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="#" class="hover:underline decoration-gray-400">Our Story</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Job Opportunities</a></li>
+                    <li><a href="ourStores.html" class="hover:underline decoration-gray-400">Store Locator</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class=" text-white font-[poppins] text-md font-bold mb-4">Customer Services</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="my-account.html" class="hover:underline decoration-gray-400">My Account</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Terms of Use</a></li>
+                    <li><a href="delivery-returns.html" class="hover:underline decoration-gray-400">Deliveries & Returns</a></li>
+                    <li><a href="gift-cards.html" class="hover:underline decoration-gray-400">Gift Card</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+            © 2024 QODE INTERACTIVE, ALL RIGHTS RESERVED
+        </div>
+    </footer>
+
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobile-menu-drawer"
+        class="fixed top-0 right-0 z-50 h-screen w-[320px] max-w-[85%] translate-x-full bg-white p-8 overflow-y-auto transition-transform border-l border-[#ededed] lg:hidden"
+        tabindex="-1" aria-labelledby="mobile-menu-drawer-label">
+
+        <div class="flex items-center justify-between border-b border-[#ededed] pb-6">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="Bridge Logo" class="w-[130px]">
+            </a>
+
+            <button type="button" data-drawer-hide="mobile-menu-drawer" aria-controls="mobile-menu-drawer"
+                class="text-black text-[24px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-xmark"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+
+        <nav class="mt-10">
+            <ul class="space-y-7">
+                <li><a href="../../index.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Home</a>
+                </li>
+
+                <li><a href="../pages/about.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">About
+                        Us</a></li>
+
+                <li><a href="../pages/ourStores.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Our
+                        Stores</a></li>
+
+                <li><a href="../pages/shop.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Shop</a>
+                </li>
+
+                <li><a href="../pages/blog.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Blog</a>
+                </li>
+
+                <li>
+                    <a href="../pages/cart.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./wishlist.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-regular fa-heart"></i>
+                        Wishlist
+                        <span class="wishlist-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach(function (item) {
+            const button = item.querySelector(".faq-btn");
+            const answer = item.querySelector(".faq-answer");
+
+            button.addEventListener("click", function () {
+                faqItems.forEach(function (otherItem) {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove("active");
+                        otherItem.querySelector(".faq-answer").classList.remove("show");
+                    }
+                });
+
+                item.classList.toggle("active");
+                answer.classList.toggle("show");
+            });
+        });
+    </script>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/shop.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
+
+</body>
+
+</html>
