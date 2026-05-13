@@ -326,108 +326,80 @@ const products = [
 ];
 
 const productGalleries = {
-  1: [
+  "product-16-550x550.jpg": [
     "secImage2.jpg",
     "secImage3.jpg",
     "secImage4.jpg",
-    "secImage5.jpg",
-    "secImage1.jpg"
+    "secImage5.jpg"
   ],
 
-  Jars: [
-    "secImage2 (1).jpg",
-    "secImage3 (1).jpg",
-    "secImage4 (1).jpg",
-    "secImage5 (1).jpg",
-    "secImage1 (9).jpg",
-  ],
-
-  11: [
-    "secImage2 (2).jpg",
-    "secImage3 (2).jpg",
-    "secImage4 (2).jpg",
-    "secImage5 (2).jpg",
-    "product-25-new-300x300.jpg"
-  ],
-
-  9: [
-    "secImage2 (3).jpg",
-    "secImage3 (3).jpg",
-    "secImage4 (3).jpg",
-    "secImage5 (3).jpg",
-    "product-5-550x550.jpg"
-  ],
-
-  5: [
-    "secImage2 (11).jpg",
-    "secImage3 (11).jpg",
-    "secImage4 (11).jpg",
-    "secImage1 (10).jpg",
-    "product-3-550x550.jpg"
-  ],
-
-  2: [
+  "product-14-1-550x550.jpg": [
     "secImage2 (4).jpg",
     "secImage3 (4).jpg",
     "secImage4 (4).jpg",
-    "secImage4 (4).jpg",
-    "product-14-1-550x550.jpg"
+    "secImage5 (4).jpg"
   ],
 
-  8: [
+  "product-25-new-300x300.jpg": [
+    "secImage2 (2).jpg",
+    "secImage3 (2).jpg",
+    "secImage4 (2).jpg",
+    "secImage5 (2).jpg"
+  ],
+
+  "product-5-550x550.jpg": [
+    "secImage2 (3).jpg",
+    "secImage3 (3).jpg",
+    "secImage4 (3).jpg",
+    "secImage5 (3).jpg"
+  ],
+
+  "product-3-550x550.jpg": [
+    "secImage2 (11).jpg",
+    "secImage3 (11).jpg",
+    "secImage4 (11).jpg",
+    "secImage1 (10).jpg"
+  ],
+
+  "product-6-550x550.jpg": [
     "secImage2 (5).jpg",
     "secImage3 (5).jpg",
     "secImage4 (5).jpg",
-    "secImage5 (4).jpg",
-    "product-6-550x550.jpg"
+    "secImage5 (4).jpg"
   ],
 
-  4: [
+  "product-9-550x550.jpg": [
     "secImage2 (6).jpg",
     "secImage3 (6).jpg",
     "secImage4 (6).jpg",
-    "secImage5 (5).jpg",
-    "product-9-550x550.jpg"
+    "secImage5 (5).jpg"
   ],
 
-  12: [
+  "product-57-550x550.jpg": [
     "secImage2 (7).jpg",
     "secImage3 (7).jpg",
-    "secImage4 (7).jpg",
-    "product-57-550x550.jpg",
-    "product-57-550x550.jpg"
+    "secImage4 (7).jpg"
   ],
 
-  7: [
+  "product-7-550x550.jpg": [
     "secImage2 (8).jpg",
     "secImage3 (8).jpg",
     "secImage4 (8).jpg",
-    "secImage5 (7).jpg",
-    "product-7-550x550jpg"
+    "secImage5 (7).jpg"
   ],
 
-  3: [
+  "product-10-550x550.jpg": [
     "secImage2 (9).jpg",
     "secImage3 (9).jpg",
     "secImage4 (9).jpg",
-    "secImage5 (8).jpg",
-    "product-10-550x550.jpg"
+    "secImage5 (8).jpg"
   ],
 
-  6: [
+  "product-8-550x550.jpg": [
     "secImage2 (10).jpg",
     "secImage3 (10).jpg",
     "secImage4 (10).jpg",
-    "secImage5 (9).jpg",
-    "product-8-550x550.jpg"
-  ],
-
-  3: [
-    "secImage2 (9).jpg",
-    "secImage3 (9).jpg",
-    "secImage4 (9).jpg",
-    "secImage5 (8).jpg",
-    "product-10-550x550.jpg"
+    "secImage5 (9).jpg"
   ]
 };
 
@@ -440,18 +412,11 @@ const fallbackGallery = [
 ];
 
 function buildProductGallery(product) {
-  const gallerySource =
-    productGalleries[product.id] ||
-    productGalleries[product.category] ||
-    fallbackGallery;
+  const helperImages = productGalleries[product.image] || fallbackGallery;
 
-  // last image in the gallery is the main image
-  const lastImage = gallerySource[gallerySource.length - 1];
-
-  // put last image first, then the rest
   const gallery = [
-    lastImage,
-    ...gallerySource.slice(0, gallerySource.length - 1)
+    product.image,
+    ...helperImages
   ];
 
   const uniqueGallery = gallery.filter((image, index) => {

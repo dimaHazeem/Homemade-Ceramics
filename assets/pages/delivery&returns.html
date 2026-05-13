@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery & Returns | Bridge</title>
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.35), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.10), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .delivery-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 24px 40px;
+        }
+
+        .delivery-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 76px;
+            line-height: 0.95;
+            font-weight: 500;
+        }
+
+        .policy-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.12);
+            overflow: hidden;
+        }
+
+        .info-card {
+            background: rgba(255, 253, 249, 0.90);
+            border: 1px solid #ddcfc2;
+            border-radius: 24px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 45px rgba(112, 73, 51, 0.10);
+        }
+
+        .return-input {
+            width: 100%;
+            height: 56px;
+            border-radius: 16px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0 20px;
+            font-size: 14px;
+            color: #17120f;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .return-input:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .return-input::placeholder {
+            color: #a9a19b;
+            opacity: 1;
+        }
+
+        .return-textarea {
+            width: 100%;
+            min-height: 140px;
+            border-radius: 16px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 18px 20px;
+            font-size: 14px;
+            color: #17120f;
+            outline: none;
+            resize: none;
+            transition: 0.3s;
+        }
+
+        .return-textarea:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .return-textarea::placeholder {
+            color: #a9a19b;
+            opacity: 1;
+        }
+
+        .field-label {
+            display: block;
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.28em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .return-btn {
+            width: 100%;
+            min-height: 58px;
+            border-radius: 16px;
+            padding: 16px;
+            background: linear-gradient(to right, #e8bfb3, #f7d2c6) !important;
+            color: white !important;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            box-shadow: 0 16px 35px rgba(166, 108, 79, 0.22);
+            transition: 0.3s;
+        }
+
+        .return-btn:hover {
+            box-shadow: 0 20px 40px rgba(166, 108, 79, 0.28);
+            transform: translateY(-2px);
+        }
+
+        .ceramic-shape {
+            border-radius: 48% 52% 44% 56% / 58% 44% 56% 42%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .shape-one {
+            width: 150px;
+            height: 150px;
+            top: -50px;
+            left: -50px;
+            background: rgba(244, 216, 204, 0.55);
+        }
+
+        .shape-two {
+            width: 190px;
+            height: 190px;
+            bottom: -65px;
+            right: -65px;
+            background: rgba(166, 108, 79, 0.13);
+        }
+
+        .error-text {
+            display: none;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #b91c1c;
+        }
+
+        .error-text.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .delivery-title {
+                font-size: 58px;
+            }
+
+            .shape-one,
+            .shape-two {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- HEADER -->
+    <header class="">
+
+        <nav class="row justify-between items-center p-7">
+
+            <!-- LEFT -->
+            <div class="row justify-between items-center gap-20">
+
+                <!-- LOGO -->
+                <div>
+                    <img src="../images/home-images/Ceramics01.png" alt="logo" class="">
+                </div>
+
+                <!-- NAV LINKS-->
+                <div class="row justify-between gap-15 items-center hidden lg:flex">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Home</a>
+
+                    <a href="./about.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">About
+                        Us</a>
+
+                    <a href="./ourStores.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">our
+                        stores</a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">shop</a>
+
+                    <a href="./blog.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">blog</a>
+                </div>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="row justify-between gap-5 items-center">
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+
+                    <div id="cartDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
+
+                    <div id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button type="button" id="openSearchBtn"
+                        class="text-black text-[22px] hover:text-[#e2b7a8] transition">
+                        <img src="../images/home-images/download.svg" alt="search..." class="w-5">
+                    </button>
+
+                    <div id="searchDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-7 z-50 hidden">
+
+                        <div class="relative">
+                            <input id="globalSearchInput" type="text" placeholder="Search products..."
+                                class="w-full border-b border-black/20 bg-transparent outline-none py-3 pr-8 text-[14px] tracking-normal placeholder:text-[#8a8a8a] normal-case">
+
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute right-0 top-1/2 -translate-y-1/2 text-[15px] text-black"></i>
+                        </div>
+
+                        <div id="globalSearchResults" class="mt-6 max-h-[360px] overflow-y-auto space-y-5">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
+                    data-drawer-placement="right" aria-controls="mobile-menu-drawer"
+                    class="lg:hidden text-black text-[22px]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- DELIVERY MAIN -->
+    <main class="delivery-main">
+
+        <!-- TITLE -->
+        <section class="text-center mb-14">
+            <p class="font-[Poppins] text-[11px] uppercase tracking-[0.36em] font-bold text-[#a66c4f] mb-4">
+                Customer Care
+            </p>
+
+            <h1 class="delivery-title">
+                Delivery & Returns
+            </h1>
+
+            <p class="mt-6 text-[15px] leading-[1.9] text-[#776d64] max-w-[680px] mx-auto">
+                Every handmade ceramic piece is carefully wrapped, packed, and prepared
+                so it reaches your home safely and beautifully.
+            </p>
+        </section>
+
+        <!-- INFO CARDS -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+
+            <div class="info-card text-center">
+                <i class="fa-solid fa-box-open text-[#a66c4f] text-[28px] mb-5"></i>
+
+                <h3 class="font-[Poppins] text-[12px] uppercase tracking-[0.24em] font-bold mb-4">
+                    Careful Packing
+                </h3>
+
+                <p class="text-[15px] leading-[1.8] text-[#776d64]">
+                    Each piece is wrapped with protective materials to keep it safe during delivery.
+                </p>
+            </div>
+
+            <div class="info-card text-center">
+                <i class="fa-solid fa-truck-fast text-[#a66c4f] text-[28px] mb-5"></i>
+
+                <h3 class="font-[Poppins] text-[12px] uppercase tracking-[0.24em] font-bold mb-4">
+                    Delivery Time
+                </h3>
+
+                <p class="text-[15px] leading-[1.8] text-[#776d64]">
+                    Orders are usually processed within 1–3 business days before shipping.
+                </p>
+            </div>
+
+            <div class="info-card text-center">
+                <i class="fa-solid fa-rotate-left text-[#a66c4f] text-[28px] mb-5"></i>
+
+                <h3 class="font-[Poppins] text-[12px] uppercase tracking-[0.24em] font-bold mb-4">
+                    Easy Returns
+                </h3>
+
+                <p class="text-[15px] leading-[1.8] text-[#776d64]">
+                    If something arrives damaged, contact us quickly and we will help you.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- POLICY CARD -->
+        <section class="relative mb-16">
+
+            <div class="ceramic-shape shape-one"></div>
+            <div class="ceramic-shape shape-two"></div>
+
+            <div class="policy-card relative z-10 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr]">
+
+                <!-- LEFT PANEL -->
+                <div class="bg-[#f6eadf] p-8 md:p-12 flex flex-col justify-between">
+
+                    <div>
+                        <p class="font-[Poppins] text-[11px] uppercase tracking-[0.34em] font-bold text-[#a66c4f] mb-5">
+                            Shipping Policy
+                        </p>
+
+                        <h2 class="font-['Cormorant_Garamond'] text-[56px] leading-none mb-7">
+                            Packed gently, delivered with care.
+                        </h2>
+
+                        <p class="text-[15px] leading-[1.9] text-[#776d64] mb-8">
+                            Handmade ceramics are delicate by nature, so we pack each order with
+                            extra attention. Slight glaze and shape differences are part of the handmade
+                            character of every piece.
+                        </p>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div class="flex gap-4">
+                            <span class="text-[#a66c4f]">✓</span>
+                            <p class="text-[15px] leading-[1.8] text-[#776d64]">
+                                Orders are prepared within 1–3 business days.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <span class="text-[#a66c4f]">✓</span>
+                            <p class="text-[15px] leading-[1.8] text-[#776d64]">
+                                Delivery times depend on your location and shipping method.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <span class="text-[#a66c4f]">✓</span>
+                            <p class="text-[15px] leading-[1.8] text-[#776d64]">
+                                Tracking details are sent after your order is shipped.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT PANEL -->
+                <div class="p-8 md:p-12">
+
+                    <p class="font-[Poppins] text-[11px] uppercase tracking-[0.34em] font-bold text-[#a66c4f] mb-4">
+                        Returns Policy
+                    </p>
+
+                    <h3 class="font-['Cormorant_Garamond'] text-[52px] leading-none mb-8">
+                        Return Guidelines
+                    </h3>
+
+                    <div class="space-y-7">
+
+                        <div>
+                            <h4 class="font-[Poppins] text-[12px] uppercase tracking-[0.22em] font-bold mb-3">
+                                Return Window
+                            </h4>
+
+                            <p class="text-[15px] leading-[1.9] text-[#776d64]">
+                                Returns are accepted within 14 days if the item is unused, undamaged,
+                                and returned in its original packaging.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-[Poppins] text-[12px] uppercase tracking-[0.22em] font-bold mb-3">
+                                Damaged Items
+                            </h4>
+
+                            <p class="text-[15px] leading-[1.9] text-[#776d64]">
+                                If your ceramic item arrives damaged, please contact us within 48 hours
+                                with clear photos of the item and packaging.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-[Poppins] text-[12px] uppercase tracking-[0.22em] font-bold mb-3">
+                                Handmade Notes
+                            </h4>
+
+                            <p class="text-[15px] leading-[1.9] text-[#776d64]">
+                                Small variations in glaze, size, or texture are not defects.
+                                They are part of the handmade ceramic process.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- RETURN REQUEST FORM -->
+        <section class="policy-card p-8 md:p-12">
+
+            <div class="text-center mb-10">
+                <p class="font-[Poppins] text-[11px] uppercase tracking-[0.34em] font-bold text-[#a66c4f] mb-4">
+                    Need Help?
+                </p>
+
+                <h2 class="font-['Cormorant_Garamond'] text-[52px] leading-none mb-5">
+                    Request a Return
+                </h2>
+
+                <p class="text-[15px] leading-[1.9] text-[#776d64] max-w-[650px] mx-auto">
+                    Fill out the form below and our team will review your request.
+                </p>
+            </div>
+
+            <form id="returnForm" class="space-y-6">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label for="orderNumber" class="field-label">
+                            Order Number
+                        </label>
+
+                        <input id="orderNumber" type="text" placeholder="Example: BR-1024" class="return-input">
+
+                        <p id="orderError" class="error-text">
+                            Please enter your order number.
+                        </p>
+                    </div>
+
+                    <div>
+                        <label for="email" class="field-label">
+                            Email Address
+                        </label>
+
+                        <input id="email" type="email" placeholder="you@example.com" class="return-input">
+
+                        <p id="emailError" class="error-text">
+                            Please enter a valid email.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="reason" class="field-label">
+                        Return Reason
+                    </label>
+
+                    <select id="reason" class="return-input">
+                        <option value="">Select reason</option>
+                        <option value="Damaged item">Damaged item</option>
+                        <option value="Wrong item received">Wrong item received</option>
+                        <option value="Changed my mind">Changed my mind</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <p id="reasonError" class="error-text">
+                        Please select a return reason.
+                    </p>
+                </div>
+
+                <div>
+                    <label for="details" class="field-label">
+                        Details
+                    </label>
+
+                    <textarea id="details" placeholder="Tell us more about your return request..."
+                        class="return-textarea"></textarea>
+                </div>
+
+                <button type="submit" class="return-btn">
+                    Submit Request
+                </button>
+
+                <p id="successMessage" class="hidden text-center text-[14px] text-green-700">
+                    Your return request has been submitted successfully.
+                </p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#211f1f] py-16 px-12 font-[poppins] font-normal text-[15px] uppercase text-[#bfbfbf] mt-32 ">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Contact</h3>
+                <p class="mb-2">+1 123 456 789</p>
+                <p>1316 Abbot Kinney Blvd.<br />Copenhagen CA 90291</p>
+            </div>
+
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Help</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="faqs.html" class="hover:underline decoration-gray-400">FAQ’s</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Pricing Plans</a></li>
+                    <li><a href="track-order.html" class="hover:underline decoration-gray-400">Track Your Order</a></li>
+                    <li><a href="delivery-returns.html" class="hover:underline decoration-gray-400">Returns</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-md font-[poppins] font-bold mb-4 text-white">About Us</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="#" class="hover:underline decoration-gray-400">Our Story</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Job Opportunities</a></li>
+                    <li><a href="ourStores.html" class="hover:underline decoration-gray-400">Store Locator</a></li>
+                    <li><a href="contact-us.html" class="hover:underline decoration-gray-400">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class=" text-white font-[poppins] text-md font-bold mb-4">Customer Services</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="my-account.html" class="hover:underline decoration-gray-400">My Account</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Terms of Use</a></li>
+                    <li><a href="delivery-returns.html" class="hover:underline decoration-gray-400">Deliveries & Returns</a></li>
+                    <li><a href="gift-cards.html" class="hover:underline decoration-gray-400">Gift Card</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+            © 2024 QODE INTERACTIVE, ALL RIGHTS RESERVED
+        </div>
+    </footer>
+
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobile-menu-drawer"
+        class="fixed top-0 right-0 z-50 h-screen w-[320px] max-w-[85%] translate-x-full bg-white p-8 overflow-y-auto transition-transform border-l border-[#ededed] lg:hidden"
+        tabindex="-1" aria-labelledby="mobile-menu-drawer-label">
+
+        <div class="flex items-center justify-between border-b border-[#ededed] pb-6">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="Bridge Logo" class="w-[130px]">
+            </a>
+
+            <button type="button" data-drawer-hide="mobile-menu-drawer" aria-controls="mobile-menu-drawer"
+                class="text-black text-[24px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-xmark"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+
+        <nav class="mt-10">
+            <ul class="space-y-7">
+                <li><a href="../../index.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Home</a>
+                </li>
+
+                <li><a href="../pages/about.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">About
+                        Us</a></li>
+
+                <li><a href="../pages/ourStores.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Our
+                        Stores</a></li>
+
+                <li><a href="../pages/shop.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Shop</a>
+                </li>
+
+                <li><a href="../pages/blog.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Blog</a>
+                </li>
+
+                <li>
+                    <a href="../pages/cart.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./wishlist.html"
+                        class="flex items-center gap-3 uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">
+                        <i class="fa-regular fa-heart"></i>
+                        Wishlist
+                        <span class="wishlist-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        const returnForm = document.getElementById("returnForm");
+
+        const orderNumber = document.getElementById("orderNumber");
+        const email = document.getElementById("email");
+        const reason = document.getElementById("reason");
+
+        const orderError = document.getElementById("orderError");
+        const emailError = document.getElementById("emailError");
+        const reasonError = document.getElementById("reasonError");
+        const successMessage = document.getElementById("successMessage");
+
+        returnForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let valid = true;
+
+            orderError.classList.remove("show");
+            emailError.classList.remove("show");
+            reasonError.classList.remove("show");
+            successMessage.classList.add("hidden");
+
+            if (orderNumber.value.trim() === "") {
+                orderError.classList.add("show");
+                valid = false;
+            }
+
+            if (!email.value.includes("@") || !email.value.includes(".")) {
+                emailError.classList.add("show");
+                valid = false;
+            }
+
+            if (reason.value === "") {
+                reasonError.classList.add("show");
+                valid = false;
+            }
+
+            if (valid) {
+                localStorage.setItem("bridgeReturnOrder", orderNumber.value.trim());
+                localStorage.setItem("bridgeReturnEmail", email.value.trim());
+                localStorage.setItem("bridgeReturnReason", reason.value);
+
+                successMessage.classList.remove("hidden");
+                returnForm.reset();
+            }
+        });
+    </script>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/shop.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
+
+</body>
+
+</html>
