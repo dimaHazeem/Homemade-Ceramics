@@ -14,7 +14,9 @@ async function renderUserProfileMenu() {
 
     const isSignedIn = user !== null;
 
-    const avatarImage = isSignedIn && user.avatar
+    const avatarImage = isSignedIn && user.avatarData
+    ? user.avatarData
+    : isSignedIn && user.avatar
         ? `${assetsPath}images/${user.avatar}`
         : `${assetsPath}images/${window.UsersAPI.DEFAULT_PROFILE_IMAGE}`;
 

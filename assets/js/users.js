@@ -135,10 +135,71 @@ function demoLogin() {
     location.reload();
 }
 
+function updateCurrentUser(updatedData) {
+    const currentUserId = localStorage.getItem(CURRENT_USER_KEY);
+
+    if (!currentUserId) {
+        return {
+            success: false,
+            message: "No user is signed in."
+        };
+    }
+
+    const users = getStoredUsers();
+
+    const userIndex = users.findIndex(function (user) {
+        return user.id === currentUserId;
+    });
+
+    if (userIndex === -1) {
+        return {
+            success: false,
+            message: "User was not found."
+        };
+    }
+
+    const cleanEmail = updatedData.email
+        ? normalizeEmail(updatedData.email)
+        : users[userIndex].email;
+
+    const emailUsedByAnotherUser = users.some(function (user) {
+        return user.email === cleanEmail && user.id !== currentUserId;
+    });
+
+    if (emailUsedByAnotherUser) {
+        return {
+            success: false,
+            message: "This email is already used by another account."
+        };
+    }
+
+    users[userIndex] = {
+        ...users[userIndex],
+        firstName: updatedData.firstName ?? users[userIndex].firstName,
+        lastName: updatedData.lastName ?? users[userIndex].lastName,
+        fullName: updatedData.firstName || updatedData.lastName
+            ? `${updatedData.firstName ?? users[userIndex].firstName} ${updatedData.lastName ?? users[userIndex].lastName}`.trim()
+            : users[userIndex].fullName,
+        email: updatedData.email ? cleanEmail : users[userIndex].email,
+        phone: updatedData.phone ?? users[userIndex].phone,
+        city: updatedData.city ?? users[userIndex].city,
+        address: updatedData.address ?? users[userIndex].address,
+        avatarData: updatedData.avatarData ?? users[userIndex].avatarData
+    };
+
+    saveUsers(users);
+
+    return {
+        success: true,
+        user: users[userIndex]
+    };
+}
+
 window.UsersAPI = {
     createUser,
     loginUser,
     getCurrentUser,
+    updateCurrentUser,
     logoutUser,
     demoLogin,
     findUserByEmail,

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Homemade Ceramics</title>
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.35), transparent 26%),
+                radial-gradient(circle at 85% 8%, rgba(166, 108, 79, 0.10), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .account-title {
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .account-card {
+            background: rgba(255, 253, 249, 0.92);
+            border: 1px solid #ddcfc2;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.10);
+        }
+
+        .account-input {
+            width: 100%;
+            height: 54px;
+            border-radius: 14px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.78);
+            padding: 0 18px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .account-input:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .field-label {
+            display: block;
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.28em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .account-btn {
+            background: linear-gradient(to right, #e8bfb3, #f7d2c6);
+            color: white;
+            box-shadow: 0 16px 35px rgba(166, 108, 79, 0.20);
+        }
+
+        .account-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(166, 108, 79, 0.27);
+        }
+
+        .account-submit-loader-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.42), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.12), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-submit-loader-overlay.show {
+            display: flex;
+        }
+
+        .account-submit-loader-box {
+            text-align: center;
+        }
+
+        .account-submit-loader {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: block;
+            position: relative;
+            background: #a66c4f;
+            animation: accountSubmitLoaderMove 0.9s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        .account-submit-loader::before,
+        .account-submit-loader::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #a66c4f;
+            animation: accountSubmitLoaderMove 0.9s ease-in-out infinite;
+        }
+
+        .account-submit-loader::before {
+            left: -24px;
+            animation-delay: 0.15s;
+        }
+
+        .account-submit-loader::after {
+            left: 24px;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes accountSubmitLoaderMove {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+
+            40% {
+                transform: translateY(-8px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- FULL PAGE LOADER AFTER SAVE -->
+    <div id="accountSubmitLoader" class="account-submit-loader-overlay">
+        <div class="account-submit-loader-box">
+            <span class="account-submit-loader"></span>
+
+            <p id="accountSubmitLoaderText"
+                class="mt-8 uppercase tracking-[0.35em] text-[11px] font-[Poppins] text-[#a66c4f]">
+                Saving Changes
+            </p>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="row justify-between items-center p-7">
+
+            <div class="row justify-between items-center gap-20">
+                <div>
+                    <a href="../../index.html">
+                        <img src="../images/home-images/Ceramics01.png" alt="logo">
+                    </a>
+                </div>
+
+                <div class="row justify-between gap-15 items-center hidden lg:flex">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Home</a>
+
+                    <a href="./about.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">About
+                        Us</a>
+
+                    <a href="./ourStores.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Our
+                        Stores</a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Shop</a>
+
+                    <a href="./blog.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Blog</a>
+                </div>
+            </div>
+
+            <div class="row justify-between gap-5 items-center">
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+
+                    <div id="cartDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
+
+                    <div id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button type="button" id="openSearchBtn"
+                        class="text-black text-[22px] hover:text-[#e2b7a8] transition">
+                        <img src="../images/home-images/download.svg" alt="search..." class="w-5">
+                    </button>
+
+                    <div id="searchDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-7 z-50 hidden">
+
+                        <div class="relative">
+                            <input id="globalSearchInput" type="text" placeholder="Search products..."
+                                class="w-full border-b border-black/20 bg-transparent outline-none py-3 pr-8 text-[14px] placeholder:text-[#8a8a8a] normal-case">
+
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute right-0 top-1/2 -translate-y-1/2 text-[15px] text-black"></i>
+                        </div>
+
+                        <div id="globalSearchResults" class="mt-6 max-h-[360px] overflow-y-auto space-y-5"></div>
+                    </div>
+                </div>
+
+                <div id="userProfileMenu"></div>
+
+                <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
+                    data-drawer-placement="right" aria-controls="mobile-menu-drawer"
+                    class="lg:hidden text-black text-[22px]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="px-6 py-12 lg:py-20">
+
+        <section class="max-w-[1180px] mx-auto">
+
+            <!-- HERO ACCOUNT HEADER -->
+            <div class="account-card rounded-[36px] overflow-hidden mb-10">
+
+                <div class="relative min-h-[260px] bg-[#f7e9df]">
+                    <div
+                        class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.75),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(166,108,79,0.16),transparent_28%)]">
+                    </div>
+
+                    <div class="relative z-10 px-8 lg:px-12 pt-12 pb-10">
+                        <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
+                            Homemade Ceramics Account
+                        </p>
+
+                        <h1 class="account-title mt-4 text-[58px] md:text-[78px] leading-none font-medium">
+                            My Account
+                        </h1>
+
+                        <p class="mt-5 max-w-2xl text-[#776d64] text-[15px] leading-8">
+                            Manage your personal details, view your orders, and keep your favorite handmade ceramics
+                            close for your next visit.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="px-8 lg:px-12 pb-10 -mt-12 relative z-20">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+
+                        <div class="flex items-end gap-6">
+                            <div class="relative">
+                                <button id="avatarUploadButton" type="button"
+                                    class="relative w-[130px] h-[130px] rounded-full bg-white p-[6px] shadow-lg border border-[#ddcfc2] group overflow-hidden">
+
+                                    <img id="accountAvatar" src="../images/users-profiles/default-profile.png"
+                                        alt="Profile image"
+                                        class="w-full h-full rounded-full object-cover bg-[#f4eee7]">
+
+                                    <span
+                                        class="absolute inset-[6px] rounded-full bg-black/45 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                        <span class="text-white text-center">
+                                            <i class="fa-solid fa-camera text-[22px] mb-2"></i>
+                                            <span class="block uppercase tracking-[0.18em] text-[10px]">
+                                                Change
+                                            </span>
+                                        </span>
+                                    </span>
+                                </button>
+
+                                <input id="avatarInput" type="file" accept="image/*" class="hidden">
+                            </div>
+
+                            <div class="pb-2">
+                                <h2 id="accountName" class="uppercase tracking-[0.22em] text-[20px] font-semibold">
+                                    Customer Name
+                                </h2>
+
+                                <p id="accountEmail" class="mt-2 text-[#8b837c] text-[15px]">
+                                    customer@email.com
+                                </p>
+                            </div>
+                        </div>
+
+                        <button id="accountLogoutBtn" type="button"
+                            class="px-8 py-4 bg-black text-white uppercase tracking-[0.28em] text-[11px] hover:bg-[#c9ab81] transition">
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+                <a href="./orders.html"
+                    class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                Orders
+                            </p>
+                            <h3 class="mt-4 text-[34px] font-medium">0</h3>
+                            <p class="mt-2 text-[#776d64]">View your order history</p>
+                        </div>
+
+                        <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                            <i class="fa-solid fa-box-open text-[#a66c4f] text-[20px]"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="./wishlist.html"
+                    class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                Wishlist
+                            </p>
+                            <h3 class="mt-4 text-[34px] font-medium">
+                                <span class="wishlist-count">0</span>
+                            </h3>
+                            <p class="mt-2 text-[#776d64]">Saved ceramic pieces</p>
+                        </div>
+
+                        <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                            <i class="fa-regular fa-heart text-[#a66c4f] text-[20px]"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="./cart.html"
+                    class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                Cart
+                            </p>
+                            <h3 class="mt-4 text-[34px] font-medium">
+                                <span class="cart-count">0</span>
+                            </h3>
+                            <p class="mt-2 text-[#776d64]">Items ready to checkout</p>
+                        </div>
+
+                        <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                            <i class="fa-solid fa-cart-shopping text-[#a66c4f] text-[20px]"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- CONTENT GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- PROFILE FORM -->
+                <section class="lg:col-span-2 account-card rounded-[32px] p-8 lg:p-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-9">
+                        <div>
+                            <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
+                                Profile Details
+                            </p>
+                            <h2 class="account-title text-[44px] leading-none mt-3">
+                                Personal Information
+                            </h2>
+                        </div>
+
+                        <span id="saveMessage"
+                            class="hidden text-[13px] text-[#a66c4f] bg-[#fbf0eb] px-5 py-3 rounded-full">
+                            Changes saved successfully.
+                        </span>
+                    </div>
+
+                    <form id="accountForm" class="space-y-6">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label for="accountFirstName" class="field-label">First Name</label>
+                                <input id="accountFirstName" type="text" class="account-input" placeholder="First name">
+                            </div>
+
+                            <div>
+                                <label for="accountLastName" class="field-label">Last Name</label>
+                                <input id="accountLastName" type="text" class="account-input" placeholder="Last name">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="accountEmailInput" class="field-label">Email Address</label>
+                            <input id="accountEmailInput" type="email" class="account-input"
+                                placeholder="you@example.com">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label for="accountPhone" class="field-label">Phone Number</label>
+                                <input id="accountPhone" type="text" class="account-input" placeholder="+970 ...">
+                            </div>
+
+                            <div>
+                                <label for="accountCity" class="field-label">City</label>
+                                <input id="accountCity" type="text" class="account-input" placeholder="Nablus">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="accountAddress" class="field-label">Address</label>
+                            <input id="accountAddress" type="text" class="account-input"
+                                placeholder="Street, building, apartment">
+                        </div>
+
+                        <button id="saveAccountBtn" type="submit"
+                            class="account-btn w-full md:w-auto px-10 py-4 rounded-2xl uppercase tracking-[0.28em] text-[11px] font-bold transition">
+                            Save Changes
+                        </button>
+
+                    </form>
+                </section>
+
+                <!-- SIDE PANEL -->
+                <aside class="space-y-8">
+
+                    <section class="account-card rounded-[32px] p-8">
+                        <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
+                            Quick Links
+                        </p>
+
+                        <div class="mt-7 space-y-5">
+                            <a href="./orders.html"
+                                class="flex items-center justify-between border-b border-[#eaded3] pb-4 hover:text-[#c9ab81] transition">
+                                <span class="uppercase tracking-[0.18em] text-[12px]">My Orders</span>
+                                <i class="fa-solid fa-arrow-right-long text-[12px]"></i>
+                            </a>
+
+                            <a href="./wishlist.html"
+                                class="flex items-center justify-between border-b border-[#eaded3] pb-4 hover:text-[#c9ab81] transition">
+                                <span class="uppercase tracking-[0.18em] text-[12px]">Wishlist</span>
+                                <i class="fa-solid fa-arrow-right-long text-[12px]"></i>
+                            </a>
+
+                            <a href="./cart.html"
+                                class="flex items-center justify-between border-b border-[#eaded3] pb-4 hover:text-[#c9ab81] transition">
+                                <span class="uppercase tracking-[0.18em] text-[12px]">Cart</span>
+                                <i class="fa-solid fa-arrow-right-long text-[12px]"></i>
+                            </a>
+
+                            <a href="./shop.html"
+                                class="flex items-center justify-between hover:text-[#c9ab81] transition">
+                                <span class="uppercase tracking-[0.18em] text-[12px]">Continue Shopping</span>
+                                <i class="fa-solid fa-arrow-right-long text-[12px]"></i>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="account-card rounded-[32px] p-8">
+                        <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
+                            Need Help?
+                        </p>
+
+                        <h3 class="account-title text-[38px] leading-none mt-4">
+                            Customer Care
+                        </h3>
+
+                        <p class="mt-5 text-[#776d64] leading-7">
+                            Questions about your ceramics, delivery, or returns? Visit the help pages or contact us.
+                        </p>
+
+                        <div class="mt-7 space-y-4">
+                            <a href="./FAQ'S.html"
+                                class="block text-[12px] uppercase tracking-[0.22em] hover:text-[#c9ab81] transition">
+                                FAQ
+                            </a>
+
+                            <a href="./track.html"
+                                class="block text-[12px] uppercase tracking-[0.22em] hover:text-[#c9ab81] transition">
+                                Track Your Order
+                            </a>
+
+                            <a href="./giftcard.html"
+                                class="block text-[12px] uppercase tracking-[0.22em] hover:text-[#c9ab81] transition">
+                                Gift Card
+                            </a>
+                        </div>
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#211f1f] py-16 px-12 font-[poppins] font-normal text-[15px] uppercase text-[#bfbfbf] mt-32">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Contact</h3>
+                <p class="mb-2">+1 123 456 789</p>
+                <p>1316 Abbot Kinney Blvd.<br />Copenhagen CA 90291</p>
+            </div>
+
+            <div>
+                <h3 class="text-md font-bold font-[poppins] mb-4 text-white">Help</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="./FAQ'S.html" class="hover:underline decoration-gray-400">FAQ’s</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Pricing Plans</a></li>
+                    <li><a href="./track.html" class="hover:underline decoration-gray-400">Track Your Order</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Returns</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-md font-[poppins] font-bold mb-4 text-white">About Us</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="./about.html" class="hover:underline decoration-gray-400">Our Story</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Job Opportunities</a></li>
+                    <li><a href="./ourStores.html" class="hover:underline decoration-gray-400">Store Locator</a></li>
+                    <li><a href="./contactUs.html" class="hover:underline decoration-gray-400">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-white font-[poppins] text-md font-bold mb-4">Customer Services</h3>
+                <ul class="space-y-2 text-[14px]">
+                    <li><a href="./account.html" class="hover:underline decoration-gray-400">My Account</a></li>
+                    <li><a href="#" class="hover:underline decoration-gray-400">Terms of Use</a></li>
+                    <li><a href="./delivery&returns.html" class="hover:underline decoration-gray-400">Deliveries &
+                            Returns</a></li>
+                    <li><a href="./giftcard.html" class="hover:underline decoration-gray-400">Gift Card</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+            © 2024 QODE INTERACTIVE, ALL RIGHTS RESERVED
+        </div>
+    </footer>
+
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobile-menu-drawer"
+        class="fixed top-0 right-0 z-50 h-screen w-[320px] max-w-[85%] translate-x-full bg-white p-8 overflow-y-auto transition-transform border-l border-[#ededed] lg:hidden"
+        tabindex="-1" aria-labelledby="mobile-menu-drawer-label">
+
+        <div class="flex items-center justify-between border-b border-[#ededed] pb-6">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="Bridge Logo" class="w-[130px]">
+            </a>
+
+            <button type="button" data-drawer-hide="mobile-menu-drawer" aria-controls="mobile-menu-drawer"
+                class="text-black text-[24px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-xmark"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+
+        <nav class="mt-10">
+            <ul class="space-y-7">
+                <li><a href="../../index.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Home</a>
+                </li>
+
+                <li><a href="./about.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">About
+                        Us</a></li>
+
+                <li><a href="./ourStores.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Our
+                        Stores</a></li>
+
+                <li><a href="./shop.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Shop</a>
+                </li>
+
+                <li><a href="./blog.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Blog</a>
+                </li>
+
+                <li><a href="./account.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">My
+                        Account</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/shop.js"></script>
+    <script src="../js/search.js"></script>
+
+    <script src="../js/users.js"></script>
+    <script src="../js/user-profile-menu.js"></script>
+    <script src="../js/account.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
+
+</body>
+
+</html>
