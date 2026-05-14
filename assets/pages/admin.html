@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Studio | Homemade Ceramics</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.42), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.12), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .admin-main {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 90px 24px 60px;
+        }
+
+        .admin-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 82px;
+            line-height: 0.95;
+            font-weight: 500;
+            color: #17120f;
+        }
+
+        .admin-label {
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.36em;
+            font-weight: 700;
+            color: #a66c4f;
+        }
+
+        .admin-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid #ddcfc2;
+            border-radius: 24px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 35px rgba(112, 73, 51, 0.10);
+        }
+
+        .stat-number {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 58px;
+            line-height: 1;
+            font-weight: 600;
+            color: #17120f;
+        }
+
+        .admin-input,
+        .admin-select {
+            width: 100%;
+            height: 58px;
+            border-radius: 16px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.78);
+            padding: 0 20px;
+            font-size: 14px;
+            color: #17120f;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .admin-input:focus,
+        .admin-select:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .admin-btn {
+            min-height: 56px;
+            border-radius: 16px;
+            padding: 16px 30px;
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .admin-btn-primary {
+            background: linear-gradient(to right, #e8bfb3, #f7d2c6);
+            color: white;
+            box-shadow: 0 16px 35px rgba(166, 108, 79, 0.22);
+        }
+
+        .admin-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(166, 108, 79, 0.28);
+        }
+
+        .admin-btn-outline {
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.7);
+            color: #17120f;
+        }
+
+        .admin-btn-outline:hover {
+            border-color: #a66c4f;
+            color: #a66c4f;
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .ceramic-shape {
+            border-radius: 48% 52% 44% 56% / 58% 44% 56% 42%;
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .shape-one {
+            width: 150px;
+            height: 150px;
+            top: -55px;
+            left: -55px;
+            background: rgba(244, 216, 204, 0.58);
+        }
+
+        .shape-two {
+            width: 210px;
+            height: 210px;
+            bottom: -85px;
+            right: -80px;
+            background: rgba(166, 108, 79, 0.13);
+        }
+
+        #productsList article {
+            border: 1px solid #ddcfc2 !important;
+            background: rgba(255, 253, 249, 0.95) !important;
+            border-radius: 28px !important;
+            box-shadow: 0 18px 50px rgba(112, 73, 51, 0.09);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        #productsList article:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.13);
+        }
+
+        #paginationContainer button {
+            min-width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 253, 249, 0.88);
+            transition: 0.3s;
+        }
+
+        #paginationContainer button:hover {
+            background: #e8bfb3;
+            color: white;
+            border-color: #e8bfb3;
+        }
+
+        @media (max-width: 900px) {
+            .admin-title {
+                font-size: 62px;
+            }
+
+            #productsList article>div {
+                display: block !important;
+            }
+
+            #productsList article img {
+                margin-bottom: 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .admin-title {
+                font-size: 54px;
+            }
+
+            .shape-one,
+            .shape-two {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- HEADER -->
+    <header>
+        <nav class="flex justify-between items-center p-7">
+            <div class="flex justify-between items-center gap-20">
+                <a href="../../index.html">
+                    <img src="../images/home-images/Ceramics01.png" alt="logo">
+                </a>
+
+                <div class="hidden lg:flex justify-between gap-15 items-center">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Home
+                    </a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Shop
+                    </a>
+
+                    <a href="./admin.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-[100%]">
+                        Admin
+                    </a>
+                </div>
+            </div>
+
+            <a href="./shop.html"
+                class="hidden md:flex items-center gap-3 uppercase tracking-[0.25em] font-[Poppins] text-[12px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-store"></i>
+                Shop View
+            </a>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+        <!-- HERO -->
+        <section class="text-center mb-14">
+            <p class="admin-label mb-4">
+                Handmade Ceramics Studio
+            </p>
+
+            <h1 class="admin-title">
+                Admin Studio
+            </h1>
+
+            <p class="mt-6 text-[15px] leading-[1.9] text-[#776d64] max-w-[700px] mx-auto">
+                Manage your handmade ceramics collection, product images, prices, categories,
+                and sale pieces from one calm studio dashboard.
+            </p>
+        </section>
+
+        <!-- TOP DASHBOARD CARD -->
+        <section class="relative mb-14">
+
+            <div class="ceramic-shape shape-one"></div>
+            <div class="ceramic-shape shape-two"></div>
+
+            <div class="admin-card relative z-10 p-8 md:p-12">
+
+                <div class="flex flex-col lg:flex-row justify-between gap-10 lg:items-end mb-10">
+                    <div>
+                        <p class="admin-label mb-4">
+                            Store Management
+                        </p>
+
+                        <h2 class="font-['Cormorant_Garamond'] text-[48px] md:text-[58px] leading-none font-medium">
+                            Products Collection
+                        </h2>
+
+                        <p class="mt-5 text-[15px] leading-[1.9] text-[#776d64] max-w-[680px]">
+                            Create new pieces, update product information, control prices,
+                            and organize the ceramics shown in your shop.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="./admin-form.html" class="admin-btn admin-btn-primary">
+                            <i class="fa-solid fa-plus"></i>
+                            Create Product
+                        </a>
+
+                        <button id="resetProductsBtn" class="admin-btn admin-btn-outline">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Reset Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATS -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <p class="font-[Poppins] text-[10px] uppercase tracking-[0.3em] text-[#a66c4f] font-bold mb-5">
+                            Total Products
+                        </p>
+
+                        <h3 id="totalProducts" class="stat-number">0</h3>
+
+                        <p class="mt-4 text-[14px] leading-[1.8] text-[#776d64]">
+                            Pieces currently available in the collection.
+                        </p>
+                    </div>
+
+                    <div class="stat-card">
+                        <p class="font-[Poppins] text-[10px] uppercase tracking-[0.3em] text-[#a66c4f] font-bold mb-5">
+                            Sale Products
+                        </p>
+
+                        <h3 id="saleProducts" class="stat-number">0</h3>
+
+                        <p class="mt-4 text-[14px] leading-[1.8] text-[#776d64]">
+                            Discounted handmade pieces shown as sale items.
+                        </p>
+                    </div>
+
+                    <div class="stat-card">
+                        <p class="font-[Poppins] text-[10px] uppercase tracking-[0.3em] text-[#a66c4f] font-bold mb-5">
+                            Categories
+                        </p>
+
+                        <h3 id="totalCategories" class="stat-number">0</h3>
+
+                        <p class="mt-4 text-[14px] leading-[1.8] text-[#776d64]">
+                            Product groups used to organize the shop.
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+
+        <!-- FILTER CARD -->
+        <section class="admin-card p-8 md:p-10 mb-12">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-8">
+                <div>
+                    <p class="admin-label mb-4">
+                        Product Library
+                    </p>
+
+                    <h2 class="font-['Cormorant_Garamond'] text-[44px] md:text-[52px] leading-none">
+                        Browse & Edit
+                    </h2>
+                </div>
+
+                <p class="text-[14px] leading-[1.8] text-[#776d64] max-w-[460px]">
+                    Search by product name, category, material, color, or description.
+                </p>
+            </div>
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="relative">
+                    <input id="searchInput" type="text" placeholder="Search products..." class="admin-input pr-12">
+
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-[15px] text-[#a66c4f]"></i>
+                </div>
+
+                <select id="categoryFilter" class="admin-select">
+                    <option value="all">All Categories</option>
+                </select>
+
+                <select id="sortSelect" class="admin-select">
+                    <option value="default">Default Sorting</option>
+                    <option value="name">Name A-Z</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </section>
+        </section>
+
+        <!-- PRODUCTS LIST -->
+        <section id="productsList" class="space-y-8">
+            <!-- JS will fill product cards here -->
+        </section>
+
+        <!-- PAGINATION -->
+        <div id="paginationContainer"
+            class="flex justify-center items-center gap-4 mt-16 font-[Poppins] text-[12px] uppercase tracking-[0.22em]">
+        </div>
+
+        <!-- EMPTY STATE -->
+        <section id="emptyState" class="hidden min-h-[340px] flex flex-col justify-center items-center text-center">
+            <div class="admin-card px-10 py-14 max-w-[560px]">
+                <p class="admin-label mb-4">
+                    Empty Collection
+                </p>
+
+                <h2 class="font-['Cormorant_Garamond'] text-[52px] leading-none mb-6">
+                    No products found.
+                </h2>
+
+                <p class="text-[15px] leading-[1.9] text-[#776d64] mb-8">
+                    Try changing your search filters or create a new handmade ceramic product.
+                </p>
+
+                <a href="./admin-form.html" class="admin-btn admin-btn-primary">
+                    Create Product
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

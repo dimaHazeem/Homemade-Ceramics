@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Posts | Homemade Ceramics</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.42), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.12), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .posts-main {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 90px 24px 70px;
+        }
+
+        .posts-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 82px;
+            line-height: 0.95;
+            font-weight: 500;
+            color: #17120f;
+        }
+
+        .posts-label {
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.36em;
+            font-weight: 700;
+            color: #a66c4f;
+        }
+
+        .posts-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .posts-input,
+        .posts-select {
+            width: 100%;
+            height: 58px;
+            border-radius: 16px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.78);
+            padding: 0 20px;
+            font-size: 14px;
+            color: #17120f;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .posts-input:focus,
+        .posts-select:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .post-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 18px 50px rgba(112, 73, 51, 0.09);
+            transition: 0.3s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.14);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 310px;
+            object-fit: cover;
+        }
+
+        .post-action {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.88);
+            color: #a66c4f;
+            transition: 0.3s;
+        }
+
+        .post-action:hover,
+        .post-action.active {
+            background: #a66c4f;
+            color: white;
+            border-color: #a66c4f;
+        }
+
+        .ceramic-shape {
+            border-radius: 48% 52% 44% 56% / 58% 44% 56% 42%;
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .shape-one {
+            width: 150px;
+            height: 150px;
+            top: -55px;
+            left: -55px;
+            background: rgba(244, 216, 204, 0.58);
+        }
+
+        .shape-two {
+            width: 210px;
+            height: 210px;
+            bottom: -85px;
+            right: -80px;
+            background: rgba(166, 108, 79, 0.13);
+        }
+
+        @media (max-width: 768px) {
+            .posts-title {
+                font-size: 62px;
+            }
+
+            .shape-one,
+            .shape-two {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .posts-title {
+                font-size: 54px;
+            }
+
+            .post-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- HEADER -->
+    <header>
+        <nav class="flex justify-between items-center p-7">
+            <div class="flex justify-between items-center gap-20">
+                <a href="../../index.html">
+                    <img src="../images/home-images/Ceramics01.png" alt="logo">
+                </a>
+
+                <div class="hidden lg:flex justify-between gap-15 items-center">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Home
+                    </a>
+
+                    <a href="./about.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        About Us
+                    </a>
+
+                    <a href="./ourStores.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Our Stores
+                    </a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Shop
+                    </a>
+
+                    <a href="./posts.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-[100%]">
+                        Posts
+                    </a>
+                </div>
+            </div>
+
+            <a href="./shop.html"
+                class="hidden md:flex items-center gap-3 uppercase tracking-[0.25em] font-[Poppins] text-[12px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-store"></i>
+                Shop
+            </a>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="posts-main">
+
+        <!-- HERO -->
+        <section class="text-center mb-14">
+            <p class="posts-label mb-4">
+                Studio Journal
+            </p>
+
+            <h1 class="posts-title">
+                Ceramic Posts
+            </h1>
+
+            <p class="mt-6 text-[15px] leading-[1.9] text-[#776d64] max-w-[700px] mx-auto">
+                Discover short updates from our ceramic studio: new collections, care tips,
+                workshop moments, and handmade inspiration.
+            </p>
+        </section>
+
+        <!-- FILTERS -->
+        <section class="relative mb-14">
+            <div class="ceramic-shape shape-one"></div>
+            <div class="ceramic-shape shape-two"></div>
+
+            <div class="posts-card relative z-10 p-8 md:p-10">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-8">
+                    <div>
+                        <p class="posts-label mb-4">
+                            Browse Posts
+                        </p>
+
+                        <h2 class="font-['Cormorant_Garamond'] text-[46px] md:text-[56px] leading-none font-medium">
+                            Studio Updates
+                        </h2>
+                    </div>
+
+                    <p class="text-[15px] leading-[1.9] text-[#776d64] max-w-[500px]">
+                        Search by title, category, or post content.
+                    </p>
+                </div>
+
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="relative md:col-span-2">
+                        <input id="postSearchInput" type="text" placeholder="Search posts..." class="posts-input pr-12">
+
+                        <i
+                            class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-[15px] text-[#a66c4f]"></i>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+
+        <section id="createPostSection" class="posts-card p-8 md:p-10 mb-10 hidden">
+            <div class="flex items-center gap-4 mb-7">
+                <div class="w-[54px] h-[54px] rounded-full bg-[#f4d8cc] flex items-center justify-center">
+                    <i class="fa-solid fa-user text-[#a66c4f] text-[22px]"></i>
+                </div>
+
+                <div>
+                    <p id="postUserName"
+                        class="font-[Poppins] text-[12px] uppercase tracking-[0.22em] font-bold text-[#17120f]">
+                        Customer
+                    </p>
+                    <p class="text-[13px] text-[#776d64] mt-1">
+                        Share your experience with a handmade ceramic piece
+                    </p>
+                </div>
+            </div>
+
+            <form id="createPostForm" class="space-y-5">
+                <textarea id="postTextInput" placeholder="What did you think about your ceramic piece?"
+                    class="w-full min-h-[150px] rounded-[16px] border border-[#ddcfc2] bg-white/80 px-5 py-4 outline-none focus:border-[#a66c4f] text-[15px] leading-[1.8] resize-none"></textarea>
+
+                <input id="postImageInput" type="file" accept="image/*" class="posts-input py-4">
+
+                <button type="submit"
+                    class="min-h-[56px] rounded-[16px] px-8 bg-gradient-to-r from-[#e8bfb3] to-[#f7d2c6] text-white font-[Poppins] text-[11px] font-bold uppercase tracking-[0.28em] hover:translate-y-[-2px] transition">
+                    Publish Post
+                </button>
+            </form>
+        </section>
+
+        <section id="guestPostMessage" class="posts-card p-8 md:p-10 mb-10 text-center">
+            <p class="posts-label mb-4">
+                Join the Community
+            </p>
+
+            <h2 class="font-['Cormorant_Garamond'] text-[44px] leading-none mb-5">
+                Sign in to share your ceramic experience.
+            </h2>
+
+            <p class="text-[15px] leading-[1.9] text-[#776d64] mb-7 max-w-[600px] mx-auto">
+                Customers can post their experience after buying or trying a handmade ceramic piece.
+            </p>
+
+            <a href="./signin.html"
+                class="inline-flex min-h-[56px] rounded-[16px] px-8 bg-gradient-to-r from-[#e8bfb3] to-[#f7d2c6] text-white font-[Poppins] text-[11px] font-bold uppercase tracking-[0.28em] items-center justify-center">
+                Sign In
+            </a>
+        </section>
+
+
+        <!-- POSTS LIST -->
+        <div id="postsList" class="space-y-8 max-w-[1120px] mx-auto">
+        </div>
+
+        <!-- EMPTY STATE -->
+        <section id="postsEmptyState" class="hidden min-h-[300px] flex justify-center items-center text-center">
+            <div class="posts-card px-10 py-14 max-w-[560px]">
+                <p class="posts-label mb-4">
+                    No Results
+                </p>
+
+                <h2 class="font-['Cormorant_Garamond'] text-[52px] leading-none mb-6">
+                    No posts found.
+                </h2>
+
+                <p class="text-[15px] leading-[1.9] text-[#776d64]">
+                    Try another keyword or choose a different category.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/posts.js"></script>
+</body>
+
+</html>

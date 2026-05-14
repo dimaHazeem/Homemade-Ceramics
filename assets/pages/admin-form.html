@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form | Homemade Ceramics</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.42), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.12), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .form-main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 90px 24px 70px;
+        }
+
+        .form-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 82px;
+            line-height: 0.95;
+            font-weight: 500;
+            color: #17120f;
+        }
+
+        .form-label-top {
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.36em;
+            font-weight: 700;
+            color: #a66c4f;
+        }
+
+        .form-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .field-label {
+            display: block;
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.26em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #17120f;
+        }
+
+        .admin-input,
+        .admin-textarea,
+        .admin-file {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.78);
+            padding: 0 20px;
+            font-size: 14px;
+            color: #17120f;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .admin-input,
+        .admin-file {
+            height: 58px;
+        }
+
+        .admin-textarea {
+            min-height: 140px;
+            padding: 18px 20px;
+            resize: none;
+            line-height: 1.8;
+        }
+
+        .admin-input:focus,
+        .admin-textarea:focus,
+        .admin-file:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .admin-input::placeholder,
+        .admin-textarea::placeholder {
+            color: #a9a19b;
+        }
+
+        .hint-text {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #776d64;
+        }
+
+        .admin-btn {
+            min-height: 56px;
+            border-radius: 16px;
+            padding: 16px 30px;
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .admin-btn-primary {
+            background: linear-gradient(to right, #e8bfb3, #f7d2c6);
+            color: white;
+            box-shadow: 0 16px 35px rgba(166, 108, 79, 0.22);
+        }
+
+        .admin-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(166, 108, 79, 0.28);
+        }
+
+        .admin-btn-outline {
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.7);
+            color: #17120f;
+        }
+
+        .admin-btn-outline:hover {
+            border-color: #a66c4f;
+            color: #a66c4f;
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .image-box {
+            border: 1px dashed #ddcfc2;
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 24px;
+            padding: 26px;
+        }
+
+        .sale-box {
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 20px;
+            padding: 20px 22px;
+        }
+
+        .custom-checkbox {
+            appearance: auto !important;
+            width: 18px !important;
+            height: 18px !important;
+            accent-color: #a66c4f !important;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .ceramic-shape {
+            border-radius: 48% 52% 44% 56% / 58% 44% 56% 42%;
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .shape-one {
+            width: 150px;
+            height: 150px;
+            top: -55px;
+            left: -55px;
+            background: rgba(244, 216, 204, 0.58);
+        }
+
+        .shape-two {
+            width: 210px;
+            height: 210px;
+            bottom: -85px;
+            right: -80px;
+            background: rgba(166, 108, 79, 0.13);
+        }
+
+        #mainImagePreview>div,
+        #galleryPreview>div {
+            border-color: #ddcfc2 !important;
+            border-radius: 22px !important;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.75) !important;
+        }
+
+        #mainImagePreview img,
+        #galleryPreview img {
+            border-radius: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .form-title {
+                font-size: 62px;
+            }
+
+            .shape-one,
+            .shape-two {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .form-title {
+                font-size: 54px;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- HEADER -->
+    <header>
+        <nav class="flex justify-between items-center p-7">
+            <div class="flex items-center gap-20">
+                <a href="../../index.html">
+                    <img src="../images/home-images/Ceramics01.png" alt="logo">
+                </a>
+
+                <div class="hidden lg:flex justify-between gap-15 items-center">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Home
+                    </a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">
+                        Shop
+                    </a>
+
+                    <a href="./admin.html"
+                        class="uppercase tracking-widest font-[Poppins] text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-[100%]">
+                        Admin
+                    </a>
+                </div>
+            </div>
+
+            <a href="./admin.html"
+                class="hidden md:flex items-center gap-3 uppercase tracking-[0.25em] font-[Poppins] text-[12px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Admin
+            </a>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="form-main">
+
+        <!-- HERO -->
+        <section class="text-center mb-14">
+            <p class="form-label-top mb-4">
+                Product Management
+            </p>
+
+            <h1 id="pageTitle" class="form-title">
+                Create Product
+            </h1>
+
+            <p class="mt-6 text-[15px] leading-[1.9] text-[#776d64] max-w-[700px] mx-auto">
+                Add a handmade ceramic piece to the shop collection. Choose a main image,
+                add gallery images, and describe the product details clearly.
+            </p>
+        </section>
+
+        <!-- FORM CARD -->
+        <section class="relative">
+
+            <div class="ceramic-shape shape-one"></div>
+            <div class="ceramic-shape shape-two"></div>
+
+            <form id="productForm" class="form-card relative z-10 p-8 md:p-12">
+                <input type="hidden" id="productId">
+
+                <div class="mb-10">
+                    <p class="form-label-top mb-4">
+                        Ceramic Details
+                    </p>
+
+                    <h2 class="font-['Cormorant_Garamond'] text-[46px] md:text-[56px] leading-none font-medium">
+                        Product Information
+                    </h2>
+
+                    <p class="mt-5 text-[15px] leading-[1.9] text-[#776d64] max-w-[720px]">
+                        These details will be used across the shop, product page, search results,
+                        and admin dashboard.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+
+                    <div>
+                        <label for="name" class="field-label">Product Name</label>
+                        <input id="name" type="text" required placeholder="Example: Handmade Ceramic Mug"
+                            class="admin-input">
+                    </div>
+
+                    <div>
+                        <label for="category" class="field-label">Category</label>
+                        <input id="category" type="text" required placeholder="Example: Mugs" class="admin-input">
+                    </div>
+
+                    <div>
+                        <label for="price" class="field-label">Price</label>
+                        <input id="price" type="number" required placeholder="Example: 35" class="admin-input">
+                    </div>
+
+                    <div>
+                        <label for="oldPrice" class="field-label">Old Price</label>
+                        <input id="oldPrice" type="number" placeholder="Optional old price" class="admin-input">
+                    </div>
+
+                    <div>
+                        <label for="color" class="field-label">Color</label>
+                        <input id="color" type="text" placeholder="Example: Cream" class="admin-input">
+                    </div>
+
+                    <div>
+                        <label for="material" class="field-label">Material</label>
+                        <input id="material" type="text" placeholder="Example: Stoneware" class="admin-input">
+                    </div>
+
+                    <!-- MAIN IMAGE -->
+                    <div class="md:col-span-2 image-box">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-5">
+                            <div>
+                                <label for="image" class="field-label">
+                                    Main Product Image
+                                </label>
+
+                                <p class="hint-text">
+                                    Upload one main image. This is the image shown first in the shop page.
+                                </p>
+                            </div>
+
+                            <div
+                                class="font-[Poppins] text-[10px] uppercase tracking-[0.26em] text-[#a66c4f] font-bold">
+                                Required
+                            </div>
+                        </div>
+
+                        <input id="image" type="file" accept="image/*" class="admin-file">
+
+                        <div id="mainImagePreview" class="mt-6"></div>
+                    </div>
+
+                    <!-- GALLERY IMAGES -->
+                    <div class="md:col-span-2 image-box">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-5">
+                            <div>
+                                <label class="field-label">
+                                    Gallery Images
+                                </label>
+
+                                <p class="hint-text">
+                                    Add up to four extra images for the product details page.
+                                </p>
+                            </div>
+
+                            <button type="button" id="addGalleryBtn" class="admin-btn admin-btn-primary">
+                                <i class="fa-solid fa-plus"></i>
+                                Add Gallery Image
+                            </button>
+                        </div>
+
+                        <p id="galleryCountText"
+                            class="font-[Poppins] text-[11px] uppercase tracking-[0.22em] text-[#776d64]">
+                            0 / 4 gallery images selected.
+                        </p>
+
+                        <div id="galleryPreview" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPTION -->
+                    <div class="md:col-span-2">
+                        <label for="description" class="field-label">Description</label>
+                        <textarea id="description" rows="5"
+                            placeholder="Describe the ceramic piece, its texture, use, and handmade details..."
+                            class="admin-textarea"></textarea>
+                    </div>
+
+                    <!-- SALE -->
+                    <div class="md:col-span-2 sale-box">
+                        <label class="flex items-start gap-4 text-[14px] text-[#776d64] leading-7">
+                            <input id="sale" type="checkbox" class="custom-checkbox mt-1">
+                            <span>
+                                <strong class="text-[#17120f]">This product is on sale.</strong>
+                                <br>
+                                Mark this item as a sale product so it can appear with a sale label.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="flex flex-col sm:flex-row justify-end gap-5 mt-12">
+                    <a href="./admin.html" class="admin-btn admin-btn-outline">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="admin-btn admin-btn-primary">
+                        <i class="fa-solid fa-check"></i>
+                        Save Product
+                    </button>
+                </div>
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/admin-form.js"></script>
+</body>
+
+</html>

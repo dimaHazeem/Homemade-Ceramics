@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Comments | Homemade Ceramics</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.42), transparent 26%),
+                radial-gradient(circle at 82% 12%, rgba(166, 108, 79, 0.12), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .comments-main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 90px 24px 70px;
+        }
+
+        .page-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 78px;
+            line-height: 0.95;
+            font-weight: 500;
+            color: #17120f;
+        }
+
+        .page-label {
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.36em;
+            font-weight: 700;
+            color: #a66c4f;
+        }
+
+        .soft-card {
+            background: rgba(255, 253, 249, 0.95);
+            border: 1px solid #ddcfc2;
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.12);
+            overflow: hidden;
+        }
+
+        .comment-card {
+            background: rgba(255, 253, 249, 0.85);
+            border: 1px solid #ddcfc2;
+            border-radius: 22px;
+            padding: 22px;
+        }
+
+        .comment-input {
+            width: 100%;
+            min-height: 120px;
+            border-radius: 18px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.82);
+            padding: 18px 20px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #17120f;
+            outline: none;
+            resize: none;
+            transition: 0.3s;
+        }
+
+        .comment-input:focus {
+            border-color: #a66c4f;
+            box-shadow: 0 0 0 4px rgba(244, 216, 204, 0.35);
+        }
+
+        .soft-btn {
+            min-height: 54px;
+            border-radius: 16px;
+            padding: 15px 28px;
+            background: linear-gradient(to right, #e8bfb3, #f7d2c6);
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .soft-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 35px rgba(166, 108, 79, 0.22);
+        }
+
+        .outline-btn {
+            min-height: 54px;
+            border-radius: 16px;
+            padding: 15px 28px;
+            border: 1px solid #ddcfc2;
+            background: rgba(255, 255, 255, 0.72);
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .outline-btn:hover {
+            border-color: #a66c4f;
+            color: #a66c4f;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 58px;
+            }
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <header>
+        <nav class="flex justify-between items-center p-7">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="logo">
+            </a>
+
+            <a href="./posts.html"
+                class="hidden md:flex items-center gap-3 uppercase tracking-[0.25em] font-[Poppins] text-[12px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Posts
+            </a>
+        </nav>
+    </header>
+
+    <main class="comments-main">
+
+        <section class="text-center mb-14">
+            <p class="page-label mb-4">
+                Community Post
+            </p>
+
+            <h1 class="page-title">
+                Comments
+            </h1>
+
+            <p class="mt-6 text-[15px] leading-[1.9] text-[#776d64] max-w-[680px] mx-auto">
+                Read the full post and join the conversation about handmade ceramics.
+            </p>
+        </section>
+
+        <section id="postDetailsContainer">
+            <!-- JS will fill the post here -->
+        </section>
+
+    </main>
+
+    <script src="../js/post-comments.js"></script>
+</body>
+
+</html>
