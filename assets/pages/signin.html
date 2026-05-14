@@ -558,45 +558,7 @@
         </nav>
     </div>
 
-    <script>
-        const loginForm = document.getElementById("loginForm");
-        const email = document.getElementById("email");
-        const password = document.getElementById("password");
-        const emailError = document.getElementById("emailError");
-        const passwordError = document.getElementById("passwordError");
-        const togglePassword = document.getElementById("togglePassword");
 
-        togglePassword.addEventListener("click", function () {
-            const visible = password.type === "text";
-            password.type = visible ? "password" : "text";
-            togglePassword.textContent = visible ? "Show" : "Hide";
-        });
-
-        loginForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            let valid = true;
-
-            emailError.classList.remove("show");
-            passwordError.classList.remove("show");
-
-            if (!email.value.includes("@") || !email.value.includes(".")) {
-                emailError.classList.add("show");
-                valid = false;
-            }
-
-            if (password.value.length < 6) {
-                passwordError.classList.add("show");
-                valid = false;
-            }
-
-            if (valid) {
-                localStorage.setItem("bridgeCustomerEmail", email.value);
-                alert("Welcome back to Bridge Ceramics.");
-                window.location.href = "my-account.html";
-            }
-        });
-    </script>
 
     <script src="../js/data.js"></script>
     <script src="../js/cart.js"></script>

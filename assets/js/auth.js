@@ -1,5 +1,6 @@
-const AFTER_LOGIN_PAGE = "./account.html";
-const AFTER_AUTH_PAGE = "../../index.html";
+const CUSTOMER_AFTER_LOGIN_PAGE = "./account.html";
+const ADMIN_AFTER_LOGIN_PAGE = "./admin.html";
+const AFTER_SIGNUP_PAGE = "./account.html";
 
 function isValidEmail(email) {
     return email.includes("@") && email.includes(".");
@@ -83,7 +84,11 @@ function setupSigninForm() {
             return;
         }
 
-        window.location.href = AFTER_AUTH_PAGE;
+        if (result.user.role === "admin") {
+            window.location.href = ADMIN_AFTER_LOGIN_PAGE;
+        } else {
+            window.location.href = CUSTOMER_AFTER_LOGIN_PAGE;
+        }
     });
 }
 
@@ -175,7 +180,7 @@ function setupSignupForm() {
             return;
         }
 
-        window.location.href = AFTER_LOGIN_PAGE;
+        window.location.href = AFTER_SIGNUP_PAGE;
     });
 }
 
