@@ -1,0 +1,192 @@
+/* ========================================
+   WARM HANDMADE DARK MODE
+======================================== */
+
+body.dark-mode {
+    background:
+        radial-gradient(circle at top left,
+            rgba(201, 137, 111, 0.08),
+            transparent 25%),
+
+        radial-gradient(circle at bottom right,
+            rgba(214, 180, 150, 0.06),
+            transparent 28%),
+
+        linear-gradient(
+            135deg,
+            #17120f 0%,
+            #211b18 45%,
+            #2a211d 100%
+        );
+
+    color: #f5ede5;
+}
+
+/* ========================================
+   TEXT
+======================================== */
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode li,
+body.dark-mode label,
+body.dark-mode .auth-desc,
+body.dark-mode .faq-answer,
+body.dark-mode .policy-text {
+    color: #cdbfb4 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #f7efe7 !important;
+}
+
+/* ========================================
+   LINKS
+======================================== */
+
+body.dark-mode a {
+    color: #f3e6d8;
+}
+
+body.dark-mode a:hover {
+    color: #d6b496;
+}
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+body.dark-mode nav {
+    background: rgba(24, 19, 17, 0.92);
+    border-bottom: 1px solid rgba(214, 180, 150, 0.08);
+}
+
+/* ========================================
+   CARDS
+======================================== */
+
+body.dark-mode .auth-card,
+body.dark-mode .faq-card,
+body.dark-mode .gift-card,
+body.dark-mode .policy-card,
+body.dark-mode .contact-card,
+body.dark-mode .track-card,
+body.dark-mode .account-card {
+    background: rgba(34, 28, 25, 0.95) !important;
+
+    border: 1px solid rgba(214, 180, 150, 0.12);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.35);
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: rgba(255,255,255,0.04) !important;
+
+    border-color: rgba(214, 180, 150, 0.18) !important;
+
+    color: #f5ede5 !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #9d8e84 !important;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+body.dark-mode .auth-btn,
+body.dark-mode .main-btn,
+body.dark-mode button {
+    background:
+        linear-gradient(
+            135deg,
+            #8f644e 0%,
+            #a9785d 100%
+        );
+
+    color: white;
+}
+
+body.dark-mode .outline-btn {
+    background: transparent !important;
+
+    border: 1px solid rgba(214,180,150,0.25);
+
+    color: #f5ede5 !important;
+}
+
+/* ========================================
+   DROPDOWNS
+======================================== */
+
+body.dark-mode #userDropdown,
+body.dark-mode #cartDropdown,
+body.dark-mode #wishlistDropdown,
+body.dark-mode #searchDropdown {
+    background: #241d1a !important;
+
+    border-color: rgba(214,180,150,0.12) !important;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+body.dark-mode footer {
+    background: #120f0d !important;
+}
+
+/* ========================================
+   IMAGES
+======================================== */
+
+body.dark-mode img {
+    transition: 0.4s ease;
+}
+
+body.dark-mode .hero-slide {
+    filter:
+        brightness(0.82)
+        saturate(0.9);
+}
+
+/* ========================================
+   SMOOTH TRANSITION
+======================================== */
+
+body,
+nav,
+div,
+section,
+footer,
+input,
+textarea,
+button,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        opacity 0.35s ease;
+}

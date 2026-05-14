@@ -170,6 +170,7 @@
             text-transform: uppercase;
             transition: 0.3s;
         }
+
         .show-password-btn {
             position: absolute;
             right: 20px;
@@ -431,8 +432,7 @@
                             <input id="password" type="password" placeholder="Create password"
                                 class="auth-input password-input">
 
-                            <button id="togglePassword" type="button"
-                                class="show-password-btn">
+                            <button id="togglePassword" type="button" class="show-password-btn">
                                 Show
                             </button>
                         </div>
@@ -451,8 +451,7 @@
                             <input id="confirmPassword" type="password" placeholder="Confirm password"
                                 class="auth-input password-input">
 
-                            <button id="toggleConfirmPassword" type="button"
-                                class="show-password-btn">
+                            <button id="toggleConfirmPassword" type="button" class="show-password-btn">
                                 Show
                             </button>
                         </div>
@@ -482,6 +481,12 @@
                         <span class="text-[11px] uppercase tracking-[0.26em] text-[#776d64]">or</span>
                         <span class="h-px bg-[#ddcfc2] flex-1"></span>
                     </div>
+
+                    <button id="googleSignUpBtn" type="button"
+                        class="outline-btn flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-google text-[16px] text-[#a66c4f]"></i>
+                        Continue With Google
+                    </button>
 
                     <a href="signin.html" class="outline-btn flex items-center justify-center">
                         Sign In
@@ -602,7 +607,15 @@
         </nav>
     </div>
 
-    <script>
+
+    <script type="module">
+        import { auth, googleProvider } from "../js/firebase-config.js";
+
+        import {
+            createUserWithEmailAndPassword,
+            updateProfile,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
         const signupForm = document.getElementById("signupForm");
 
         const firstName = document.getElementById("firstName");
@@ -634,7 +647,7 @@
             toggleConfirmPassword.textContent = visible ? "Show" : "Hide";
         });
 
-        signupForm.addEventListener("submit", function (event) {
+        signupForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
             let valid = true;
@@ -676,12 +689,46 @@
                 valid = false;
             }
 
-            if (valid) {
+            if (!valid) {
+                return;
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(
+                    auth,
+                    email.value.trim(),
+                    password.value
+                );
+
+                await updateProfile(userCredential.user, {
+                    displayName: firstName.value.trim() + " " + lastName.value.trim()
+                });
+
                 localStorage.setItem("bridgeCustomerName", firstName.value.trim());
                 localStorage.setItem("bridgeCustomerEmail", email.value.trim());
 
                 alert("Your Bridge account has been created.");
-                window.location.href = "my-account.html";
+                window.location.href = "account.html";
+
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        const googleSignUpBtn = document.getElementById("googleSignUpBtn");
+
+        googleSignUpBtn.addEventListener("click", async function () {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+
+                localStorage.setItem("bridgeCustomerName", result.user.displayName || "Bridge Customer");
+                localStorage.setItem("bridgeCustomerEmail", result.user.email);
+
+                alert("Your Bridge account is ready.");
+                window.location.replace("./account.html");
+
+            } catch (error) {
+                alert(error.message);
             }
         });
     </script>
@@ -689,11 +736,8 @@
     <script src="../js/data.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
-    <script src="../js/shop.js"></script>
     <script src="../js/search.js"></script>
-    <script src="../js/users.js"></script>
-    <script src="../js/auth.js"></script>
-    <script src="../js/user-profile-menu.js"></script>
+    <script type="module" src="../js/firebase-profile-menu.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
 
 </body>

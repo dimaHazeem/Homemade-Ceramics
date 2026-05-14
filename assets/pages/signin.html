@@ -405,8 +405,7 @@
                             <input id="password" type="password" placeholder="Enter password"
                                 class="auth-input password-input">
 
-                            <button id="togglePassword" type="button"
-                                class="show-password-btn">
+                            <button id="togglePassword" type="button" class="show-password-btn">
                                 Show
                             </button>
                         </div>
@@ -423,9 +422,10 @@
                             Remember Me
                         </label>
 
-                        <a href="#" class="text-sm font-semibold text-[#a66c4f] hover:text-[#c9896f] transition">
+                        <button id="forgotPasswordBtn" type="button"
+                            class="text-sm font-semibold text-[#a66c4f] hover:text-[#c9896f] transition">
                             Forgot Password?
-                        </a>
+                        </button>
 
                     </div>
 
@@ -438,6 +438,11 @@
                         <span class="text-[11px] uppercase tracking-[0.26em] text-[#776d64]">or</span>
                         <span class="h-px bg-[#ddcfc2] flex-1"></span>
                     </div>
+                    <button id="googleSignInBtn" type="button"
+                        class="outline-btn flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-google text-[16px] text-[#a66c4f]"></i>
+                        Continue With Google
+                    </button>
 
                     <a href="signup.html" class="outline-btn flex items-center justify-center">
                         Create Account
@@ -558,16 +563,107 @@
         </nav>
     </div>
 
+    <script type="module">
+        import { auth, googleProvider } from "../js/firebase-config.js";
+
+        import {
+            signInWithEmailAndPassword,
+            signInWithPopup,
+            sendPasswordResetEmail
+        } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+        const loginForm = document.getElementById("loginForm");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", function () {
+            const visible = password.type === "text";
+            password.type = visible ? "password" : "text";
+            togglePassword.textContent = visible ? "Show" : "Hide";
+        });
+
+        loginForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            let valid = true;
+
+            emailError.classList.remove("show");
+            passwordError.classList.remove("show");
+
+            if (!email.value.includes("@") || !email.value.includes(".")) {
+                emailError.classList.add("show");
+                valid = false;
+            }
+
+            if (password.value.length < 6) {
+                passwordError.classList.add("show");
+                valid = false;
+            }
+
+            if (!valid) {
+                return;
+            }
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(
+                    auth,
+                    email.value.trim(),
+                    password.value
+                );
+
+                localStorage.setItem("bridgeCustomerEmail", userCredential.user.email);
+
+                alert("Welcome back to Bridge Ceramics.");
+                window.location.replace("./account.html");
+
+            } catch (error) {
+                alert("Invalid email or password.");
+            }
+        });
+
+        const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+
+        forgotPasswordBtn.addEventListener("click", async function () {
+            if (!email.value.includes("@") || !email.value.includes(".")) {
+                alert("Please enter your email address first.");
+                return;
+            }
+
+            try {
+                await sendPasswordResetEmail(auth, email.value.trim());
+                alert("Password reset email has been sent. Please check your inbox.");
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        const googleSignInBtn = document.getElementById("googleSignInBtn");
+
+        googleSignInBtn.addEventListener("click", async function () {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+
+                localStorage.setItem("bridgeCustomerEmail", result.user.email);
+                localStorage.setItem("bridgeCustomerName", result.user.displayName || "Bridge Customer");
+
+                alert("Welcome to Bridge Ceramics.");
+                window.location.replace("./account.html");
+
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    </script>
 
 
     <script src="../js/data.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
-    <script src="../js/shop.js"></script>
     <script src="../js/search.js"></script>
-    <script src="../js/users.js"></script>
-    <script src="../js/auth.js"></script>
-    <script src="../js/user-profile-menu.js"></script>
+    <script type="module" src="../js/firebase-profile-menu.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
 
 </body>

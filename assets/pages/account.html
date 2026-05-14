@@ -196,7 +196,7 @@
                         class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Blog</a>
 
                     <a href="./posts.html"
-                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">posts</a>    
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">posts</a>
                 </div>
             </div>
 
@@ -389,121 +389,125 @@
             </div>
 
             <!-- COMMUNITY ACTIVITY CARDS -->
-<section class="mb-10">
+            <section class="mb-10">
 
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-        <div>
-            <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
-                Community Activity
-            </p>
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                    <div>
+                        <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
+                            Community Activity
+                        </p>
 
-            <h2 class="account-title text-[46px] leading-none mt-3">
-                Your Posts Space
-            </h2>
-        </div>
+                        <h2 class="account-title text-[46px] leading-none mt-3">
+                            Your Posts Space
+                        </h2>
+                    </div>
 
-        <a href="./posts.html"
-            class="uppercase tracking-[0.25em] text-[11px] hover:text-[#c9ab81] transition">
-            Explore Posts
-        </a>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <a href="./user-posts.html?tab=my-posts"
-            class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
-                        My Posts
-                    </p>
-
-                    <h3 class="mt-4 text-[34px] font-medium">
-                        <span id="myPostsCount">0</span>
-                    </h3>
-
-                    <p class="mt-2 text-[#776d64]">
-                        Posts you shared
-                    </p>
+                    <a href="./posts.html"
+                        class="uppercase tracking-[0.25em] text-[11px] hover:text-[#c9ab81] transition">
+                        Explore Posts
+                    </a>
                 </div>
 
-                <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
-                    <i class="fa-regular fa-pen-to-square text-[#a66c4f] text-[20px]"></i>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    <a href="./user-posts.html?tab=my-posts"
+                        class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p
+                                    class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                    My Posts
+                                </p>
+
+                                <h3 class="mt-4 text-[34px] font-medium">
+                                    <span id="myPostsCount">0</span>
+                                </h3>
+
+                                <p class="mt-2 text-[#776d64]">
+                                    Posts you shared
+                                </p>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                                <i class="fa-regular fa-pen-to-square text-[#a66c4f] text-[20px]"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="./user-posts.html?tab=liked"
+                        class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p
+                                    class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                    Liked Posts
+                                </p>
+
+                                <h3 class="mt-4 text-[34px] font-medium">
+                                    <span id="likedPostsCount">0</span>
+                                </h3>
+
+                                <p class="mt-2 text-[#776d64]">
+                                    Posts you liked
+                                </p>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                                <i class="fa-regular fa-heart text-[#a66c4f] text-[20px]"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="./user-posts.html?tab=saved"
+                        class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p
+                                    class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                    Saved Posts
+                                </p>
+
+                                <h3 class="mt-4 text-[34px] font-medium">
+                                    <span id="savedPostsCount">0</span>
+                                </h3>
+
+                                <p class="mt-2 text-[#776d64]">
+                                    Saved for later
+                                </p>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                                <i class="fa-regular fa-bookmark text-[#a66c4f] text-[20px]"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="./user-posts.html?tab=comments"
+                        class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p
+                                    class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
+                                    Comments
+                                </p>
+
+                                <h3 class="mt-4 text-[34px] font-medium">
+                                    <span id="myCommentsCount">0</span>
+                                </h3>
+
+                                <p class="mt-2 text-[#776d64]">
+                                    Comments you wrote
+                                </p>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
+                                <i class="fa-regular fa-comment text-[#a66c4f] text-[20px]"></i>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
-            </div>
-        </a>
-
-        <a href="./user-posts.html?tab=liked"
-            class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
-                        Liked Posts
-                    </p>
-
-                    <h3 class="mt-4 text-[34px] font-medium">
-                        <span id="likedPostsCount">0</span>
-                    </h3>
-
-                    <p class="mt-2 text-[#776d64]">
-                        Posts you liked
-                    </p>
-                </div>
-
-                <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
-                    <i class="fa-regular fa-heart text-[#a66c4f] text-[20px]"></i>
-                </div>
-            </div>
-        </a>
-
-        <a href="./user-posts.html?tab=saved"
-            class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
-                        Saved Posts
-                    </p>
-
-                    <h3 class="mt-4 text-[34px] font-medium">
-                        <span id="savedPostsCount">0</span>
-                    </h3>
-
-                    <p class="mt-2 text-[#776d64]">
-                        Saved for later
-                    </p>
-                </div>
-
-                <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
-                    <i class="fa-regular fa-bookmark text-[#a66c4f] text-[20px]"></i>
-                </div>
-            </div>
-        </a>
-
-        <a href="./user-posts.html?tab=comments"
-            class="account-card rounded-[28px] p-7 hover:-translate-y-1 transition duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="font-[Poppins] uppercase tracking-[0.28em] text-[11px] text-[#a66c4f] font-bold">
-                        Comments
-                    </p>
-
-                    <h3 class="mt-4 text-[34px] font-medium">
-                        <span id="myCommentsCount">0</span>
-                    </h3>
-
-                    <p class="mt-2 text-[#776d64]">
-                        Comments you wrote
-                    </p>
-                </div>
-
-                <div class="w-14 h-14 rounded-full bg-[#f7e9df] flex items-center justify-center">
-                    <i class="fa-regular fa-comment text-[#a66c4f] text-[20px]"></i>
-                </div>
-            </div>
-        </a>
-
-    </div>
-</section>
+            </section>
 
             <!-- CONTENT GRID -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -740,15 +744,48 @@
         </nav>
     </div>
 
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+        const accountName = document.getElementById("accountName");
+        const accountEmail = document.getElementById("accountEmail");
+        const accountEmailInput = document.getElementById("accountEmailInput");
+        const logoutBtn = document.getElementById("accountLogoutBtn");
+
+        onAuthStateChanged(auth, function (user) {
+            if (!user) {
+                window.location.replace("signin.html");
+                return;
+            }
+
+            accountName.textContent = user.displayName || "Bridge Customer";
+            accountEmail.textContent = user.email;
+            accountEmailInput.value = user.email;
+        });
+
+        logoutBtn.addEventListener("click", async function () {
+            await signOut(auth);
+
+            localStorage.removeItem("bridgeCustomerName");
+            localStorage.removeItem("bridgeCustomerEmail");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("wishlist");
+
+            window.location.replace("signin.html");
+        });
+    </script>
+
     <script src="../js/data.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
-    <script src="../js/shop.js"></script>
     <script src="../js/search.js"></script>
+    <script type="module" src="../js/firebase-profile-menu.js"></script>
 
-    <script src="../js/users.js"></script>
-    <script src="../js/user-profile-menu.js"></script>
-    <script src="../js/account.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
 
