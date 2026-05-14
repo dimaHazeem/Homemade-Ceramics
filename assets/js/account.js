@@ -48,6 +48,7 @@ async function loadAccountPage() {
     phoneInput.value = user.phone || "";
     cityInput.value = user.city || "";
     addressInput.value = user.address || "";
+    updateCommunityCounts(user);
 
     avatarUploadButton.addEventListener("click", function () {
         avatarInput.click();
@@ -93,6 +94,48 @@ async function loadAccountPage() {
 
         reader.readAsDataURL(file);
     });
+
+    function getStorageArray(key) {
+    const data = localStorage.getItem(key);
+
+    if (!data) {
+        return [];
+    }
+
+    try {
+        return JSON.parse(data);
+    } catch (error) {
+        return [];
+    }
+}
+
+function updateCommunityCounts(user) {
+    const posts = getStorageArray("homemadeCeramicsPosts");
+    const postLikes = getStorageArray("homemadeCeramicsPostLikes");
+    const postSaves = getStorageArray("homemadeCeramicsPostSaves");
+    const comments = getStorageArray("homemadeCeramicsComments");
+
+    const myPostsCount = posts.filter(function (post) {
+        return post.userId === user.id;
+    }).length;
+
+    const likedPostsCount = postLikes.filter(function (like) {
+        return like.userId === user.id;
+    }).length;
+
+    const savedPostsCount = postSaves.filter(function (save) {
+        return save.userId === user.id;
+    }).length;
+
+    const myCommentsCount = comments.filter(function (comment) {
+        return comment.userId === user.id;
+    }).length;
+
+    document.getElementById("myPostsCount").textContent = myPostsCount;
+    document.getElementById("likedPostsCount").textContent = likedPostsCount;
+    document.getElementById("savedPostsCount").textContent = savedPostsCount;
+    document.getElementById("myCommentsCount").textContent = myCommentsCount;
+}
 
     accountForm.addEventListener("submit", function (event) {
         event.preventDefault();

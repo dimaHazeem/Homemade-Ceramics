@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Posts | Homemade Ceramics</title>
+
+    <link href="../css/output.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Jost", sans-serif;
+            color: #17120f;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(244, 216, 204, 0.35), transparent 26%),
+                radial-gradient(circle at 85% 8%, rgba(166, 108, 79, 0.10), transparent 24%),
+                linear-gradient(135deg, #fbf6ef 0%, #f8f1e8 50%, #f3e5d7 100%);
+        }
+
+        .soft-texture {
+            background-image:
+                linear-gradient(rgba(23, 18, 15, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 18, 15, 0.025) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .page-title {
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .soft-card {
+            background: rgba(255, 253, 249, 0.92);
+            border: 1px solid #ddcfc2;
+            box-shadow: 0 24px 70px rgba(112, 73, 51, 0.10);
+        }
+
+        .tab-btn.active {
+            background: #17120f;
+            color: white;
+            border-color: #17120f;
+        }
+
+        .post-image-placeholder {
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), transparent 28%),
+                linear-gradient(135deg, #f7e9df, #ead7ca);
+        }
+    </style>
+</head>
+
+<body class="soft-texture">
+
+    <!-- HEADER -->
+    <header>
+        <nav class="row justify-between items-center p-7">
+
+            <div class="row justify-between items-center gap-20">
+                <div>
+                    <a href="../../index.html">
+                        <img src="../images/home-images/Ceramics01.png" alt="logo">
+                    </a>
+                </div>
+
+                <div class="row justify-between gap-15 items-center hidden lg:flex">
+                    <a href="../../index.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Home</a>
+
+                    <a href="./about.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">About
+                        Us</a>
+
+                    <a href="./ourStores.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Our
+                        Stores</a>
+
+                    <a href="./shop.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Shop</a>
+
+                    <a href="./posts.html"
+                        class="uppercase tracking-widest poppins-medium text-[11px] relative after:absolute after:left-[-10px] after:top-1/2 after:h-[1px] after:bg-[#e2b7a8] after:-translate-y-1/2 after:w-0 hover:after:w-[100%] after:transition-all after:duration-500 hover:text-gray-500 transition">Posts</a>
+                </div>
+            </div>
+
+            <div class="row justify-between gap-5 items-center">
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+
+                    <div id="cartDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group hidden md:block">
+                    <div class="cursor-pointer flex items-center gap-1">
+                        <i class="fa-regular fa-heart text-[20px]"></i>
+                        <span class="wishlist-count">0</span>
+                    </div>
+
+                    <div id="wishlistDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-8 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button type="button" id="openSearchBtn"
+                        class="text-black text-[22px] hover:text-[#e2b7a8] transition">
+                        <img src="../images/home-images/download.svg" alt="search..." class="w-5">
+                    </button>
+
+                    <div id="searchDropdown"
+                        class="absolute right-0 top-full mt-6 w-[420px] bg-white border border-[#ededed] shadow-lg p-7 z-50 hidden">
+
+                        <div class="relative">
+                            <input id="globalSearchInput" type="text" placeholder="Search products..."
+                                class="w-full border-b border-black/20 bg-transparent outline-none py-3 pr-8 text-[14px] placeholder:text-[#8a8a8a] normal-case">
+
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute right-0 top-1/2 -translate-y-1/2 text-[15px] text-black"></i>
+                        </div>
+
+                        <div id="globalSearchResults" class="mt-6 max-h-[360px] overflow-y-auto space-y-5"></div>
+                    </div>
+                </div>
+
+                <div id="userProfileMenu"></div>
+
+                <button type="button" data-drawer-target="mobile-menu-drawer" data-drawer-show="mobile-menu-drawer"
+                    data-drawer-placement="right" aria-controls="mobile-menu-drawer"
+                    class="lg:hidden text-black text-[22px]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="px-6 py-12 lg:py-20">
+
+        <section class="max-w-[1180px] mx-auto">
+
+            <!-- HERO -->
+            <div class="soft-card rounded-[36px] overflow-hidden mb-10">
+                <div class="relative bg-[#f7e9df] px-8 lg:px-12 py-14">
+                    <div
+                        class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.75),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(166,108,79,0.16),transparent_28%)]">
+                    </div>
+
+                    <div class="relative z-10">
+                        <a href="./account.html"
+                            class="inline-flex items-center gap-3 uppercase tracking-[0.25em] text-[11px] hover:text-[#c9ab81] transition mb-8">
+                            <i class="fa-solid fa-arrow-left-long"></i>
+                            Back To Account
+                        </a>
+
+                        <p class="font-[Poppins] uppercase tracking-[0.35em] text-[11px] font-bold text-[#a66c4f]">
+                            Community Activity
+                        </p>
+
+                        <h1 class="page-title mt-4 text-[58px] md:text-[78px] leading-none font-medium">
+                            Your Posts Space
+                        </h1>
+
+                        <p id="pageDescription" class="mt-5 max-w-2xl text-[#776d64] text-[15px] leading-8">
+                            View the posts you shared, liked, saved, and commented on.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABS -->
+            <div class="soft-card rounded-[28px] p-5 md:p-6 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+                    <button type="button" data-tab="my-posts"
+                        class="tab-btn border border-[#ddcfc2] rounded-2xl px-5 py-4 uppercase tracking-[0.22em] text-[11px] hover:border-black transition">
+                        My Posts
+                        <span id="tabMyPostsCount" class="ml-2 text-[#a66c4f]">0</span>
+                    </button>
+
+                    <button type="button" data-tab="liked"
+                        class="tab-btn border border-[#ddcfc2] rounded-2xl px-5 py-4 uppercase tracking-[0.22em] text-[11px] hover:border-black transition">
+                        Liked
+                        <span id="tabLikedCount" class="ml-2 text-[#a66c4f]">0</span>
+                    </button>
+
+                    <button type="button" data-tab="saved"
+                        class="tab-btn border border-[#ddcfc2] rounded-2xl px-5 py-4 uppercase tracking-[0.22em] text-[11px] hover:border-black transition">
+                        Saved
+                        <span id="tabSavedCount" class="ml-2 text-[#a66c4f]">0</span>
+                    </button>
+
+                    <button type="button" data-tab="comments"
+                        class="tab-btn border border-[#ddcfc2] rounded-2xl px-5 py-4 uppercase tracking-[0.22em] text-[11px] hover:border-black transition">
+                        Comments
+                        <span id="tabCommentsCount" class="ml-2 text-[#a66c4f]">0</span>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <section id="userPostsContainer" class="space-y-6"></section>
+
+        </section>
+
+    </main>
+
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobile-menu-drawer"
+        class="fixed top-0 right-0 z-50 h-screen w-[320px] max-w-[85%] translate-x-full bg-white p-8 overflow-y-auto transition-transform border-l border-[#ededed] lg:hidden"
+        tabindex="-1" aria-labelledby="mobile-menu-drawer-label">
+
+        <div class="flex items-center justify-between border-b border-[#ededed] pb-6">
+            <a href="../../index.html">
+                <img src="../images/home-images/Ceramics01.png" alt="Bridge Logo" class="w-[130px]">
+            </a>
+
+            <button type="button" data-drawer-hide="mobile-menu-drawer" aria-controls="mobile-menu-drawer"
+                class="text-black text-[24px] hover:text-[#e2b7a8] transition">
+                <i class="fa-solid fa-xmark"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+
+        <nav class="mt-10">
+            <ul class="space-y-7">
+                <li><a href="../../index.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Home</a>
+                </li>
+
+                <li><a href="./about.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">About
+                        Us</a></li>
+
+                <li><a href="./ourStores.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Our
+                        Stores</a></li>
+
+                <li><a href="./shop.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Shop</a>
+                </li>
+
+                <li><a href="./posts.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">Posts</a>
+                </li>
+
+                <li><a href="./account.html"
+                        class="block uppercase tracking-[0.25em] text-[13px] hover:text-[#e2b7a8] transition">My
+                        Account</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/search.js"></script>
+
+    <script src="../js/users.js"></script>
+    <script src="../js/user-profile-menu.js"></script>
+    <script src="../js/user-posts.js"></script>
+
+    <script src="../js/user-profile-menu.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
+
+</body>
+
+</html>
