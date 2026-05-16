@@ -703,6 +703,7 @@
                 await updateProfile(userCredential.user, {
                     displayName: firstName.value.trim() + " " + lastName.value.trim()
                 });
+                await window.syncFirebaseUserToMySQL(userCredential.user);
 
                 localStorage.setItem("bridgeCustomerName", firstName.value.trim());
                 localStorage.setItem("bridgeCustomerEmail", email.value.trim());
@@ -737,6 +738,7 @@
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
     <script src="../js/search.js"></script>
+    <script src="../js/sync-user.js"></script>
     <script type="module" src="../js/firebase-profile-menu.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
 

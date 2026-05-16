@@ -1,12 +1,21 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "homemade_ceramics");
 
-if ($conn->connect_error) {
-    die(json_encode([
-        "success" => false,
-        "message" => "Database connection failed"
-    ]));
+$host = "localhost";
+$dbname = "homemade_ceramics";
+$username = "root";
+$password = "";
+
+try {
+    $conn = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password
+    );
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
 }
 
-$conn->set_charset("utf8mb4");
 ?>
