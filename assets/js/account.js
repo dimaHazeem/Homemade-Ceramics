@@ -1,53 +1,175 @@
-async function loadAccountPage() {
-    if (!window.UsersAPI) {
-        return;
+import { auth } from "./firebase-config.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+const DEFAULT_AVATAR = "../images/users-profiles/default-profile.png";
+
+function getElement(id) {
+    return document.getElementById(id);
+}
+
+function splitName(fullName) {
+    const parts = (fullName || "").trim().split(" ");
+
+    return {
+        firstName: parts[0] || "",
+        lastName: parts.slice(1).join(" ") || ""
+    };
+}
+
+function getStorageArray(key) {
+    const data = localStorage.getItem(key);
+
+    if (!data) {
+        return [];
     }
 
-    const user = await window.UsersAPI.getCurrentUser();
+    try {
+        return JSON.parse(data);
+    } catch (error) {
+        return [];
+    }
+}
 
-    if (!user) {
-        window.location.href = "./signin.html";
-        return;
+function getAvatarKey(user) {
+    return `bridgeAccountAvatar_${user.uid}`;
+}
+
+function getProfileKey(user) {
+    return `bridgeAccountProfile_${user.uid}`;
+}
+
+function getProfile(user) {
+    const savedProfile = localStorage.getItem(getProfileKey(user));
+
+    if (!savedProfile) {
+        return null;
     }
 
-    const accountAvatar = document.getElementById("accountAvatar");
-    const accountName = document.getElementById("accountName");
-    const accountEmail = document.getElementById("accountEmail");
+    try {
+        return JSON.parse(savedProfile);
+    } catch (error) {
+        return null;
+    }
+}
 
-    const firstNameInput = document.getElementById("accountFirstName");
-    const lastNameInput = document.getElementById("accountLastName");
-    const emailInput = document.getElementById("accountEmailInput");
-    const phoneInput = document.getElementById("accountPhone");
-    const cityInput = document.getElementById("accountCity");
-    const addressInput = document.getElementById("accountAddress");
+function getAvatar(user) {
+    const savedAvatar = localStorage.getItem(getAvatarKey(user));
 
-    const accountForm = document.getElementById("accountForm");
-    const saveMessage = document.getElementById("saveMessage");
-    const logoutBtn = document.getElementById("accountLogoutBtn");
+    if (savedAvatar) {
+        return savedAvatar;
+    }
 
-    const avatarUploadButton = document.getElementById("avatarUploadButton");
-    const avatarInput = document.getElementById("avatarInput");
+    if (user.photoURL) {
+        return user.photoURL;
+    }
 
-    const saveAccountBtn = document.getElementById("saveAccountBtn");
-    const accountSubmitLoader = document.getElementById("accountSubmitLoader");
-    const accountSubmitLoaderText = document.getElementById("accountSubmitLoaderText");
+    return DEFAULT_AVATAR;
+}
 
-    const avatarPath = user.avatarData
-        ? user.avatarData
-        : user.avatar
-            ? `../images/${user.avatar}`
-            : `../images/${window.UsersAPI.DEFAULT_PROFILE_IMAGE}`;
+function updateCommunityCounts(user) {
+    const posts = getStorageArray("homemadeCeramicsPosts");
+    const postLikes = getStorageArray("homemadeCeramicsPostLikes");
+    const postSaves = getStorageArray("homemadeCeramicsPostSaves");
+    const comments = getStorageArray("homemadeCeramicsComments");
 
-    accountAvatar.src = avatarPath;
-    accountName.textContent = user.fullName || "Customer";
+    const myPostsCount = posts.filter(function (post) {
+        return post.userId === user.uid || post.userEmail === user.email;
+    }).length;
+
+    const likedPostsCount = postLikes.filter(function (like) {
+        return like.userId === user.uid || like.userEmail === user.email;
+    }).length;
+
+    const savedPostsCount = postSaves.filter(function (save) {
+        return save.userId === user.uid || save.userEmail === user.email;
+    }).length;
+
+    const myCommentsCount = comments.filter(function (comment) {
+        return comment.userId === user.uid || comment.userEmail === user.email;
+    }).length;
+
+    const myPostsCountEl = getElement("myPostsCount");
+    const likedPostsCountEl = getElement("likedPostsCount");
+    const savedPostsCountEl = getElement("savedPostsCount");
+    const myCommentsCountEl = getElement("myCommentsCount");
+
+    if (myPostsCountEl) myPostsCountEl.textContent = myPostsCount;
+    if (likedPostsCountEl) likedPostsCountEl.textContent = likedPostsCount;
+    if (savedPostsCountEl) savedPostsCountEl.textContent = savedPostsCount;
+    if (myCommentsCountEl) myCommentsCountEl.textContent = myCommentsCount;
+}
+
+async function syncFirebaseUserToMySQL(user) {
+    try {
+        const response = await fetch("../../backend/auth/sync-user.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                firebase_uid: user.uid,
+                full_name: user.displayName || "Bridge Customer",
+                email: user.email
+            })
+        });
+
+        const result = await response.json();
+
+        console.log("Database sync result:", result);
+    } catch (error) {
+        console.error("Database sync failed:", error);
+    }
+}
+
+function loadAccount(user) {
+    const accountAvatar = getElement("accountAvatar");
+    const accountName = getElement("accountName");
+    const accountEmail = getElement("accountEmail");
+
+    const firstNameInput = getElement("accountFirstName");
+    const lastNameInput = getElement("accountLastName");
+    const emailInput = getElement("accountEmailInput");
+    const phoneInput = getElement("accountPhone");
+    const cityInput = getElement("accountCity");
+    const addressInput = getElement("accountAddress");
+
+    const avatarUploadButton = getElement("avatarUploadButton");
+    const avatarInput = getElement("avatarInput");
+
+    const accountForm = getElement("accountForm");
+    const saveMessage = getElement("saveMessage");
+    const logoutBtn = getElement("accountLogoutBtn");
+
+    const saveAccountBtn = getElement("saveAccountBtn");
+    const accountSubmitLoader = getElement("accountSubmitLoader");
+    const accountSubmitLoaderText = getElement("accountSubmitLoaderText");
+
+    const savedProfile = getProfile(user);
+
+    const firebaseName = user.displayName || "Bridge Customer";
+    const fullName = savedProfile?.fullName || firebaseName;
+    const nameParts = splitName(fullName);
+
+    accountAvatar.src = getAvatar(user);
+
+    accountAvatar.onerror = function () {
+        accountAvatar.src = DEFAULT_AVATAR;
+    };
+
+    accountName.textContent = fullName;
     accountEmail.textContent = user.email || "";
 
-    firstNameInput.value = user.firstName || "";
-    lastNameInput.value = user.lastName || "";
+    firstNameInput.value = savedProfile?.firstName || nameParts.firstName;
+    lastNameInput.value = savedProfile?.lastName || nameParts.lastName;
     emailInput.value = user.email || "";
-    phoneInput.value = user.phone || "";
-    cityInput.value = user.city || "";
-    addressInput.value = user.address || "";
+    phoneInput.value = savedProfile?.phone || "";
+    cityInput.value = savedProfile?.city || "";
+    addressInput.value = savedProfile?.address || "";
+
     updateCommunityCounts(user);
 
     avatarUploadButton.addEventListener("click", function () {
@@ -77,114 +199,91 @@ async function loadAccountPage() {
             const imageData = reader.result;
 
             accountAvatar.src = imageData;
-
-            const result = window.UsersAPI.updateCurrentUser({
-                avatarData: imageData
-            });
-
-            if (!result.success) {
-                alert(result.message);
-                return;
-            }
-
-            if (typeof renderUserProfileMenu === "function") {
-                renderUserProfileMenu();
-            }
+            localStorage.setItem(getAvatarKey(user), imageData);
         });
 
         reader.readAsDataURL(file);
     });
 
-    function getStorageArray(key) {
-    const data = localStorage.getItem(key);
-
-    if (!data) {
-        return [];
-    }
-
-    try {
-        return JSON.parse(data);
-    } catch (error) {
-        return [];
-    }
-}
-
-function updateCommunityCounts(user) {
-    const posts = getStorageArray("homemadeCeramicsPosts");
-    const postLikes = getStorageArray("homemadeCeramicsPostLikes");
-    const postSaves = getStorageArray("homemadeCeramicsPostSaves");
-    const comments = getStorageArray("homemadeCeramicsComments");
-
-    const myPostsCount = posts.filter(function (post) {
-        return post.userId === user.id;
-    }).length;
-
-    const likedPostsCount = postLikes.filter(function (like) {
-        return like.userId === user.id;
-    }).length;
-
-    const savedPostsCount = postSaves.filter(function (save) {
-        return save.userId === user.id;
-    }).length;
-
-    const myCommentsCount = comments.filter(function (comment) {
-        return comment.userId === user.id;
-    }).length;
-
-    document.getElementById("myPostsCount").textContent = myPostsCount;
-    document.getElementById("likedPostsCount").textContent = likedPostsCount;
-    document.getElementById("savedPostsCount").textContent = savedPostsCount;
-    document.getElementById("myCommentsCount").textContent = myCommentsCount;
-}
-
     accountForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        saveAccountBtn.disabled = true;
-        accountSubmitLoaderText.textContent = "Saving Changes";
-        accountSubmitLoader.classList.add("show");
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        const fullName = `${firstName} ${lastName}`.trim() || "Bridge Customer";
 
-        const updatedUser = {
-            firstName: firstNameInput.value.trim(),
-            lastName: lastNameInput.value.trim(),
+        const profileData = {
+            firstName: firstName,
+            lastName: lastName,
+            fullName: fullName,
             email: emailInput.value.trim().toLowerCase(),
             phone: phoneInput.value.trim(),
             city: cityInput.value.trim(),
             address: addressInput.value.trim()
         };
 
-        const result = window.UsersAPI.updateCurrentUser(updatedUser);
-
-        if (!result.success) {
-            alert(result.message);
-
-            saveAccountBtn.disabled = false;
-            accountSubmitLoader.classList.remove("show");
-
-            return;
+        if (saveAccountBtn) {
+            saveAccountBtn.disabled = true;
         }
 
-        accountName.textContent = result.user.fullName || "Customer";
-        accountEmail.textContent = result.user.email || "";
-
-        if (typeof renderUserProfileMenu === "function") {
-            renderUserProfileMenu();
+        if (accountSubmitLoaderText) {
+            accountSubmitLoaderText.textContent = "Saving Changes";
         }
 
-        saveMessage.textContent = "Changes saved successfully. Returning to home...";
-        saveMessage.classList.remove("hidden");
+        if (accountSubmitLoader) {
+            accountSubmitLoader.classList.add("show");
+        }
 
-        accountSubmitLoaderText.textContent = "Saved Successfully";
+        localStorage.setItem(getProfileKey(user), JSON.stringify(profileData));
+
+        accountName.textContent = fullName;
+        accountEmail.textContent = profileData.email;
+
+        if (saveMessage) {
+            saveMessage.textContent = "Changes saved successfully.";
+            saveMessage.classList.remove("hidden");
+        }
+
+        if (accountSubmitLoaderText) {
+            accountSubmitLoaderText.textContent = "Saved Successfully";
+        }
 
         setTimeout(function () {
-            window.location.href = "../../index.html";
-        }, 1800);
+            if (saveAccountBtn) {
+                saveAccountBtn.disabled = false;
+            }
+
+            if (accountSubmitLoader) {
+                accountSubmitLoader.classList.remove("show");
+            }
+
+            if (saveMessage) {
+                saveMessage.classList.add("hidden");
+            }
+        }, 1200);
     });
 
-    logoutBtn.addEventListener("click", function () {
-        window.UsersAPI.logoutUser();
-        window.location.href = "../../index.html";
+    logoutBtn.addEventListener("click", async function () {
+        await signOut(auth);
+
+        localStorage.removeItem("bridgeCustomerName");
+        localStorage.removeItem("bridgeCustomerEmail");
+        localStorage.removeItem("cart");
+        localStorage.removeItem("wishlist");
+
+        window.location.replace("./signin.html");
     });
 }
 
-loadAccountPage();
+onAuthStateChanged(auth, function (user) {
+    if (!user) {
+        window.location.replace("./signin.html");
+        return;
+    }
+
+    console.log("Account Firebase user:", user);
+
+    loadAccount(user);
+
+    syncFirebaseUserToMySQL(user);
+});

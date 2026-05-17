@@ -563,100 +563,142 @@
         </nav>
     </div>
 
-    <script type="module">
-        import { auth, googleProvider } from "../js/firebase-config.js";
+<script type="module">
+    import { auth, googleProvider } from "../js/firebase-config.js";
 
-        import {
-            signInWithEmailAndPassword,
-            signInWithPopup,
-            sendPasswordResetEmail
-        } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+    import {
+        signInWithEmailAndPassword,
+        signInWithPopup,
+        sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-        const loginForm = document.getElementById("loginForm");
-        const email = document.getElementById("email");
-        const password = document.getElementById("password");
-        const emailError = document.getElementById("emailError");
-        const passwordError = document.getElementById("passwordError");
-        const togglePassword = document.getElementById("togglePassword");
+    const loginForm = document.getElementById("loginForm");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+    const togglePassword = document.getElementById("togglePassword");
+    const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+    const googleSignInBtn = document.getElementById("googleSignInBtn");
 
-        togglePassword.addEventListener("click", function () {
-            const visible = password.type === "text";
-            password.type = visible ? "password" : "text";
-            togglePassword.textContent = visible ? "Show" : "Hide";
-        });
+    async function syncFirebaseUserToMySQL(user) {
+        if (!user) {
+            return false;
+        }
 
-        loginForm.addEventListener("submit", async function (event) {
-            event.preventDefault();
+        const userData = {
+            firebase_uid: user.uid,
+            full_name: user.displayName || "Bridge Customer",
+            email: user.email
+        };
 
-            let valid = true;
+        try {
+            const response = await fetch("../../backend/auth/sync-user.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            });
 
-            emailError.classList.remove("show");
-            passwordError.classList.remove("show");
+            const result = await response.json();
 
-            if (!email.value.includes("@") || !email.value.includes(".")) {
-                emailError.classList.add("show");
-                valid = false;
+            console.log("Sync user result:", result);
+
+            if (!result.success) {
+                console.error("User sync failed:", result.message);
+                return false;
             }
 
-            if (password.value.length < 6) {
-                passwordError.classList.add("show");
-                valid = false;
-            }
+            return true;
 
-            if (!valid) {
-                return;
-            }
+        } catch (error) {
+            console.error("User sync error:", error);
+            return false;
+        }
+    }
 
-            try {
-                const userCredential = await signInWithEmailAndPassword(
-                    auth,
-                    email.value.trim(),
-                    password.value
-                );
+    togglePassword.addEventListener("click", function () {
+        const visible = password.type === "text";
+        password.type = visible ? "password" : "text";
+        togglePassword.textContent = visible ? "Show" : "Hide";
+    });
 
-                localStorage.setItem("bridgeCustomerEmail", userCredential.user.email);
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-                alert("Welcome back to Bridge Ceramics.");
-                window.location.replace("./account.html");
+        let valid = true;
 
-            } catch (error) {
-                alert("Invalid email or password.");
-            }
-        });
+        emailError.classList.remove("show");
+        passwordError.classList.remove("show");
 
-        const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+        if (!email.value.includes("@") || !email.value.includes(".")) {
+            emailError.classList.add("show");
+            valid = false;
+        }
 
-        forgotPasswordBtn.addEventListener("click", async function () {
-            if (!email.value.includes("@") || !email.value.includes(".")) {
-                alert("Please enter your email address first.");
-                return;
-            }
+        if (password.value.length < 6) {
+            passwordError.classList.add("show");
+            valid = false;
+        }
 
-            try {
-                await sendPasswordResetEmail(auth, email.value.trim());
-                alert("Password reset email has been sent. Please check your inbox.");
-            } catch (error) {
-                alert(error.message);
-            }
-        });
+        if (!valid) {
+            return;
+        }
 
-        const googleSignInBtn = document.getElementById("googleSignInBtn");
+        try {
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email.value.trim(),
+                password.value
+            );
 
-        googleSignInBtn.addEventListener("click", async function () {
-            try {
-                const result = await signInWithPopup(auth, googleProvider);
+            await syncFirebaseUserToMySQL(userCredential.user);
 
-                localStorage.setItem("bridgeCustomerEmail", result.user.email);
-                localStorage.setItem("bridgeCustomerName", result.user.displayName || "Bridge Customer");
+            localStorage.setItem("bridgeCustomerEmail", userCredential.user.email);
+            localStorage.setItem("bridgeCustomerName", userCredential.user.displayName || "Bridge Customer");
 
-                alert("Welcome to Bridge Ceramics.");
-                window.location.replace("./account.html");
+            alert("Welcome back to Bridge Ceramics.");
+            window.location.replace("./account.html");
 
-            } catch (error) {
-                alert(error.message);
-            }
-        });
-    </script>
+        } catch (error) {
+            console.error(error);
+            alert("Invalid email or password.");
+        }
+    });
+
+    forgotPasswordBtn.addEventListener("click", async function () {
+        if (!email.value.includes("@") || !email.value.includes(".")) {
+            alert("Please enter your email address first.");
+            return;
+        }
+
+        try {
+            await sendPasswordResetEmail(auth, email.value.trim());
+            alert("Password reset email has been sent. Please check your inbox.");
+        } catch (error) {
+            alert(error.message);
+        }
+    });
+
+    googleSignInBtn.addEventListener("click", async function () {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+
+            await syncFirebaseUserToMySQL(result.user);
+
+            localStorage.setItem("bridgeCustomerEmail", result.user.email);
+            localStorage.setItem("bridgeCustomerName", result.user.displayName || "Bridge Customer");
+
+            alert("Welcome to Bridge Ceramics.");
+            window.location.replace("./account.html");
+
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
+    });
+</script>
 
 
     <script src="../js/data.js"></script>

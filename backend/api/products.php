@@ -1,65 +1,65 @@
 <?php
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 
-$conn = new mysqli("127.0.0.1", "root", "", "homemade_ceramics");
+$conn = new mysqli("localhost", "root", "", "homemade_ceramics");
 
 if ($conn->connect_error) {
+    http_response_code(500);
     echo json_encode([
         "success" => false,
-        "message" => "Database connection failed"
+        "message" => "Database connection failed: " . $conn->connect_error
     ]);
     exit;
 }
 
+$conn->set_charset("utf8mb4");
+
 $sql = "
-SELECT 
-    p.id,
-    p.name,
-    p.price,
-    p.old_price AS oldPrice,
-    p.category,
-    p.color,
-    p.material,
-    p.image,
-    p.description,
-    p.sale,
-    pi.image AS galleryImage,
-    pi.sort_order
-FROM products p
-LEFT JOIN product_images pi
-ON p.id = pi.product_id
-ORDER BY p.id, pi.sort_order
+    SELECT
+        id,
+        name,
+        price,
+        old_price,
+        category,
+        color,
+        material,
+        image,
+        description,
+        sale
+    FROM products
+    ORDER BY id ASC
 ";
 
 $result = $conn->query($sql);
 
+if (!$result) {
+    http_response_code(500);
+    echo json_encode([
+        "success" => false,
+        "message" => "SQL error: " . $conn->error
+    ]);
+    exit;
+}
+
 $products = [];
 
 while ($row = $result->fetch_assoc()) {
-    $id = $row["id"];
-
-    if (!isset($products[$id])) {
-        $products[$id] = [
-            "id" => (int)$row["id"],
-            "name" => $row["name"],
-            "price" => (float)$row["price"],
-            "oldPrice" => $row["oldPrice"] !== null ? (float)$row["oldPrice"] : null,
-            "category" => $row["category"],
-            "color" => $row["color"],
-            "material" => $row["material"],
-            "image" => $row["image"],
-            "description" => $row["description"],
-            "sale" => (bool)$row["sale"],
-            "images" => []
-        ];
-    }
-
-    if ($row["galleryImage"]) {
-        $products[$id]["images"][] = $row["galleryImage"];
-    }
+    $products[] = [
+        "id" => (int) $row["id"],
+        "name" => $row["name"],
+        "price" => (float) $row["price"],
+        "old_price" => $row["old_price"] !== null ? (float) $row["old_price"] : null,
+        "category" => $row["category"],
+        "color" => $row["color"],
+        "material" => $row["material"],
+        "image" => $row["image"],
+        "description" => $row["description"],
+        "sale" => (int) $row["sale"]
+    ];
 }
 
-echo json_encode(array_values($products));
+echo json_encode($products, JSON_UNESCAPED_UNICODE);
+
 $conn->close();
 ?>
